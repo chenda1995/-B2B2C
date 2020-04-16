@@ -1,0 +1,99 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/base.css" />
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/jm.css" />
+<div class="wy-mbx">当前位置：<a href="{$MODULE[1][linkurl]}">首页</a><span>&gt;</span><a href="{$MOD[linkurl]}">{$MOD[name]}</a><span>&gt;</span>{cat_pos($CAT, ' <span>&gt;</span> ')}</div>
+<div class="wy-wrap">
+<dl class="wy-brand-select cf" style="border:1px solid #e3e3e3;">
+<dt>品牌所在</dt>
+<dd>
+<ul>
+<li><a href="{$MOD[linkurl]}search.php?catid=0" class="on">全部</a></li>
+{php $mainarea = get_mainarea(0)}
+{loop $mainarea $k $v}
+<li><a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v['areaid'])}">{$v[areaname]}</a><li>
+{/loop}
+</ul>
+</dd>
+</dl>
+<dl class="wy-grade-select cf">
+<dt>招商分类</dt>
+<dd class="cf">
+<ul>
+<li><a href="{$MOD[linkurl]}search.php?catid=0" class="on" >全部</a></li>
+{loop $maincat $k $v}
+<li{if $v[catid]==$catid} class="on"{/if}><a href="{$MOD[linkurl]}{$v[linkurl]}">{set_style($v[catname],$v[style])}</a>{if !$cityid} <i>({$v[item]})</i>{/if}<li>
+{/loop}
+</ul>
+</dd>
+</dl>
+{if $CP}
+{loop $PPT $p}
+<dl class="wy-grade-select cf">
+<dt>{$p[name]}</dt>
+<dd class="cf">
+<input type="hidden" name="ppt_{$p[oid]}" id="ppt_{$p[oid]}" value="{$p[select]}"/>
+<ul>
+<li><a href="javascript:;" onclick="Dd('ppt_{$p[oid]}').value='';Dd('fsearch').submit();" class="on">全部</a></li>
+{loop $p[options] $o}
+<li{if $p[select]==$o} class="on"{/if}><a href="javascript:;" onclick="Dd('ppt_{$p[oid]}').value='{$o}';Dd('fsearch').submit();">{$o}</a><li>
+{/loop}
+</ul>
+</dd>
+</dl>
+{/loop}
+{/if}
+</div>
+<div class="wy-wrap">
+<div class="wy-brand-sort">
+<ul class="cf">
+<li><a href="{$MOD[linkurl]}search.php?catid={$catid}" class="on">默认</a></li>
+<li><a href="#" >人气指数</a></li>
+</ul>
+<div class="so cf">
+<form id="destoon_search3" action="{$MOD[linkurl]}search.php" >
+<span>快速查找招商品牌：</span>
+<input class="ipt_ppzs" id="destoon_kw" name="kw" type="text" value="" placeholder="请输入关键词">
+<button type="submit">搜索</button>
+</form>
+</div>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn-list">
+<ul class="wy-invest-list">
+{if $CP}{template 'property_list', 'chip'}{/if}
+{if $page == 1}{ad($moduleid,$catid,$kw,6)}{/if}
+{if $tags}{template 'list-'.$module, 'tag'}{/if}
+</ul>
+<div class="wy-page" id="pagediv">{if $showpage && $pages}<div class="wy-page" id="pagediv">{$pages}</div>{/if}</div>
+</div>
+<div class="wy-sd-list">
+
+<div class="mb20">
+<div class="wy-brand-hot">
+<div class="wy-tt mb20 cf">
+<h3><a href="{$MODULE[13][linkurl]}" target="_blank">热门品牌</a></h3>
+<a href="{$MODULE[13][linkurl]}" class="more" target="_blank">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=20&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div></div>
+<div class="wy-brand-auth">
+<div class="wy-tt9 cf">
+<h3><a href="{$MODULE[22][linkurl]}" target="_blank" title="招商信息">招商信息</a></h3>
+<a href="{$MODULE[22][linkurl]}" target="_blank" class="more">更多</a>
+</div>
+<div class="bd cf">
+<ul class="cf" id="js-brand-auth2">
+<!--{php $tags=tag("moduleid=22&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=20&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{dsubstr($t[title], 36, '...')}</a></li>
+{/loop}
+</ul>
+</div>
+</div></div>
+</div>
+{template 'footer-info'}

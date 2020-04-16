@@ -1,0 +1,25 @@
+{loop $tags $k $t}
+<li>
+<dl>
+<dt>
+<a href="{$t[linkurl]}" target="_blank"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}"/></a>
+<h3><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></h3>
+</dt>
+<dd>
+{if $t[vipbrand] == 1 || $t[validated] || $t[shida] == 1 || $t[shijia] == 1}
+<div class="icon">
+{if $t[vipbrand] == 1}<i>VIP品牌</i>{/if}
+{if $t[validated]}<i class="blue">认证品牌</i>{/if}
+{if $t[shida] == 1}<i>十大品牌</i>{/if}
+{if $t[shijia] == 1}<i>十佳品牌</i>{/if}
+</div>
+{else}
+<div class="icon">
+{$t[company]}
+</div>
+{/if}
+<div class="link"><a href="{userurl($t[username])}" target="_blank">商铺</a><a href="{$t[linkurl]}" target="_blank" class="blue">查看</a></div>
+</dd>
+</dl>
+</li>
+{/loop}

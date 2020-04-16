@@ -1,0 +1,6 @@
+{loop $tags $i $t}
+<li><a class="hotImg" href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">
+<img  width="165" height="165" alt="{$t[alt]}" title="{$t[alt]}" src="{$t[thumb]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'">
+</a><a class="hotName" href="{$t[linkurl]}" title="" target="_blank">{$t[title]}</a>
+</li>
+{/loop}

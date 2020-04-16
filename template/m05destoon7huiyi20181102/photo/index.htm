@@ -1,0 +1,191 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/pic-v1.3.1.css" />
+<div class="wy-wrap cf">
+<div class="wy-sd">
+<div class="wy-select">
+<dl class="cf">
+<dt>类型 <br /><em>CLASSIFY</em></dt>
+<dd class="cf">
+{loop $maincat $k $v}
+<a title="{$v[catname]}" href="{$MOD[linkurl]}{$v[linkurl]}">{set_style($v[catname],$v[style])}({$v[item]})</a>
+{/loop}
+</dd>
+</dl>
+</div>
+</div>
+<div class="wy-mn" style="width: 800px;">
+<div class="wy-recommend js-pic-focus">
+<div class="slide cf">
+<div class="bd cf">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=5&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank"><img src="{$t[thumb]}" alt="{$t[alt]}"><span>{$t[title]}</span></a></li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=5&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li></li>
+{/loop}
+</ul>
+</div>
+<span class="prev"></span><span class="next"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn2 cf">
+<div class="wy-photo1">
+<ul class="cf">
+<li><a href="#" target="_blank"><img src="http://wy1.jmcdn.cn/skin/chinaweiyu.com/img/tupian/tptj_bg.gif" /></a></li>
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=1&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li class="big-img">
+<a href="{$t[linkurl]}" class="pic" title="{$t[alt]}" target="_blank">
+<img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" />
+<em>{$t[title]}</em>
+<div class="hover">
+<i></i>
+<strong>{$t[title]}</strong>
+<p></p>
+</div>
+</a>
+</li>
+{/loop}
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=1&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li class="mt">
+<a href="{$t[linkurl]}" class="pic" title="{$t[alt]}" target="_blank">
+<img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" />
+<em>{$t[title]}</em>
+<div class="hover"><i></i></div>
+</a>
+</li>
+{/loop}
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=3&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" class="pic" title="{$t[alt]}" target="_blank">
+<img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" />
+<em>{$t[title]}</em>
+<div class="hover"><i></i></div>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="wy-sd2">
+<div class="wy-ranking js-pic-rank">
+<div class="slide">
+<div class="hd cf">
+<h3>排行<i>TOP10</i></h3>
+<ul class="cf"><li class="on">周</li><li>月</li></ul>
+</div>
+<div class="bd">
+<ul class="cf">
+<li>
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=10&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<dl {if $i == 0}class="on"{/if}>
+<dd class="cf"><i class="red">{if $i < 10}<?php echo $i+1?>{/if}</i><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></dd>
+<dt><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" /><i>{$t[hits]}</i></a></dt>
+</dl>
+{/loop}
+</li>
+<li>
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=10&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<dl {if $i == 0}class="on"{/if}>
+<dd class="cf"><i class="red">{if $i < 10}<?php echo $i+1?>{/if}</i><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></dd>
+<dt><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" /><i>{$t[hits]}</i></a></dt>
+</dl>
+{/loop}
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-album">
+<div class="wy-tt11 mb20 cf"><h2><a href="#" target="_blank">推荐图库</a></h2><a href="#" class="more" target="_blank">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=8&order=edittime desc&template=null")}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" class="tpxgt_tp">
+<img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" width="297px" height="220px"/>
+<em>{$t[title]}</em>
+<div class="hover"><i></i></div>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-gallery js-gallery">
+<div class="wy-tt11 mb20 cf"><h2><a href="{$MODULE[13][linkurl]}" target="_blank">品牌展示</a></h2><a href="{$MODULE[13][linkurl]}" class="more">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&pagesize=12&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" title="" target="_blank">
+<dl>
+<dt>
+<img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}"/>
+<h3>{$t[title]}</h3>
+</dt>
+<dd>
+<img class="sm-pic lazy" src="{$t[thumb]}" class="lazy" alt="{$t[alt]}"/>
+<h3>{$t[title]}</h3>
+</dd>
+</dl>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+<div class="wy-wrap">
+<div class="wy-ad wy-ad-half">
+<ul class="cf">
+<li><!--广告ID【AD-K3-1】暂无广告--></li>
+<li><!--广告ID【AD-K3-2】暂无广告--></li>
+<li><!--广告ID【AD-K3-3】暂无广告--></li>
+<li><!--广告ID【AD-K3-4】暂无广告--></li>
+</ul>
+</div>
+</div>
+<div class="wy-wrap">
+<div class="wy-photo2 cf">
+<div class="wy-tt11 mb20 cf">
+<h2>
+<a href="{$MODULE[12][linkurl]}" target="_blank">最新图库</a>
+</h2>
+<a href="{$MODULE[12][linkurl]}" class="more">更多</a>
+</div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&pagesize=20&order=edittime desc&template=null")}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" class="image"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" width="287px" height="194px"/></a>
+<dl>
+<dt><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></dt>
+<dd><i></i>
+<a>关注：{$t[hits]}</a>
+<a href="{$t[linkurl]}" target="_blank" title="查看详情">查看详情</a>
+</dd>
+</dl>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+{template 'footer-photo'}

@@ -1,0 +1,86 @@
+/*qiandao 20160704*/
+.qiandao_content {
+	text-align: center;
+	padding-top: 20px;
+	display: block;
+}
+.qiandao_ok {
+	display: none;
+}
+.qiandao_content  a {
+	text-decoration: none;
+	display: block;
+}
+.qiandao_icon img {
+	width: 100px;
+}
+.qiandao_content  span {
+	line-height: 50px;
+}
+.qiandaojilu {
+	font-size: 14px;
+	color: #333333;
+}
+.qiandao_top {
+	width: 100%;
+	line-height: 40px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #F0F0F0;
+	float: left;
+}
+.qiandao_top  em {
+	float: left;
+	font-style: normal;
+	margin-left: 10px;
+}
+.qiandao_top  a {
+	float: left;
+	margin-left: 20px;
+	color: #ff6063;
+	text-decoration: none;
+	font-size: 14px;
+}
+.qiandao_num {
+	float: right;
+	margin-right: 10px;
+}
+.qiandaojilu ul {
+	float: left;
+	width: 100%;
+}
+.qiandaojilu li {
+	line-height: 40px;
+	margin-left: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #F0F0F0;
+	font-size: 13px;
+	color: #666666;
+}
+.qiandaojilu li span {
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.qiandaojilu li .qiandao_time {
+	float: right;
+	margin-right: 10px;
+	color: #666666;
+	font-size: 13px;
+}
+
+.m_more {
+	line-height: 40px;
+	text-align: center;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #F6F6F6;
+	float: left;
+	width: 100%;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #F6F6F6;
+}
+
+.w { background-color: #FFFFFF; float:left; width: 98%; margin-left:1%; margin-bottom:5px; margin-right:1%}

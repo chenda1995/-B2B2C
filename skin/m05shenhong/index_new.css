@@ -1,0 +1,90 @@
+.wy-invest-box{width:1198px;margin:0 auto;border:1px solid #e3e3e3}
+.wy-invest-oa{float:left;position:relative;width:292px;height:296px;background:url(../images/oa-manage.gif) no-repeat}
+.wy-invest-oa i{display:block;position:absolute;top:125px;right:-20px;width:41px;height:41px;background:url(../images/sp.png) -155px -60px no-repeat}
+.wy-invest-oa dt{height:210px}
+.wy-invest-oa dd{height:86px}
+.wy-invest-oa dd a{display:block;height:66px;padding:10px 0;font:bold 16px "microsoft yahei";color:#f5e923}
+.wy-invest-oa a:hover{text-decoration:none;cursor:pointer}
+.wy-invest-oa dd a:hover{cursor:pointer}
+.wy-invest-oa dd a:hover span{color:#fff;border:2px solid #fff}
+.wy-invest-oa span{display:block;width:196px;height:36px;line-height:36px;margin:18px auto;text-align:center;border:2px solid #f5e923;border-radius:20px}
+.wy-invest-form{float:left;width:514px;height:274px;margin:22px 0 0;padding:0 34px 0 35px;box-shadow:0 3px 3px #eee;*border-bottom:1px solid #e3e3e3}
+.wy-invest-form .note{padding-bottom:10px}
+.wy-invest-form .note dt{float:left;width:140px;height:68px;background:url(../images/sp.png) 0 -110px no-repeat}
+.wy-invest-form .note dd{float:left;width:364px;margin-left:10px}
+.wy-invest-form .note dd u{padding:0 3px;font-weight:bold;color:#db214c}
+.wy-invest-form .note dd p{line-height:22px;font-size:14px;text-indent:2em}
+.wy-invest-form .line{width:520px;height:1px;background:#e5e5e5}
+.wy-invest-form .form{font-size:16px;padding-top:30px}
+.wy-invest-form .form u{color:#db214c;padding-left:5px}
+form *:focus{outline:none}
+.wy-invest-form .form dt,.wy-invest-form .form dd{float:left;line-height:36px}
+.wy-invest-form .form dt{margin:0 5px}
+.wy-invest-form .form input{float:left;width:160px;height:36px;font:14px/36px "microsoft yahei";border:1px solid #e3e3e3}
+.wy-invest-form .form input:focus{border:1px solid #db214c}
+.wy-invest-form .form p{width:100%;height:36px;line-height:36px;padding:15px 0 0 5px;vertical-align:middle}
+.wy-invest-form .form p span{float:left;line-height:36px;*line-height:24px}
+.wy-invest-form .form select{float:left;display:inline;width:138px;height:36px;margin-left:5px;padding:5px;font:14px "microsoft yahei";text-indent:5px;color:#999;border:1px solid #e3e3e3}
+.wy-invest-form .form button,.wy-invest-form .form .reset{width:428px;height:42px;background:#db214c;color:#fff;text-align:center;border-radius:10px;border-radius:0px\9\0;font:18px "microsoft yahei";cursor:pointer;margin:15px 0 0 72px;*margin:10px 0 0 72px;clear:both;outline:none;border:none}
+.wy-invest-form .form button:hover{background:#c41840;font-weight:bold}
+.wy-invest-form .form .reset{background:#f2f2f2;color:#666}
+.wy-invest-box .steps{float:right;width:321px;height:296px;background:url(../images/sp-bg.png) 0 -150px no-repeat;border-left:1px solid #e3e3e3;box-shadow:0 3px 3px #eee;*border-bottom:1px solid #e3e3e3}
+.wy-invest-box .steps dt{height:196px}
+.wy-invest-box .steps dd{height:100px}
+.wy-invest-box .steps dd a{display:block;width:100%;height:100px}
+.wy-invest-box .steps .qq_boxlx{filter:alpha(opacity=0);-moz-opacity:0;opacity:0}
+.wy-invest-box .hot-brands{float:left;padding:20px}
+.wy-invest-box .hot-brands ul{width:1120px}
+.wy-invest-box .hot-brands a{display:block;padding:5px}
+.wy-invest-box .hot-brands img{display:block;width:104px;height:36px}
+.wy-invest-box .hot-brands dt,.wy-invest-box .hot-brands dd{float:left}
+.wy-invest-box .hot-brands dt{width:45px;font-size:16px;font-weight:bold}
+.wy-invest-box .hot-brands dd{width:1100px}
+.wy-invest-box .hot-brands li{float:left;margin:0 4px;background:#fff;border:1px solid #e3e3e3}
+.wy-invest-box .hot-brands li:hover{border:1px solid hsl(30,70%,74%);box-shadow:0 0 5px hsla(0,0%,0%,0.2),0 0 2px hsla(0,0%,78%,0.2)}
+.wy-invest-box .success,#slideUI1{width:1150px;height:75px;margin:0 auto 15px;padding:0;font-size:14px;overflow:hidden}
+.wy-invest-box .success li,#slideUI1 li{float:left;width:33%;height:25px;line-height:25px;font-size:14px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.wy-invest-box .success a,#slideUI1 a{color:#666}
+.wy-invest-box .success a:hover,#slideUI1 a:hover{color:#db214c}
+.wy-invest-box .success a em,#slideUI1 a em{display:inline-block;width:9px;height:11px;margin-left:5px;background:url(../images/sp.png) -140px 0 no-repeat;*display:inline;zoom:1}
+.wy-invest-show{padding:10px 0 10px 10px;_border-top:1px solid #e3e3e3}
+.wy-invest-show li{float:left;margin-right:6px;width:140px;border:1px solid #e3e3e3}
+.wy-invest-show li:hover{border:1px solid hsl(30,70%,74%);box-shadow:0 0 5px hsla(0,0%,0%,0.2),0 0 2px hsla(0,0%,78%,0.2)}
+.wy-invest-show a,.wy-invest-show img{display:block;margin:0}
+.wy-invest-show a:hover{text-decoration:none}
+.wy-invest-show img{width:140px;height:104px;margin-top:10px;overflow:hidden}
+.wy-invest-show dl{padding:10px;font-size:14px;border-top:none}
+.wy-invest-show dt,.wy-invest-show dd{text-align:center}
+.wy-invest-show dt{text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.wy-invest-show dd a,.wy-invest-show dd i{width:46px;height:26px;line-height:26px;margin:5px auto 0;font-size:12px;text-align:center;color:#fff;background:#db214c;border-radius:5px;display:block}
+.wy-invest-rec .hd{position:absolute;top:-18px;right:100px;height:30px;line-height:30px;font-size:14px;color:#999;background:#fff;border:1px solid #e3e3e3;border-radius:15px}
+.wy-invest-rec .hd li{float:left;height:30px;line-height:30px;border-right:1px solid #e3e3e3}
+.wy-invest-rec .hd li:first-child{border-radius:15px 0 0 15px}
+.wy-invest-rec .hd li:last-child{border-radius:0 15px 15px 0;border-right:none}
+.wy-invest-rec .hd li a{display:block;padding:0 25px;font-size:12px;color:#999}
+.wy-invest-rec .hd li.on{background:#db214c}
+.wy-invest-rec .hd li.on a{color:#fff}
+.wy-invest-rec .bd ul{width:890px;margin-top:20px}
+.wy-invest-rec .bd li{float:left;width:165px;height:120px;margin:10px 10px 0 0;padding:5px 0;border:1px solid #e3e3e3;overflow:hidden}
+.wy-invest-rec .bd img{display:block;width:135px;height:48px;margin:0 auto;box-shadow:0 3px 3px #ddd;overflow:hidden;*border-bottom:1px solid #e3e3e3}
+.wy-invest-rec .bd div{width:115px;height:50px;margin:10px auto 0;padding:6px 15px;font-size:14px;background:url(../images/sp.png) 0 -190px repeat-x}
+.wy-invest-rec .bd i{display:block;width:80px;height:13px;margin:6px auto;background:url(../images/sp.png) 0 -300px no-repeat}
+.wy-invest-rec .bd i.star4{width:65px}
+.wy-invest-rec .bd li:hover{border:1px solid #ffdb95;border:1px solid hsl(30,70%,74%);box-shadow:0 0 5px hsla(0,0%,0%,0.2),0 0 2px hsla(0,0%,78%,0.2)}
+.wy-invest-rec .bd ul.two li{float:left;width:135px;height:85px;margin:0 10px 10px 0;border:1px solid #e3e3e3;overflow:hidden}
+.wy-invest-rec .bd ul.two img{display:block;width:130px;height:48px;margin:0 auto 5px;box-shadow:none;overflow:hidden}
+.wy-invest-rec .bd ul.two div{display:block;width:100%;height:32px;line-height:30px;margin:0;padding:0;font-size:14px;background:#fff;border-top:1px solid #e3e3e3}
+.wy-invest-rec .bd ul.two i{margin:10px auto 5px}
+.wy-invest-rec .bd ul.two li:hover div{background:#f8f8f8}
+.wy-invest-rec .bd h4{display:block;width:100%;height:30px;line-height:30px;margin:0 auto;font-size:14px;font-weight:normal;text-align:center;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.wy-invest-sep{margin-top:10px;border-left:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;box-shadow:0 3px 3px #eee}
+.wy-invest-sep img{display:block;width:295px;height:214px;overflow:hidden}
+.wy-invest-sep dd{background:#f8f8f8}
+.wy-invest-sep dd h4{line-height:24px;padding:10px;font-size:16px}
+.wy-invest-sep .info{display:block;width:272px;height:52px;line-height:52px;margin:0 auto;font-size:14px;text-indent:50px;}
+.wy-invest-sep .info u{color:#fafc01}
+.wy-invest-sep .info:hover{text-decoration:none;}
+.wy-invest-sep span{display:block;position:relative;height:24px;margin-top:20px;border-top:1px solid #e3e3e3}
+.wy-invest-sep span i{position:absolute;top:-12px;left:90px;padding:0 20px;font-size:14px;text-align:center;background:#f8f8f8}
+.wy-invest-sep dd p{height:30px;line-height:30px;padding-bottom:10px;font-size:14px;text-align:center}
+.wy-invest-sep dd p u{background:#e3e3e3;color:#999;border-radius:5px;padding:3px 5px;margin:0 5px}

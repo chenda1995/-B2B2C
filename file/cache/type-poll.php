@@ -1,0 +1,1 @@
+<?php defined('IN_DESTOON') or exit('Access Denied'); return array (21 => array ('typeid' => '21','parentid' => '0','typename' => '测试','style' => '',),); ?>

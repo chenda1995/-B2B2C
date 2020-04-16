@@ -1,0 +1,352 @@
+{if $user_status == 3}
+{if $module == 'sell'}
+{if $member}
+<div class="companyName">
+   <h3>{$member[company]}</h3>
+   <div class="jwsy"><a href="{$MODULE[2][linkurl]}friend.php?action=add&username={$member[username]}" class="jwsy1" rel="nofollow">+ 加为商友</a> <a href="{$MODULE[2][linkurl]}message.php?action=send&touser={$member[username]}" class="jwsy2" rel="nofollow">发送信件</a>{if online($member[userid])==1} <font class="jwsy3">当前在线</font>{else}<font class="jwsy3">当前离线</font>{/if}</div>
+   </div>
+   <p class="mt10"><i>会员级别：</i><font class="level_bg"><span title="{group_name($member[groupid])}"><em class="fl vip-name">{group_name($member[groupid])}</em></span></font></p>
+   {if $member[vcompany] || $member[vtruename] || $member[vbank] || $member[vmobile] || $member[vemail]}
+  <p><i>身份认证：</i>
+	{if $member[vcompany]}<img src="{DT_SKIN}images/member/v_company.png" width="20" height="20" align="absmiddle" title="通过工商认证"/>{/if}
+	{if $member[vtruename]}&nbsp;&nbsp;<img src="{DT_SKIN}images/member/v_truename.png" width="20" height="20" align="absmiddle" title="通过实名认证"/>{/if}
+	{if $member[vbank]}&nbsp;&nbsp;<img src="{DT_SKIN}images/member/v_bank.png" width="20" height="20" align="absmiddle" title="通过银行帐号认证"/>{/if}
+	{if $member[vmobile]}&nbsp;&nbsp;<img src="{DT_SKIN}images/member/v_mobile.png" width="20" height="20" align="absmiddle" title="通过手机认证"/>{/if}
+	{if $member[vemail]}&nbsp;&nbsp;<img src="{DT_SKIN}images/member/v_email.png" width="20" height="20" align="absmiddle" title="通过邮件认证"/>{/if}</p>
+	{/if}
+	{if $member[deposit]}
+	<p class="px12"><i>已&nbsp;&nbsp;缴&nbsp;纳：</i><strong class="f_red">{$member[deposit]}</strong> {$DT[money_unit]}保证金</p>
+	{/if}
+   <p class="px12"><i>我的勋章：</i>{if $member[validated]}<img src="{DT_SKIN}image/check_right.gif" align="absmiddle"/>&nbsp;通过{$member[validator]}{/if}&nbsp;<a href="{userurl($member[username], 'file=credit')}">[诚信档案]</a></p>
+   <p><i>在线客服：</i>
+	{if $member[username] && $DT[im_web]}{im_web($member[username].'&mid='.$moduleid.'&itemid='.$itemid)}&nbsp;{/if}
+  {if $member[qq] && $DT[im_qq]}{im_qq($member[qq])}&nbsp;{/if}
+  {if $member[wx] && $DT[im_wx]}{im_wx($member[wx], $member[username])}&nbsp;{/if}
+  {if $member[ali] && $DT[im_ali]}{im_ali($member[ali])}&nbsp;{/if}
+  {if $member[skype] && $DT[im_skype]}{im_skype($member[skype])}&nbsp;{/if}
+  </p>
+  <!-- 企业二维码 -->
+   <p class="qrCode"><i>企业二维码：</i> <span>企业名称加二维码</span>
+    <img src="{DT_PATH}api/qrcode.png.php?auth={userurl($username)}" width="100" height="100" alt="{$member[company]}" title="{$member[company]}">
+   </p>
+   <!-- 公司信息 -->
+   <div class="companyInfo">
+   <a class="website px12" href="{userurl($username)}" title="进入店铺" target="_blank" rel="nofollow">进入店铺</a>
+   <a class="introduce px12" href="{userurl($username, 'file=introduce')}" title="公司介绍" target="_blank">公司介绍</a>
+   <a class="position px12" href="{userurl($username, 'file=contact')}" title="公司地址" target="_blank">公司地址</a>
+   <a class="infos px12" href="{userurl($username, 'file=sell')}" title="产品信息" target="_blank">产品信息</a>
+   </div>
+   <!-- 联系企业 -->
+   <div class="contactUs">
+   <a class="contact" href="javascript:;" onclick="return false;" title="企业名片" target="_self" id="floatTools">企业名片</a>
+  {if $module == 'sell'}
+   {if $username && !$expired}
+   {if SELL_ORDER && $price>0 && $minamount>0 && $amount>0 && $unit}
+   <a class="tocart" href="javascript:;" title="加入购物车" target="_self" onclick="Go('{$MODULE[2][linkurl]}cart.php?action=add&mid={$moduleid}&itemid={$itemid}');">加入购物车</a>
+  <a class="tobuy" href="javascript:;" title="立即购买" target="_self" onclick="Go('{$MODULE[2][linkurl]}buy.php?mid={$moduleid}&itemid={$itemid}');">立即购买</a>
+   {else}
+   <a class="inquiry" href="javascript:;" title="在线询价" target="_self" onclick="Go('{$MOD[linkurl]}{rewrite('inquiry.php?itemid='.$itemid)}');">在线询价</a>
+   {/if}
+  {/if}
+   {elseif $module == 'info' || $module == 'brand'}
+   {if $MOD[show_message] || $username || !$expired}
+    <a class="inquiry" href="javascript:;" title="留言咨询" target="_self" onclick="Go('{$MOD[linkurl]}{rewrite('message.php?itemid='.$itemid)}');">留言咨询</a>
+  {/if}
+   {/if}
+   </div>
+<!--弹窗资料-->
+<div tabindex="0" class="businesscard" id="contactInfo">
+<div tabindex="1" class="contactInfo">
+        <h3>企业名片</h3>
+        <a class="close_businesscard" href="javascript:void(0)" title="close" i="closes"></a>
+ <div class="comct">
+ <div class="comlogo fl">
+ <img src="{useravatar($username, 'large')}&time={$DT_TIME}">
+ </div>
+ <div class="comtext fr">
+        <p class="px18"><a href="{userurl($username)}" title="{$member[company]}">{$member[company]}</a></p>
+        <p><i>联&nbsp;系&nbsp;&nbsp;人：</i>{$member[truename]}({gender($member[gender])})&nbsp;{$member[career]}&nbsp;</p>
+        {if $member[email]}<p><i>电子邮箱：</i>{anti_spam($member[email])}</p>{/if}
+        {if $member[mobile]}<p><i>联系手机：</i>{anti_spam($member[mobile])}{if $DT[sms] && $member[vmobile]}&nbsp;&nbsp;<a href="{$MODULE[2][linkurl]}sms.php?action=add&auth={encrypt($member[mobile], DT_KEY.'SMS')}" target="_blank" rel="nofollow">[发送短信]</a>{/if}</p>{/if}
+        {if $member[telephone]}<p><i>联系固话：</i>{anti_spam($member[telephone])}</p>{/if}
+        {if $member[address]}<p><i>联系地址：</i>{$member[address]}</p>{/if}
+ </div>
+ </div>
+ <div class="comts"><i class="f_red" style="font-style: inherit;">【友情提示】：</i>来电请说明在{$DT[sitename]}看到我们的，谢谢！</div>
+</div>
+</div>
+{else}
+<div class="companyName">
+   <h3>{$item[company]}</h3>
+   <div class="jwsy"><a href="{userurl('')}" class="jwsy1" rel="nofollow">未注册</a></div>
+   </div>
+   <p class="mt10"><i>会员级别：</i><font class="level_bg"><span title="未注册"><em class="fl vip-name">未注册</em></span></font></p>
+   <p></p>
+   <p><i>所在地区：</i>{area_pos($item[areaid], '-')}</p>
+   <p><i>在线客服：</i>{if $item[username] && $DT[im_web]}{im_web($item[username].'&mid='.$moduleid.'&itemid='.$itemid)}&nbsp;{/if}
+	{if $item[qq] && $DT[im_qq]}{im_qq($item[qq])}&nbsp;{/if}
+	{if $item[ali] && $DT[im_ali]}{im_ali($item[ali])}&nbsp;{/if}
+	{if $item[wx] && $DT[im_wx]}{im_wx($item[wx], $item[username])}&nbsp;{/if}
+	{if $item[skype] && $DT[im_skype]}{im_skype($item[skype])}&nbsp;{/if}</p>
+  <!-- 企业二维码 -->
+   <p class="qrCode"><i>二&nbsp;维&nbsp;码：</i> <span>企业名称加二维码</span>
+    <img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" width="100" height="100" alt="{$item[company]}" title="{$item[company]}">
+   </p>
+<!-- 联系企业 -->
+   <div class="contactUs">
+   <a class="contact" href="javascript:;" onclick="return false;" title="企业名片" target="_self" id="floatTools">企业名片</a>
+   </div>
+<!--弹窗资料-->
+<div tabindex="0" class="businesscard" id="contactInfo">
+<div tabindex="1" class="contactInfo">
+        <h3>企业名片</h3>
+        <a class="close_businesscard" href="javascript:void(0)" title="close" i="close"></a>
+        <div class="comct">
+        <p class="px18"><a href="{userurl('')}" title="{$item[company]}">{$item[company]}</a></p>
+        <p><i>联&nbsp;系&nbsp;&nbsp;人：</i>{$item[truename]}</p>
+        {if $item[email]}<p><i>电子邮箱：</i>{anti_spam($item[email])}</p>{/if}
+        {if $item[mobile]}<p><i>联系手机：</i>{anti_spam($item[mobile])}</p>{/if}
+        {if $item[telephone]}<p><i>联系固话：</i>{anti_spam($item[telephone])}</p>{/if}
+        {if $item[address]}<p><i>联系地址：</i><span>{$item[address]}</span></p>{/if}
+        </div>
+         <div class="comts"><i class="f_red">【友情提示】：</i>来电请说明在{$DT[sitename]}看到我们的，谢谢！</div>
+</div>
+</div>
+{/if}
+{elseif $module == 'buy'}
+{if $member}
+ <div class="jy-zt-module jy-zt-module1">
+            <div class="jy-zt-firm"><a href="{$member[linkurl]}" target="_blank" title="{$member[company]}&#10;{$member[mode]}">{$member[company]}</a></div>
+            <ul class="rz-finfo">
+              <li><i class="iconbuy icon-rz1"></i>会员类型：<span class="red">{group_name($member[groupid])}</span>{if $member[vip]} 第 <span class="red"> {vip_year($member[fromtime])}</span> 年 {/if}</li>
+              {if $member[vip]}<li><i class="iconbuy icon-rz2"></i>诚信指数：{$member[vip]}</li>{/if}
+          {if $member[vcompany] || $member[vtruename] || $member[vbank] || $member[vmobile] || $member[vemail]}
+             <li class="vipHide" style="display:none;">
+              <div class="yfsb"><i class="iconbuy icon-rz3"></i>身份认证：</div>
+              {if $member[vcompany]}<img src="{DT_SKIN}images/member/v_company.png" width="20" height="20" align="absmiddle" title="通过工商认证"/>&nbsp;{/if}
+               {if $member[vtruename]}<img src="{DT_SKIN}images/member/v_truename.png" width="20" height="20" align="absmiddle" title="通过实名认证"/>&nbsp;{/if}
+               {if $member[vbank]}<img src="{DT_SKIN}images/member/v_bank.png" width="20" height="20" align="absmiddle" title="通过银行帐号认证"/>&nbsp;{/if}
+                {if $member[vmobile]}<img src="{DT_SKIN}images/member/v_mobile.png" width="20" height="20" align="absmiddle" title="通过手机认证"/>&nbsp;{/if}
+               {if $member[vemail]}<img src="{DT_SKIN}images/member/v_email.png" width="20" height="20" align="absmiddle" title="通过邮件认证"/>{/if}</li>
+            {/if}
+               <li class="vipHide clearfix" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz3-1"></i>企业资料：</div>
+                <div class="jy-zt-ads">
+                {if $member[validated]}<img src="{DT_SKIN}image/check_right.gif" align="absmiddle"/> 通过{$member[validator]}认证&nbsp;{/if}
+                 <a href="{userurl($member[username], 'file=credit')}">[档案]</a>
+                 </div>
+               </li>
+              <li class="vipHide clearfix" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz4"></i>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</div>
+                <div class="jy-zt-ads">{$member[truename]}({gender($member[gender])}){if $member[username] && $DT[im_web]}&nbsp;{im_web($member[username].'&mid='.$moduleid.'&itemid='.$itemid)}{/if}
+  {if $member[qq] && $DT[im_qq]}&nbsp;{im_qq($member[qq])}{/if}</div>
+              </li>
+              <li class="vipHide clearfix" style="display:none;">
+              <div class="yfsb"><i class="iconbuy icon-rz5 clearfix"></i>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</div>
+              <div class="jy-zt-ads  ">{anti_spam($member[telephone])}</div>
+              </li>
+              {if $member[vmobile]}
+              <li class="vipHide clearfix" style="display:none;">
+              <div class="yfsb"><i class="iconbuy icon-rz6 clearfix"></i>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</div>
+              <div class="jy-zt-ads">{anti_spam($member[mobile])}{if $DT[sms] && $member[vmobile]}&nbsp;<a href="{$MODULE[2][linkurl]}sms.php?action=add&auth={encrypt($member[mobile], DT_KEY.'SMS')}" target="_blank" rel="nofollow">[发送短信]</a>{/if}</div>
+              </li>
+              {/if}
+               {if $member[mail]}
+              <li class="vipHide" style="display:none;">
+              <div class="yfsb"><i class="iconbuy icon-rz7"></i>电子邮箱：</div>
+              {anti_spam($member[mail])}</li>
+              {/if}
+              <li class="vipHide clearfix" style="display:none;">
+              <div class="yfsb"><i class="iconbuy icon-rz8 clearfix"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</div>
+              <div class="jy-zt-ads">{$member[address]}</div>
+              </li>
+            </ul>
+            <!-- 公司信息 -->
+  <div class="companyInfo vipHide" style="display:none;">
+  <a class="website px12" href="{userurl($username)}" title="进入店铺" target="_blank" rel="nofollow">进入店铺</a>
+  <a class="introduce px12" href="{userurl($username, 'file=introduce')}" title="公司介绍" target="_blank">公司介绍</a>
+  <a class="position px12" href="{userurl($username, 'file=contact')}" title="公司地址" target="_blank">公司地址</a>
+  <a class="infos px12" href="{userurl($username, 'file=buy')}" title="采购信息" target="_blank">采购信息</a>
+  </div>
+            <div class="rz-btnbox clickBtn"> <a target="_blank" class="rz-btn" onclick="jQuery('.vipHide').show();jQuery('.clickBtn').hide();" style="cursor: pointer">点击查看联系方式</a> </div>
+          </div>
+{else}
+ <div class="jy-zt-module jy-zt-module1">
+            <div class="jy-zt-firm"><a href="{userurl('')}" target="_blank">{$item[company]}</a></div>
+            <ul class="rz-finfo">
+              <li> <i class="iconbuy icon-rz1"></i> 会员类型：<span class="red">未注册</span></li>
+              <li class="vipHide" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz4"></i>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</div>
+                <div class="jy-zt-ads">{$item[truename]}</div>
+              </li>
+              <li class="vipHide clearfix" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz5 clearfix"></i>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</div>
+                <div class="jy-zt-ads">{anti_spam($item[telephone])}</div>
+              </li>
+              <li class="vipHide clearfix" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz6 clearfix"></i>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</div>
+                <div class="jy-zt-ads red fontweight">{anti_spam($item[mobile])}</div>
+              </li>
+              <li class="vipHide" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz7"></i>电子邮箱：</div>
+                {anti_spam($item[email])}</li>
+              <li class="vipHide clearfix" style="display:none;">
+                <div class="yfsb"><i class="iconbuy icon-rz8 clearfix"></i>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</div>
+                <div class="jy-zt-ads">{$item[address]}</div>
+              </li>
+            </ul>
+            <div class="rz-btnbox clickBtn"> <a target="_blank" class="rz-btn" onclick="jQuery('.vipHide').show();jQuery('.clickBtn').hide();" style="cursor: pointer">点击查看联系方式</a> </div>
+          </div>
+{/if}
+{else}
+<ul>
+{if $member}
+  <li class="f_b t_c" style="padding:3px 0 5px 0;font-size:14px;"><a href="{$member[linkurl]}" target="_blank" title="{$member[company]}&#10;{$member[mode]}">{$member[company]}</a></li>
+  {if $member[vip]}
+  <li class="f_orange" style="padding:5px 0 0 12px;"><img src="{DT_SKIN}image/vip_{$member[vip]}.gif" alt="{VIP}" title="{VIP}:{$member[vip]}级" align="absmiddle"/> [{VIP}第{vip_year($member[fromtime])}年] 指数:{$member[vip]}</li>
+  {/if}
+  {if $member[validated] || $member[vcompany] || $member[vtruename] || $member[vbank] || $member[vmobile] || $member[vemail]}
+  <li class="f_green" style="padding-top:6px;padding-bottom:6px;">
+  {if $member[vcompany]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_company.gif" width="16" height="16" align="absmiddle" title="通过工商认证"/>{/if}
+  {if $member[vtruename]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_truename.gif" width="16" height="16" align="absmiddle" title="通过实名认证"/>{/if}
+  {if $member[vbank]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_bank.gif" width="16" height="16" align="absmiddle" title="通过银行帐号认证"/>{/if}
+  {if $member[vmobile]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_mobile.gif" width="16" height="16" align="absmiddle" title="通过手机认证"/>{/if}
+  {if $member[vemail]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_email.gif" width="16" height="16" align="absmiddle" title="通过邮件认证"/>{/if}
+  {if $member[validated]}&nbsp;<img src="{DT_STATIC}file/image/check-ok.png" align="absmiddle"/> 通过{$member[validator]}认证{/if}
+  &nbsp;<a href="{userurl($member[username], 'file=credit')}">[诚信档案]</a>
+  </li>
+  {/if}
+  {if $member[deposit]}
+  <li class="f_green">已缴纳 <strong>{$member[deposit]}</strong> {$DT[money_unit]}保证金</li>
+  {/if}
+  <li style="padding-top:6px;padding-bottom:6px;">
+  <span>联系人</span>{$member[truename]}({gender($member[gender])})&nbsp;{$member[career]}&nbsp;
+  {if $member[username] && $DT[im_web]}{im_web($member[username].'&mid='.$moduleid.'&itemid='.$itemid)}&nbsp;{/if}
+  {if $member[qq] && $DT[im_qq]}{im_qq($member[qq])}&nbsp;{/if}
+  {if $member[wx] && $DT[im_wx]}{im_wx($member[wx], $member[username])}&nbsp;{/if}
+  {if $member[ali] && $DT[im_ali]}{im_ali($member[ali])}&nbsp;{/if}
+  {if $member[skype] && $DT[im_skype]}{im_skype($member[skype])}&nbsp;{/if}
+  </li>
+  <li><span>会员</span> [{if online($member[userid])==1}<font class="f_red">当前在线</font>{else}<font class="f_gray">当前离线</font>{/if}] <a href="{$MODULE[2][linkurl]}friend.php?action=add&username={$member[username]}">[加为商友]</a> <a href="{$MODULE[2][linkurl]}message.php?action=send&touser={$member[username]}">[发送信件]</a></li>
+  {if $member[mail]}<li><span>邮件</span>{anti_spam($member[mail])}</li>{/if}
+  {if $member[telephone]}<li><span>电话</span>{anti_spam($member[telephone])}</li>{/if}
+  {if $member[mobile]}<li><span>手机</span>{anti_spam($member[mobile])}</li>{/if}
+  <li><span>地区</span>{area_pos($member[areaid], '-')}</li>
+  {if $member[address]}<li title="{$member[address]}"><span>地址</span><a href="{DT_PATH}api/address.php?auth={encrypt($member[address].'|'.$member[company], DT_KEY.'MAP')}" target="_blank">{$member[address]}</a></li>{/if}
+{else}
+<li class="f_b t_c" style="font-size:14px;"><a href="{userurl('')}" target="_blank">{$item[company]}</a></li>
+  <li style="padding-top:3px;">
+  <span>联系人</span>{$item[truename]}&nbsp;
+  {if $item[username] && $DT[im_web]}{im_web($item[username].'&mid='.$moduleid.'&itemid='.$itemid)}&nbsp;{/if}
+  {if $item[qq] && $DT[im_qq]}{im_qq($item[qq])}&nbsp;{/if}
+  {if $item[wx] && $DT[im_wx]}{im_wx($item[wx], $item[username])}&nbsp;{/if}
+  {if $item[ali] && $DT[im_ali]}{im_ali($item[ali])}&nbsp;{/if}
+  {if $item[skype] && $DT[im_skype]}{im_skype($item[skype])}&nbsp;{/if}
+  &nbsp;&nbsp;<strong class="f_red">未注册</strong>
+  </li>
+  {if $item[email]}<li><span>邮件</span>{anti_spam($item[email])}</li>{/if}
+  {if $item[telephone]}<li><span>电话</span>{anti_spam($item[telephone])}</li>{/if}
+  {if $item[mobile]}<li><span>手机</span>{anti_spam($item[mobile])}</li>{/if}
+  <li><span>地区</span>{area_pos($item[areaid], '&nbsp;')}</li>
+  {if $item[address]}<li title="{$item[address]}"><span>地址</span><a href="{DT_PATH}api/address.php?auth={encrypt($item[address].'|'.$item[company], DT_KEY.'MAP')}" target="_blank">{$item[address]}</a></li>{/if}
+  </li>
+{/if}
+</ul>
+{/if}
+{elseif $user_status == 2}
+<div class="px13 t_c mux">
+<table cellpadding="5" cellspacing="5" width="100%">
+<tr>
+<td class="f_b"><div style="padding:5px 3px;border:#e60000 2px solid;font-size: 12px;background:#FFFFFF;">查看该信息联系方式需支付{$name} <strong class="f_red">{$fee}</strong> {$unit}</div></td>
+</tr>
+<tr>
+<td>我的{$name}余额 <strong class="f_blue">{if $currency=='money'}{$_money}{else}{$_credit}{/if}</strong> {$unit}</td>
+</tr>
+<tr>
+<td class="px14 pd10">请点击支付按钮支付后查看</td>
+</tr>
+{if $MOD[fee_period]}
+<tr>
+<td class="px14 pd10">支付后可查看<strong class="f_red">{$MOD[fee_period]}</strong>分钟，过期重新计费</td>
+</tr>
+{/if}
+<tr>
+<td>
+<a href="{$pay_url}" rel="nofollow" alt="立即支付" title="立即支付" class="xshengji">立即支付</a>&nbsp;&nbsp;
+<a href="{$MODULE[2][linkurl]}{if $currency=='money'}charge.php?action=pay&reason=pay|{$mid}|{$itemid}{else}credit.php?action=buy{/if}" rel="nofollow" alt="帐户充值" title="帐户充值" class="xliaojie">帐户充值</a>
+</td>
+</tr>
+</table>
+</div>
+{elseif $user_status == 1}
+<div class="px13 t_c mux">
+<table cellpadding="5" cellspacing="5" width="100%">
+<tr>
+<td class="f_b"><div style="padding:5px 3px;border:#e60000 2px solid;font-size: 12px;background:#FFFFFF;">您的会员级别没有查看联系方式的权限</div></td>
+</tr>
+<tr>
+<td class="px12">获得更多商业机会，建议<span class="f_red">升级</span>会员级别</td>
+</tr>
+{if $DT[telephone]}
+<tr>
+<td class="px14 pd10">咨询电话：{$DT[telephone]}</td>
+</tr>
+{/if}
+<tr>
+<td>
+<a href="{$MODULE[2][linkurl]}grade.php" rel="nofollow" alt="现在升级" class="xshengji">现在升级</a>&nbsp;&nbsp;
+<a href="{$MODULE[2][linkurl]}grade.php" rel="nofollow" alt="了解详情" class="xliaojie">了解详情</a>
+</td>
+</tr>
+</table>
+</div>
+{elseif $user_status == 0}
+{if $module == 'sell'}
+<div class="companyName_no">
+   <h3>{$item[company]}</h3>
+</div>
+<div class="user_warn_no">
+<div class="user_warn"><img src="{DT_SKIN}image/no.gif" align="absmiddle"/> 登录后方可查看联系方式</div>
+<div class="user_login">
+<ul>
+<li><input type="button" value="立即登录" class="btn-blue" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_login]}');"/></li>
+<li><input type="button" value="免费注册" class="btn-green" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_register]}');"/></li>
+</ul>
+</div>
+</div>
+{elseif $module == 'buy'}
+<div class="user_warn_no">
+<div class="user_warn"><img src="{DT_SKIN}image/no.gif" align="absmiddle"/> 登录后方可查看联系方式</div>
+<div class="user_login">
+<ul>
+<li><input type="button" value="立即登录" class="btn-blue" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_login]}');"/></li>
+<li><input type="button" value="免费注册" class="btn-green" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_register]}');"/></li>
+</ul>
+</div>
+</div>
+{else}
+<br/>
+<div class="px14 t_c">
+<table cellpadding="5" cellspacing="5" width="100%">
+<tr>
+<td class="f_b">
+<div style="padding:6px;border:#FFC600 1px solid;background:#FFFEBF;">
+您还没有登录，请登录后查看详情
+</div>
+</td>
+</tr>
+<tr>
+<td><input type="button" value="立即登录" class="btn-blue" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_login]}');"/></td>
+</tr>
+<tr>
+<td><input type="button" value="免费注册" class="btn-green" onclick="Go('{$MODULE[2][linkurl]}{$DT[file_register]}');"/></td>
+</tr>
+</table>
+</div>
+<br/>
+{/if}
+{else}
+<br/><br/><br/>
+<center><img src="{DT_SKIN}image/load.gif"/></center>
+<br/><br/><br/>
+{/if}

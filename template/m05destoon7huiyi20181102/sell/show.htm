@@ -1,0 +1,251 @@
+{template 'header-sell-show'}
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<link rel="stylesheet" href="{DT_SKIN}css/tecenet.base.css">
+<link rel="stylesheet" href="{DT_SKIN}css/tc.chanpin.base.css">
+<link rel="stylesheet" href="{DT_SKIN}css/style-sell.css">
+<link rel="stylesheet" href="{DT_SKIN}css/jquery.fancybox.css">
+<link rel="stylesheet" href="{DT_SKIN}css/tc.page.header.css">
+<link rel="stylesheet" href="{DT_SKIN}css/sell.css">
+<script type="text/javascript" src="{DT_SKIN}js/comm.js"></script>
+<!-- 面包屑导航 -->
+<div class="breadNav">您所在的位置：<a href="{$MODULE[1][linkurl]}" title="{$DT[sitename]}" target="_self">{$DT[sitename]}</a><code>&gt;</code><a href="{$MOD[linkurl]}" target="_self">{$MOD[name]}</a><code>&gt;</code>{cat_pos($CAT, '<code>&gt;</code>')}<code>&gt;</code><font>{$title}</font> </div>
+{if $username} 
+<!--vip头部标志、标题开始-->
+<div class="details_vipheadBg">
+  <div class="details_viphead"> 
+    <!--企业相关-->
+    <div class="details_viptitle fl">
+     {php $item=userinfo($username)}
+      <h2 class="color">{$item[company]}</h2>
+      <p>{dsubstr($item[business], 200, '…')} </p>
+    </div>
+    {if $vip}
+    <div class="details_years fr">
+      <div class="details_yearsp"> <img src="{DT_SKIN}images/sell/vip{$item[vip]}-137.png" alt="VIP会员" title="VIP{$item[vip]}" />
+        <p class="vipname">{group_name($item[groupid])}</p>
+      </div>
+    </div>
+    {else}
+    <div class="details_years fr">
+      <div class="details_yearsp"> <img src="{DT_SKIN}images/sell/free-137.png" alt="普通会员" title="普通会员"/>
+        <p class="vipname">普通会员</p>
+      </div>
+    </div>
+    {/if} </div>
+</div>
+{/if} 
+<!-- 产品信息和详情 -->
+<div class="prodets">
+  <div class="proinfo"> 
+    <!-- 产品图片 -->
+    <div class="proimg"> 
+      <!-- 产品大图 -->
+      <div id="mid_pos"></div>
+      <div class="bigimg" id="mid_div" onmouseover="SAlbum();" onmouseout="HAlbum();" onclick="PAlbum(Dd('mid_pic'));"> <img src="{$albums[0]}" width="388" height="388" id="mid_pic"/><span id="zoomer"></span> </div>
+      <!-- 产品小图 -->
+      <div class="smallimg"> {loop $thumbs $k $v} <img src="{$v}" width="70" height="70" onmouseover="if(this.src.indexOf('nopic60.gif')==-1)Album({$k}, '{$albums[$k]}');" class="{if $k}ab_im{else}on{/if}" id="t_{$k}"/> {/loop} </div>
+    </div>
+    <div class="protext">
+      <h1 id="title">{$title}</h1>
+      <div id="big_div" style="display:none;"><img src="" id="big_pic"/></div>
+      <p class="proprice"><i>产品价格</i><span><font>{if $price>0}<em>{$DT[money_sign]}</em>{$price}<em>{$DT[money_unit]}/{$unit}</em>{else}面议{/if}</font></span></p>
+      <p><i>产品品牌</i>{if $brand}{$brand}{else}未填{/if}</p>
+      <p><i>最小起订</i>{if $minamount}≥{$minamount} {$unit}{else}未填{/if}</p>
+      <p><i>供货总量</i>{if $amount}{$amount} {$unit}{else}未填{/if}</p>
+      <p><i>发货期限</i>自买家付款之日起 <span class="f_b f_orange">{if $days}{$days}{/if}</span> 天内发货</p>
+      {if $MOD[hits]}<p><i>浏览次数</i><span id="hits">{$hits}</span></p>{/if}
+      {if $username}
+      <p class="companySite"><i>企业旺铺</i><a href="{userurl($username)}" target="_blank">{userurl($username)}</a></p>
+      {else}
+      <p class="companySite f_red"><i><strong class="f_red">注意</strong></i>发布人未在本站注册，建议优先选择<a href="{$MODULE[2][linkurl]}grade.php"><strong> {VIP}会员</strong></a></p>
+      {/if}
+      <p><i>更新日期</i>{$editdate}</p>
+      <!-- 分享和举报 -->
+      <div class="proShare"> 
+        <!-- 收藏商品 --> 
+        <a class="proSave px12" href="javascript:void(0)" title="收藏商品" onclick="SendFav({$moduleid}, {$itemid});"> 收藏商品</a> 
+        <!-- 分享 -->
+        <div class="bdsharebuttonbox bdshare-button-style0-16"> <a href="javascript:;" class="bds_more px12" title="分享" onclick="Dshare({$moduleid}, {$itemid});">分享</a> 
+        </div>
+        <!-- 产品手机版二维码 --> 
+        <a class="wapimg px12" href="javascript:void(0)" title="扫一扫" target="_self"><i></i>扫一扫</a> 
+        <!-- 二维码图 -->
+        <div class="proCodeimg" style="display: none;"> <span class="px12">扫一扫，用手机查看</span> <img src="{DT_PATH}api/qrcode.png.php?auth={$head_mobile}" width="100" height="100"> </div>
+        <!-- 举报 --> 
+        <a class="reportBtn px12" href="javascript:void(0)" title="举报" target="_self" onclick="SendReport();"> 举报</a> </div>
+    </div>
+  </div>
+  <!-- 右侧 -->
+  <div class="shopinfo">
+    <div class="proRight">
+      <h2><div class="icon-red"></div>诚信档案</h2>
+      <div id="contact">{template 'contact', 'chip'}</div>
+      {if !$username}
+      <div class="wzc"><strong class="f_red">注意:</strong> 发布人未在本站注册，建议优先选择<a href="{$MODULE[2][linkurl]}grade.php"><strong> {VIP}会员</strong></a></div>
+      {/if} </div>
+  </div>
+  <!-- 商品详情 -->
+  <div class="proDetail">
+    <h2><div class="icon-red"></div>商品信息</h2>
+    <div class="detsMain"> 
+      <!--参数-->
+      <div class="dvop-title">基本参数</div>
+      <div class="pro-tab">
+        <table width="100%" cellpadding="0" cellspacing="1" border="0" bgcolor="#e5e5e5">
+          <tbody>
+            <tr height="36" bgcolor="#ffffff">
+              <td class="pt-name"><h4>品牌：</h4></td>
+              <td class="pt-cent">{if $brand}{$brand}{else}未填{/if}</td>
+            </tr>
+            <tr height="36" bgcolor="#ffffff">
+              <td class="pt-name"><h4>所在地：</h4></td>
+              <td class="pt-cent">{area_pos($areaid, ' ')}</td>
+            </tr>
+            <tr height="36" bgcolor="#ffffff">
+              <td class="pt-name"><h4>起订：</h4></td>
+              <td class="pt-cent">{if $minamount}≥{$minamount} {$unit}{else}未填{/if}</td>
+            </tr>
+            <tr height="36" bgcolor="#ffffff">
+              <td class="pt-name"><h4>供货总量：</h4></td>
+              <td class="pt-cent">{if $amount}{$amount} {$unit}{else}未填{/if}</td>
+            </tr>
+            <tr height="36" bgcolor="#ffffff">
+              <td class="pt-name"><h4>有效期至：</h4></td>
+              <td class="pt-cent">{if $todate}{$todate}{else}长期有效{/if}{if $expired} <span class="f_red">[已过期]</span>{/if}</td>
+            </tr>
+          {if $n3 && $v3}
+          <tr height="36" bgcolor="#ffffff">
+            <td class="pt-name"><h4>{$n1}：</h4></td>
+            <td class="pt-cent">{$v1}</td>
+          </tr>
+          {/if}
+          {if $n2 && $v2}
+          <tr height="36" bgcolor="#ffffff">
+            <td class="pt-name"><h4>{$n2}：</h4></td>
+            <td class="pt-cent">{$v2}</td>
+          </tr>
+          {/if}
+          {if $n3 && $v3}
+          <tr height="36" bgcolor="#ffffff">
+            <td class="pt-name"><h4>{$n3}：</h4></td>
+            <td class="pt-cent">{$v3}</td>
+          </tr>
+          {/if}
+            </tbody>
+        </table>
+      </div>
+      <!--简介-->
+      <div class="dvop-title">详细说明</div>
+      <div class="pdmain">
+        {if $CP}{template 'property_show', 'chip'}{/if}
+        <div class="content c_b" id="content">{$content}</div>
+          {if $MOD[fee_award]}
+  <div class="b20 c_b">&nbsp;</div>
+  <div class="award"><div onclick="Go('{$MODULE[2][linkurl]}award.php?mid={$moduleid}&itemid={$itemid}');">打赏</div></div>
+  {/if}
+      </div>
+      </div>
+      <div class="pingl">{template 'comment', 'chip'}</div>
+  </div>
+  {if $username}
+  <!-- 企业推荐产品 -->
+  <div class="hotCommand">
+  <div class="mux">
+    <h2 class="fl"><div class="icon-red"></div>店长推荐商品</h2>
+    <a class="refreshBtn fr" href="{userurl($username, 'file=sell')}" target="_self">更多&raquo;</a>
+    </div>
+    <div class="sell_content">
+      <ul class="hotList">
+        <!--{tag("moduleid=$moduleid&length=20&condition=status=3 and username='$username' and elite=1 and thumb<>''&pagesize=10&order=edittime desc&width=165&height=165&template=sell-thumb-user")}-->
+      </ul>
+    </div>
+  </div>
+  <!-- 企业产品 -->
+  <div class="hotCommand">
+  <div class="mux">
+    <h2 class="fl"><div class="icon-red"></div>店铺内其他商品</h2>
+    <a class="refreshBtn fr" href="{userurl($username, 'file=sell')}" target="_self">更多&raquo;</a>
+    </div>
+    <div class="sell_content">
+      <ul class="hotList">
+        <!--{tag("moduleid=$moduleid&length=20&condition=status=3 and thumb<>'' and username='$username'&pagesize=10&order=edittime desc&width=165&height=165&template=sell-thumb-user")}-->
+      </ul>
+    </div>
+  </div>
+  {/if}
+  <!-- 热门推荐 -->
+  <div class="hotCommand">
+    <div class="mux">
+    <h2 class="fl"><div class="icon-red"></div>全网相似产品推荐</h2>
+    <a class="refreshBtn fr" href="javascript:void(0)" title="换一批" id="changes" target="_self"><i></i>换一批</a>
+    </div>
+    <div class="sell_content chpeg"> 
+      <!--{tag("moduleid=$moduleid&catid=$catid&length=20&condition=status=3 and thumb<>''&areaid=$cityid&pagesize=10&order=edittime desc&width=165&height=165&template=sell-thumb-catid", -2)}--> 
+    </div>
+    <script>
+//换一换
+$(function(){
+var tit = $("#changes"),
+con = $(".chpeg>ul"),
+page = con.length,
+index = 0;
+if (page>=2) {
+tit.click(function(){
+if(index < (page-1)){
+index++;
+}else{
+index = 0;
+}
+con.eq(index).show(500).siblings().hide(500);
+});
+}
+});
+</script> 
+  </div>
+  <!-- 相关栏目 -->
+  <div class="relevantPro">
+    <h2><div class="icon-red"></div>相关栏目</h2>
+    <!-- 地区相关 -->
+    <div class="relmain">
+      <h3>地区相关</h3>
+      {php $mainarea = get_mainarea(0)}
+      {loop $mainarea $k $v} <a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v[areaid])}" title="{$v[areaname]}" target="_blank">{$v[areaname]}</a> {/loop} </div>
+    <!-- 相关行业 -->
+    <div class="relmain">
+      <h3>相关行业</h3>
+      {php $mid = $moduleid;}
+      {if $CAT[parentid]}
+      {php $zcatid = $CAT[parentid];}
+      {else}
+      {php $zcatid = $catid;}      
+      {/if}
+      {php $child = get_maincat($zcatid, $mid, 1);}
+      {loop $child $i $c} <a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}" target="_blank">{$c[catname]}</a> {/loop} </div>
+    <!-- 相关搜索 -->
+    <div class="relmain">
+      <h3>产品热门搜索</h3>
+      <!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3&pagesize=26&order=total_search desc&dir=xhtag&template=show-search_kw")}--> 
+    </div>
+  </div>
+  <!-- 您是不是在找 -->
+  <div class="userInterest">
+    <p>还没找到您需要的<a href="{$MODULE[5][linkurl]}search.php?kw={cat_name($catid)}" target="_blank">{cat_name($catid)}产品</a>？立即发布您的求购意向，让<a href="{$MODULE[4][linkurl]}search.php?kw={cat_name($catid)}" target="_blank">{cat_name($catid)}公司</a>主动与您联系！</p>
+    <a class="releaseBtn" href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=6&action=add" title="立即发布求购意向" target="_blank">立即发布求购意向</a> </div>
+  <!-- 友情提示 -->
+  <div class="xhtips">
+    <h4>免责声明</h4>
+    <p>本网页所展示的有关【{$title}_{cat_name($catid)}_{$item[company]}】的信息/图片/参数等由{$DT[sitename]}的会员【{$item[company]}】提供，由{$DT[sitename]}会员【{$item[company]}】自行对信息/图片/参数等的真实性、准确性和合法性负责，<b>本平台（本网站）仅提供展示服务，请谨慎交易，因交易而产生的法律关系及法律纠纷由您自行协商解决，本平台（本网站）对此不承担任何责任</b>。您在本网页可以浏览【{$title}_{cat_name($catid)}_{$item[company]}】有关的信息/图片/价格等及提供【{$title}_{cat_name($catid)}_{$item[company]}】的商家公司简介、联系方式等信息。</p>
+    <h4 class="contactTit">联系方式</h4>
+    <p>在您的合法权益受到侵害时，欢迎您向{$DT[emaill]}邮箱发送邮件，或者进入<a href="{$EXT[guestbook_url]}" title="网站意见反馈" target="_blank">《网站意见反馈》</a>了解投诉处理流程，我们将竭诚为您服务，感谢您对{$DT[sitename]}的关注与支持！</p>
+  </div>
+  <!-- 按字母筛选 -->
+  <div class="letterSort">
+    <h3>按排行字母分类：</h3>
+    {php $LETTER = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');}
+    {loop $LETTER $i $L} <a href="{$MODULE[1][linkurl]}{rewrite('sitemap/index.php?mid='.$moduleid.'&letter='.$L)}" title="{$L}"  target="_blank">{$L}</a> {/loop} </div>
+</div>
+<div class="wrapt newfooter"></div>
+<script type="text/javascript" src="{DT_SKIN}js/top2.1.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/album.js"></script>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer'}

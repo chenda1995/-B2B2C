@@ -1,0 +1,319 @@
+{template 'header-mini'}
+<link rel="stylesheet" type="text/css" href="{DT_STATIC}{$MODULE[2][moduledir]}/image/fabu.css"/>
+<script type="text/javascript" src="{DT_STATIC}file/script/admin.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/member.js"></script>
+<div class="go-screen">
+<h1 class="main-title">需求定制表单</h1>
+<div class="form-wrap">
+<div class="order_step order_step1 order_wrap"><span class="step-one step-active">填写您的所需求</span><span class="step-two">等待审核和预算</span><span class="step-three">给出最终报价</span></div>
+{if $action=='add' || $action=='edit'}
+<iframe src="" name="send" id="send" style="display:none;"></iframe>
+<form action="?" method="post" id="dform" target="send" onsubmit="return check();">
+<input type="hidden" name="action" value="{$action}"/>
+<input type="hidden" name="mid" value="{$mid}"/>
+<input type="hidden" name="itemid" value="{$itemid}"/>
+<input type="hidden" name="forward" value="{$forward}"/>
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 类型</div>
+<div class="fb_text_1">
+{loop $TYPE $k $v}
+<input type="radio" name="post[typeid]" value="{$k}" {if $k==$typeid}checked{/if}/> <label for="typeid_{$k}" id="t_{$k}">{$v}</label>&nbsp;
+{/loop}
+</div>
+</div>
+
+<div class="dem">
+ <div class="fb_title"><span class="f_red">*</span> 需求标题</div>
+<div class="fb_text"><input name="post[title]" type="text" id="title" size="60" value="{$title}"/> （2-30个字）<span id="dtitle" class="f_red"></span></div>
+</div>
+
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 所需分类</div>
+<div class="fb_text"><div id="catesch"></div>{ajax_category_select('post[catid]', '选择分类', $catid, $moduleid, $DT_TOUCH ? '' : 'size="2" style="height:90px;width:100px;"')}{if !$DT_TOUCH}<br/>{/if}{if $DT[schcate_limit]}<input type="button" value="搜索分类" onclick="schcate({$moduleid});" class="btn_1" style="margin-top5px;"/>{/if}<span id="dcatid" class="f_red"></span></div>
+</div>
+
+{if $CP}
+<script type="text/javascript">
+var property_catid = {$catid};
+var property_itemid = {$itemid};
+var property_admin = 0;
+</script>
+<script type="text/javascript" src="{DT_STATIC}file/script/property.js"></script>
+<div id="load_property" style="display:none;">
+<div class="dem"><div></div><div></div></div>
+</div>
+{/if}
+<div class="dem">
+<div class="fb_title">是否已有域名</div>
+<div class="fb_text"><input type="text" name="post_fields[yuming]" id="yuming" value="http://" size="60"> <span class="f_red" id="dyuming"></span>（如果没有，不用填）</div></div>
+<div class="dem">
+<div class="fb_title">是否已有空间</div>
+<div class="fb_text"><span id="kongjian">
+<input type="radio" name="post_fields[kongjian]" value="已有网站空间" id="kongjian_0"> 已有网站空间&nbsp;&nbsp;&nbsp;
+<input type="radio" name="post_fields[kongjian]" value="还没有购买" id="kongjian_1"> 还没有购买&nbsp;&nbsp;&nbsp;</span> 
+<span class="f_red" id="dkongjian"></span>（是指：网站空间或服务器，支持php、mysql等）</div>
+</div>
+<div class="dem">
+<div class="fb_title">需要什么服务</div>
+<div class="fb_text">
+<span id="fuwu">
+<input type="checkbox" name="post_fields[fuwu][]" value="一站式建站" id="fuwu_0"> 一站式建站&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="网站仿制" id="fuwu_1"> 网站仿制&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="二次开发" id="fuwu_2"> 二次开发&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="首页修改" id="fuwu_3"> 首页修改&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="模板美化" id="fuwu_4"> 模板美化&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="数据调用" id="fuwu_5"> 数据调用&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="二级域名、伪静态" id="fuwu_6"> 二级域名、伪静态&nbsp;&nbsp;&nbsp;
+<input type="checkbox" name="post_fields[fuwu][]" value="其他" id="fuwu_7"> 其他&nbsp;&nbsp;&nbsp;
+</span> <span class="f_red" id="dfuwu"></span></div>
+</div>
+<div class="dem">
+<div class="fb_title">参考网址</div>
+<div class="fb_text">
+<textarea name="post_fields[wangzhi]" id="wangzhi" rows="5" cols="80"></textarea>
+<span class="f_red" id="dwangzhi"></span>（请一行一个网址）</div>
+</div>
+<div class="dem">
+<div class="fb_title">上传需求文档</div>
+<div class="fb_text">
+<input name="post_fields[wendang]" type="text" size="60" id="wendang" value="">&nbsp;&nbsp;
+<span onclick="Dfile(6, Dd('wendang').value, 'wendang');" class="jt">[上传]</span>&nbsp;&nbsp;
+<span onclick="if(Dd('wendang').value) window.open(Dd('wendang').value);" class="jt">[预览]</span> 
+<span class="f_red" id="dwendang"></span>&nbsp;&nbsp;
+<span onclick="Dd('wendang').value='';" class="jt">[删除]</span> 
+<span class="f_red" id="dwendang"></span>（ 如word、excel、ps图片，可以rar打包上传）</div>
+</div>
+<div class="dem">
+<div class="fb_title">详细说明</div>
+<div class="fb_text"><textarea name="post[content]" id="content" class="dsn">{$content}</textarea>
+{deditor($moduleid, 'content', $group_editor, '100%', 350)}<br/><span id="dcontent" class="f_red"></span></div>
+</div>
+
+<div class="dem">
+<div class="fb_title">大致样式图</div>
+<div class="fb_text">
+	<input type="hidden" name="post[thumb]" id="thumb" value="{$thumb}"/>
+{if $IMVIP || !$MG[uploadpt]}
+	<input type="hidden" name="post[thumb1]" id="thumb1" value="{$thumb1}"/>
+	<input type="hidden" name="post[thumb2]" id="thumb2" value="{$thumb2}"/>
+{/if}
+	<table width="360">
+	<tr align="center" height="120" class="c_p">
+	<td width="120"><img src="{if $thumb}{$thumb}{else}{DT_SKIN}image/waitpic.gif{/if}" width="100" height="100" id="showthumb" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb').src, 1);}else{Dalbum('',{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb').value, true);}"/></td>
+{if $IMVIP || !$MG[uploadpt]}
+	<td width="120"><img src="{if $thumb1}{$thumb1}{else}{DT_SKIN}image/waitpic.gif{/if}" width="100" height="100" id="showthumb1" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb1').src, 1);}else{Dalbum(1,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb1').value, true);}"/></td>
+
+	<td width="120"><img src="{if $thumb2}{$thumb2}{else}{DT_SKIN}image/waitpic.gif{/if}" width="100" height="100" id="showthumb2" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb2').src, 1);}else{Dalbum(2,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb2').value, true);}"/></td>
+{else}
+	<td width="120"></td>
+	<td width="120"></td>
+{/if}
+	</tr>
+	<tr align="center" class="c_p">
+	<td><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum('',{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb').value, true);"/>{if $_userid}&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum('');"/>{/if}&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum('','wait');"/></td>
+{if $IMVIP || !$MG[uploadpt]}
+	<td><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum(1,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb1').value, true);"/>&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(1);"/>&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum(1,'wait');"/></td>
+	<td><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum(2,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb2').value, true);"/>&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(2);"/>&nbsp;&nbsp;<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum(2,'wait');"/></td>
+{else}
+	<td></td>
+	<td></td>
+{/if}
+	</tr>
+	</table>
+<span id="dthumb" class="f_red"></span>
+</div>
+</div>
+
+<div class="dem">
+<div class="fb_title">过期时间</div>
+<div class="fb_text">{dcalendar('post[totime]', $totime)}&nbsp;
+<select onchange="Dd('posttotime').value=this.value;">
+<option value="">快捷选择</option>
+<option value="">长期有效</option>
+<option value="{timetodate($DT_TIME+86400*3, 3)}">3天</option>
+<option value="{timetodate($DT_TIME+86400*7, 3)}">一周</option>
+<option value="{timetodate($DT_TIME+86400*15, 3)}">半月</option>
+<option value="{timetodate($DT_TIME+86400*30, 3)}">一月</option>
+<option value="{timetodate($DT_TIME+86400*182, 3)}">半年</option>
+<option value="{timetodate($DT_TIME+86400*365, 3)}">一年</option>
+</select>&nbsp;
+不选表示长期有效
+<span id="dposttotime" class="f_red"></span></div>
+</div>
+
+<div class="dem">
+<div class="fb_title">自主要求</div>
+<div class="fb_text nv">
+<table cellspacing="1">
+<tr>
+<th>要求名</th>
+<th>简单表述</th>
+</tr>
+<tr>
+<td><input name="post[n1]" type="text" size="10" value="{$n1}" id="n1"/></td>
+<td><input name="post[v1]" type="text" size="20" value="{$v1}" id="v1"/></td>
+</tr>
+<tr>
+<td><input name="post[n2]" type="text" size="10" value="{$n2}" id="n2"/></td>
+<td><input name="post[v2]" type="text" size="20" value="{$v2}" id="v2"/></td>
+</tr>
+<tr>
+<td><input name="post[n3]" type="text" size="10" value="{$n3}" id="n3"/></td>
+<td><input name="post[v3]" type="text" size="20" value="{$v3}" id="v3"/></td>
+</tr>
+<tr>
+<td class="f_gray">例如：供应</td>
+<td class="f_gray">例如：要加什么特效，等</td>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="dem">
+<div class="fb_title">交易条件</div>
+<div class="fb_text">
+	<table width="100%">
+	<tr>
+	<td width="90">工程周期</td>
+	<td><input name="post[amount]" type="text" size="20" value="{$amount}"/>（如：20天）</td>
+	</tr>
+	<tr>
+	<td>总价预算</td>
+	<td><input name="post[price]" type="text" size="20" value="{$price}"/>（如：5000元）</td>
+	</tr>
+	<tr>
+	<td>仿站要求程度</td>
+	<td><input name="post[pack]" type="text" size="20" value="{$pack}"/>（如：95%）</td>
+	</tr>
+	</table>
+	<div class="bjts f_gray">注：建议详细填写交易条件，以便我们与您联系给您具体报价。您也可以直接联系我们的客服人员在线洽谈。QQ:290948585(小黑)</div>
+</div>
+</div>
+{if !$_userid}
+{template 'guest_contactnew', 'chip'}
+{/if}
+
+{if $need_question}
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 验证问题</div>
+<div class="fb_text">{template 'question', 'chip'} <span id="danswer" class="f_red"></span></div>
+</div>
+{/if}
+{if $need_captcha}
+<div class="dem">
+<div class="fb_title"><span class="f_red">*</span> 验证码</div>
+<div class="fb_text">{template 'captcha', 'chip'} <span id="dcaptcha" class="f_red"></span></div>
+</div>
+{/if}
+{if $action=='add'}
+<div class="dem" style="display:none;" id="weibo_sync">
+<div class="fb_title">同步主题</div>
+<div class="fb_text" id="weibo_show"></div>
+</div>
+{/if}
+<div class="dem">
+<div class="fb_title_3">&nbsp;</div>
+<div class="fb_text">
+<input type="checkbox" checked="checked" onclick="if(this.checked){Ds('sbm');}else{Dh('sbm');}"/> <span class="btxt">我已阅读并同意服务条款<a href="?read=1" target="_blank">《需求单发布以及注意事项》</a><span></div>
+</div>
+
+<div class="dem" id="sbm">
+<div class="fb_title_3">&nbsp;</div>
+<div class="fb_text"><input type="submit" name="submit" value="确认并提交" class="btn_g"/></div>
+</div>
+
+</form>
+
+{load('clear.js')}
+<script type="text/javascript">s('mid_{$mid}');m('{$action}');</script>
+
+<script type="text/javascript">
+function _p() {
+	if(Dd('tag').value) {
+		Ds('reccate');
+	}
+}
+function check() {
+	var l;
+	var f;
+	f = 'title';
+	l = Dd(f).value.length;
+	if(l < 2 || l > 30) {
+		Dmsg('信息标题应为2-30字，当前已输入'+l+'字', f);
+		return false;
+	}
+	f = 'catid_1';
+	if(Dd(f).value == 0) {
+		Dmsg('请选择所属行业', 'catid', 1);
+		return false;
+	}
+{if !$_userid}
+	f = 'company';
+	l = Dd(f).value.length;
+	if(l < 2) {
+		Dmsg('请填写公司名称', f);
+		return false;
+	}
+	if(Dd('areaid_1').value == 0) {
+		Dmsg('请选择所在地区', 'areaid');
+		return false;
+	}
+	f = 'truename';
+	l = Dd(f).value.length;
+	if(l < 2) {
+		Dmsg('请填写联系人', f);
+		return false;
+	}
+	f = 'mobile';
+	l = Dd(f).value.length;
+	if(l < 7) {
+		Dmsg('请填写手机', f);
+		return false;
+	}
+{/if}
+	{if $FD}{fields_js()}{/if}
+	{if $CP}{property_js()}{/if}
+{if $need_password}
+	f = 'password';
+	l = Dd(f).value.length;
+	if(l < 6) {
+		Dmsg('请填写支付密码', f);
+		return false;
+	}
+{/if}
+{if $need_question}
+	f = 'answer';
+	l = Dd(f).value.length;
+	if(l < 1) {
+		Dmsg('请填写验证问题', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+{if $need_captcha}
+	f = 'captcha';
+	l = Dd(f).value;
+	if(!is_captcha(l)) {
+		Dmsg('请填写正确的验证码', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+	return true;
+}
+var destoon_oauth = '{$EXT[oauth]}';
+</script>
+{if $action=='add' && strlen($EXT[oauth]) > 1}{load('weibo.js')}{/if}
+{else}
+请输入正确的网址
+{/if}
+</div>
+</div>
+</div>
+{template 'footer_member'}

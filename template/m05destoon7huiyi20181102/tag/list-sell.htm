@@ -1,0 +1,40 @@
+<div class="wy-supply-list mb30 cf">
+<div class="hd">
+<dl>
+<dt class="tp">图片</dt>
+<dt class="cpmc">产品名称</dt>
+<dt>价格</dt>
+<dt>发货地</dt>
+<dt class="gys">供应商</dt>
+<dt>更新时间</dt>
+</dl>
+</div>
+<div class="bd">
+{loop $tags $k $t}
+<dl id="item_{$t[itemid]}" {if $k%20 == 19}style="border-bottom:none"{else}{/if}>
+<dd class="tp"><a target="_blank" href="{$t[linkurl]}"><img src="{imgurl($t[thumb])}" alt="{$t[alt]}" class="lazy"></dd>
+<dd class="cpmc"><em><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></em><p>{dsubstr($t[introduce], 100, '...')}</p></dd>
+<dd>
+{if $t[unit] && $t[price]>0}
+价格：{$t[price]}/{$t[unit]}
+{else}
+价格：面议
+{/if}
+</dd>
+<dd>{area_pos($t[areaid], '')}</dd>
+<dd class="gys"><a target="_blank" href="{userurl($t[username])}" title="{$t[company]}">{dsubstr($t[company], 20, '...')}</a>
+<p>
+{if $t[username] && $DT[im_web]}{im_web($t[username].'&mid='.$moduleid.'&itemid='.$t[itemid])}&nbsp;{/if}
+{if $t[qq] && $DT[im_qq]}{im_qq($t[qq])}&nbsp;{/if}
+{if $t[wx] && $DT[im_wx]}{im_wx($t[wx], $t[username])}&nbsp;{/if}
+{if $t[ali] && $DT[im_ali]}{im_ali($t[ali])}&nbsp;{/if}
+{if $t[skype] && $DT[im_skype]}{im_skype($t[skype])}&nbsp;{/if}</p>
+</dd>
+<dd><span>{timetodate($t[edittime], $datetype)}</span></dd>
+<dd><input type="checkbox" id="check_{$t[itemid]}" name="itemid[]" value="{$t[itemid]}" onclick="sell_tip(this, {$t[itemid]});" style="vertical-align: middle;margin-top: -1px;"/><a target="_blank" href="{$t[linkurl]}">查看详情</a></dd>
+
+</dl>
+{/loop}
+</div>
+</div>
+<div class="wy-page" id="pagediv">{if $showpage && $pages}<div class="wy-page" id="pagediv">{$pages}</div>{/if}</div>

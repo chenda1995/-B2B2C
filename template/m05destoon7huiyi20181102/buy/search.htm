@@ -1,0 +1,186 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/product-v1.3.1.css" />
+<style>
+.wy-brand-rec2 li{float:left;width:129px;margin:inherit;border:none}
+.inpt{border: 1px solid #ddd;border-radius: 5px;padding: 3px;}
+select{border: 1px solid #ddd;padding: 3px;}
+.btn-blue{background-color: #db214c;color:#fff;width:70px;text-align: center;text-indent: 2px;cursor: pointer;}
+.btn{color:#fff;width:70px;text-align: center;text-indent: 2px;cursor: pointer;}
+</style>
+<div class="wy-mbx">当前位置：<a href="{$MODULE[1][linkurl]}">首页</a><span>&gt;</span><a href="{$MOD[linkurl]}">{$MOD[name]}</a><div class="resnum">共找到<span>“{php echo $db->count($DT_PRE.'buy_6', 'status=3', 1800);}”</span>条产品采购</div>
+</div>
+<div class="wy-wrap">
+<div class="wy-select2">
+
+<form action="{$MOD[linkurl]}search.php" id="fsearch">
+<dl class="cf" style="border-bottom: 1px dashed #e3e3e3;">
+<dt style="height: 46px;">搜索</dt>
+<dd class="cf" style="padding: 6px;">
+<input type="text" size="20" name="kw" value="{$kw}" class="inpt"/> &nbsp;
+{loop $sfields $k $v}
+<input type="radio" name="fields" value="{$k}" id="fd_{$k}"{if $fields==$k} checked{/if}  class="inpt"/><label for="fd_{$k}"> {$v}</label> &nbsp;
+{/loop}
+{$order_select}&nbsp;&nbsp;
+{$category_select}&nbsp;&nbsp;
+{$type_select}&nbsp;&nbsp;
+{$area_select}&nbsp;&nbsp;
+<p>{dcalendar('fromdate', $fromdate, '')} 至 {dcalendar('todate', $todate, '')}&nbsp;&nbsp;<input type="submit" value="搜 索" class="btn-blue inpt"/>&nbsp;&nbsp;<input type="button" value="重 搜" class="btn inpt" onclick="Go('{$MOD[linkurl]}search.php');"/></p>
+</dd>
+</dl>
+</form>
+{if $TYPE}
+<dl class="cf">
+<dt>采购类型</dt>
+<dd class="cf">
+<a href="{$MOD[linkurl]}search.php?catid=0&typeid=0" title="全部" class="on">全部</a>
+{loop $TYPE $k $v}
+<a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&typeid='.$k)}" title="{$v}">{$v}</a>
+{/loop}
+</dd>
+</dl>
+{/if}
+<dl class="cf">
+<dt>发布时间</dt>
+<dd class="cf">
+<a href="{$MODULE[6][linkurl]}search.php?areaid=0&typeid=99" title="全部" class="on">全部</a>
+<a href="{$MODULE[6][linkurl]}search.php?areaid=0&typeid=99&timenum=1" title="近7天">近7天</a>
+<a href="{$MODULE[6][linkurl]}search.php?areaid=0&typeid=99&timenum=2" title="近1个月">近1个月</a>
+<a href="{$MODULE[6][linkurl]}search.php?areaid=0&typeid=99&timenum=3" title="近3个月">近3个月</a>
+</dd>
+</dl>
+{if $CP}
+{loop $PPT $p}
+<dl class="cf">
+<dt>{$p[name]}</dt>
+<dd class="cf">
+<a href="{$MODULE[6][linkurl]}search.php?areaid=0&typeid=99" title="全部" class="on">全部</a>
+{loop $p[options] $o}
+<a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&ppt_'.$p[oid].'='.urlencode($o))}" title="{$o}">{$o}</a>
+{/loop}
+</dd>
+</dl>
+{/loop}
+{/if}
+<dl class="switch-con cf">
+<dt>地区</dt>
+<dd class="cf">
+<a href="{$MOD[linkurl]}search.php" title="全部" class="on">全部</a>
+{php $mainarea = get_mainarea(0)}
+{loop $mainarea $k $v}
+<a title="{$v[areaname]}" href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v['areaid'])}">{$v[areaname]}</a>
+{/loop}
+</dd>
+<a href="javascript:;" class="more">更多</a>
+</dl>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn">
+<div class="wy-list">
+{if $page==1 && $kw}
+{ad($moduleid,$catid,$kw,6)}
+{load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+{/if}
+{if $tags}
+{template 'list-'.$module, 'tag'}
+{else}
+{template 'empty-buy', 'chip'}
+{/if}
+</div>
+</div>
+<div class="wy-sd">
+<div class="wy-supply-enter mb20">
+<div class="hd"><h3>本月采购</h3></div>
+<div class="bd">
+<dl class="cf">
+<dd class="all"><span>{php echo $db->count($DT_PRE.'buy_6', 'status=3', 1800);}</span><p>累计采购</p></dd>
+</dl>
+<dl class="enter">
+<a href="{$MODULE[2][linkurl]}{$DT[file_login]}" target="_blank" class="info">发布采购</a>
+<a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank" class="reg">免费注册</a>
+</dl>
+</div>
+</div>
+<div class="wy-supply-rec mb20">
+<div class="wy-tt12 cf"><h3>推荐采购</h3></div>
+<ul class="bd cf">
+<!--{php $tags=tag("moduleid=$moduleid&catid=$catid&condition=status=3&areaid=$cityid&pagesize=10&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li><i {if $i == 0}class="red"{/if}{if $i == 1}class="orange"{/if}{if $i == 2}class="orange"{/if}>{if $i < 10}<?php echo $i+1?>{/if}</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-supply-hot mb20">
+<div class="wy-tt12 cf"><h3>热门采购</h3></div>
+<ul class="bd cf">
+{php $mid=6}
+{php $child = get_maincat(0,$mid,1);$cols=6}
+{loop $child $i $c}
+{if $i < $cols}
+<li><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">{$c[catname]}</a><span><i>{$c[item]}</i>条采购信息</span></li>
+{/if}
+{/loop}
+</ul>
+</div>
+<div class="wy-brand-rec2 js-brand-rec2 mb20">
+<div class="slide">
+<div class="hd">
+<ul class="cf">
+<li class="on">推荐品牌</li>
+<li class="">推荐企业</li>
+</ul>
+</div>
+<div class="bd">
+<ul class="cf brand-list" id="brand-list">
+<!--{php $tags=tag("moduleid=13&condition=status=3&pagesize=20&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" /><p>{$t[title]}</p></a></li>
+{/loop}
+</ul>
+<ul class="cf brand-list2">
+<!--{php $tags=tag("moduleid=4&condition=groupid>5 and catids<>''&pagesize=10&order=vip desc,userid desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" target="_blank" title="{$t[company]}">{$t[company]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+<div class="wy-ad"><!--广告ID【AD-O2-1】暂无广告--></div>
+<div class="wy-ad"><!--广告ID【AD-O2-2】暂无广告--></div>
+<div class="wy-ad"><!--广告ID【AD-O2-3】暂无广告--></div>
+<div class="mb20">
+<div class="wy-brand-auth">
+<div class="wy-tt9 cf">
+<h3><a href="{$MODULE[13][linkurl]}" target="_blank" title="推荐品牌">精选品牌</a></h3>
+<a href="{$MODULE[13][linkurl]}" target="_blank" class="more">更多</a>
+</div>
+<div class="bd cf">
+<ul class="cf" id="js-brand-auth">
+<!--{php $tags=tag("moduleid=13&condition=status=3&pagesize=20&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+<div class="mb20">
+<div class="wy-brand-auth">
+<div class="wy-tt9 cf">
+<h3><a href="{$MODULE[13][linkurl]}search.php?action&validated" target="_blank" title="认证品牌">认证品牌</a></h3>
+<a href="{$MODULE[13][linkurl]}search.php?action&validated" target="_blank" class="more">更多</a>
+</div>
+<div class="bd cf">
+<ul class="cf" id="js-brand-auth2">
+<!--{php $tags=tag("moduleid=13&condition=status=3&pagesize=20&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+{template 'footer-buy'}

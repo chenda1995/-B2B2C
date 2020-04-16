@@ -1,0 +1,141 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/news-v1.3.1.css" />
+<script type="text/javascript" src="{DT_SKIN}js/news-v1.3.1.js"></script> 
+<div class="wy-mbx">当前位置：<a href="{$MODULE[1][linkurl]}">首页</a><span>&gt;</span><a href="{$MOD[linkurl]}">{$MOD[name]}</a>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn-list">
+<ul class="wy-list-nav cf">
+{loop $maincat $k $v}
+<li><a title="{$v[catname]}" href="{$MOD[linkurl]}{$v[linkurl]}">{set_style($v[catname],$v[style])}({$v[item]})</a></li>
+{/loop}
+</ul>
+{if $page==1 && $kw}
+{ad($moduleid,$catid,$kw,6)}
+{load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+{/if}
+{if $tags}
+<div class="b20"></div>
+<div class="list-img list1">{template 'list-'.$module, 'tag'}</div>
+{else}
+{template 'empty', 'chip'}
+{/if}
+</div>
+<div class="wy-sd">
+<div class="wy-spc-topic js-spc-topic mb20">
+<div class="wy-tt3 cf"><h3>行业专题</h3><a href="{$MODULE[11][linkurl]}" target="_blank" class="more">更多行业专题</a></div>
+<div class="slide slide-arrow">
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc&datetype=3&pagesize=5&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" title="{$t[alt]}"/><h4>{$t[title]}</h4></a></li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc&datetype=3&pagesize=5&template=null")}-->
+{loop $tags $i $t}
+<li class=""></li>
+{/loop}
+</ul>
+</div>
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
+</div>
+</div>
+<div class="wy-atc-list mb20">
+<div class="wy-tt cf"><h3>行业热点</h3><a href="{$MODULE[21][linkurl]}" target="_blank" class="more">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&order=rand() desc&datetype=3&pagesize=10&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-ad mb10"><!--广告ID【AD-B1-3】暂无广告--></div>
+<div class="wy-channel mb20">
+<div class="wy-tt cf"><h3>热门频道</h3></div>
+<dl class="cf">
+<dt><a href="{$MODULE[21][linkurl]}" title="{$MODULE[21][name]}" target="_blank">{$MODULE[21][name]}</a></dt>
+<dd>
+{php $mid = 21;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<5}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[13][linkurl]}" title="{$MODULE[13][name]}" target="_blank">{$MODULE[13][name]}</a></dt>
+<dd>
+{php $mid = 13;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<5}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[22][linkurl]}" title="{$MODULE[22][name]}" target="_blank">{$MODULE[22][name]}</a></dt>
+<dd>
+{php $mid = 22;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<4}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[12][linkurl]}" title="{$MODULE[12][name]}" target="_blank">{$MODULE[12][name]}</a></dt>
+<dd>
+{php $mid = 12;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<3}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[10][linkurl]}" title="{$MODULE[10][name]}" target="_blank">{$MODULE[10][name]}</a></dt>
+<dd>
+{php $mid = 10;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<4}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+</div>
+<div class="wy-brand-rec3 mb20">
+<div class="wy-tt cf"><h3>VIP会员</h3></div>
+<ul class="cf" id="brand-list">
+<!--{php $tags=tag("moduleid=13&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc,vip desc&datetype=3&pagesize=10&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" /><p>{$t[title]}</p></a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-brand-hot">
+<div class="wy-tt mb20 cf"><h3><a href="{$MODULE[4][linkurl]}" target="_blank">热门行业企业</a></h3><a href="{$MODULE[4][linkurl]}" class="more" target="_blank">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=4&condition=groupid>5 and catids<>''&areaid=$cityid&order=vip desc,userid desc&datetype=3&pagesize=20&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" title="{$t[company]}" target="_blank">{$t[company]}</a></li>
+{/loop}
+</ul>
+</div>
+</div></div>
+</div>
+{template 'footer-news'}

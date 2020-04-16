@@ -1,0 +1,9 @@
+{loop $tags $k $t}
+<li class="clearfix">
+          <div class="xg-imgbox fl"> <a target="_blank" href="{$t[linkurl]}"> <img class="xg-img" src="{imgurl($t[thumb])}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic120_90.png'"> </a> </div>
+          <div class="fl xg-infoxx">
+            <div class="xg-infoxx-tt"> <a target="_blank" href="{$t[linkurl]}" title="{$t[alt]}">{$t[title]}</a> </div>
+            <div class="xg-infoxx-kg text-overhidden">{area_pos($t[areaid], '-')}</div>
+          </div>
+ </li>
+{/loop}

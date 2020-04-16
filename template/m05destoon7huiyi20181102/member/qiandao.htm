@@ -1,0 +1,68 @@
+{template 'header-qiandao'}
+<link rel="stylesheet" type="text/css" href="image/manxh.css"/>
+<link rel="stylesheet" type="text/css" href="image/stylexh.css"/>
+<link rel="stylesheet" href="{$MODULE[2][linkurl]}css/qiandao_style.css">
+<script type="text/javascript" src="{$MODULE[2][linkurl]}js/doT.min.js"></script>
+<script type="text/javascript">
+    {if $signed==1}var qd_yes = 1;{else}var qd_yes = 0;{/if}
+    {if $_userid}var qd_login = 1;{else}var qd_login = 0;{/if}
+</script>
+    <div class="qiandao-warp">
+        <div class="qiandap-box">
+            <div class="qiandao-banner">
+            <img src="{$MODULE[2][linkurl]}images/qiandao_banner.gif" height="554" width="1120" alt="">
+            </div>
+            <div class="qiandao-con">
+                <div class="qiandao-left">
+                    <div class="qiandao-left-top">
+                        <div class="current-date">2018年3月30日</div>
+                        <div class="qiandao-history qiandao-tran qiandao-radius"><a href="credit.php?action=qiandao">签到记录</a></div>
+                    </div>
+                    <div class="qiandao-main" id="js-qiandao-main">
+                        <ul class="qiandao-list" id="js-qiandao-list">
+                        </ul>
+                    </div>
+                </div>
+                <div class="qiandao-right">
+                <div class="member"><a href="{$MODULE[2][linkurl]}">返回会员中心</a></div>
+                    <div class="qiandao-top">
+                        <div class="just-qiandao qiandao-sprits{if $signed == 1} qiandao-yes{/if}" id="js-just-qiandao"></div>
+                        <p class="qiandao-notic">{if $signed == 1}今日已领<span id="todayget">{$todayget}</span>{$DT[credit_name]}，请明日继续签到 {else}每日签到，轻松免费得{$DT[credit_name]}{/if}</p>
+                    </div>
+                    <div class="qiandao-bottom">
+                        <div class="qiandao-rule-list">
+                            <h4>签到规则</h4>
+                            <p>首次签到获得 {$MOD[credit_qiandao]} {$DT[credit_name]}奖励</p>
+                            <p>连续签到每天获得 {$MOD[credit_qiandaos]} {$DT[credit_name]}奖励</p>
+                        </div>
+                        <div class="qiandao-rule-list">
+                            <h4>签到说明</h4>
+                            <p>{if $MOD[qiandao_sm]}{$MOD[qiandao_sm]}{else}管理员尚未填写{/if}</p>
+                        </div>
+                        <div class="qiandao-rule-list">
+                            <h4>积分用途</h4>
+                            <p>{if $MOD[credit_yt]}{$MOD[credit_yt]}{else}管理员尚未填写{/if}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 签到 layer start -->
+    <div class="qiandao-layer qiandao-active">
+        <div class="qiandao-layer-con qiandao-radius">
+            <a href="javascript:;" class="close-qiandao-layer qiandao-sprits"></a>
+            <div class="yiqiandao">
+                <div class="yiqiandao-icon qiandao-sprits"></div>您已连续签到<span id="signday">{$feeadd}</span>天
+            </div>
+            <div class="qiandao-jiangli qiandao-sprits">
+                <span class="qiandao-jiangli-num" id="signget">{$todayget}<em>{$DT[credit_name]}</em></span>
+            </div>
+            <div class="qiandao-shuoming">亲，明日继续签到有惊喜哦！</div>
+        </div>
+        <div class="qiandao-layer-bg"></div>
+    </div>
+<script type="text/javascript" src="{$MODULE[2][linkurl]}js/qiandao_js.js"></script>
+    <!-- 签到 layer end -->
+{template 'footer'}

@@ -1,0 +1,20 @@
+<div class="wy-topic-list cf">
+{loop $tags $i $t}
+<dl>
+<dt>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+<img alt="{$t[alt]}" title="{$t[alt]}" src="{$t[thumb]}" class="lazy"/>
+<i>{$t[catname]}</i>
+</a>
+</dt>
+<dd >
+<h2><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[catname]}|{$t[title]}</a></h2>
+<p>{dsubstr($t[introduce], 200, '...')}<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">[详情]</a></p>
+<p class="time"><i class="wy-ico-fwl"></i>阅读量：{$t[hits]}                       
+<a href="{$t[caturl]}" target="_blank" class="tag">{$t[catname]}</a>
+</p>
+</dd>
+</dl>
+{/loop}
+</div>
+<div class="wy-page" id="pagediv">{if $showpage && $pages}<div class="wy-page" id="pagediv">{$pages}</div>{/if}</div>

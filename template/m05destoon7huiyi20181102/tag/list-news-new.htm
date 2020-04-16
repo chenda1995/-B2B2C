@@ -1,0 +1,18 @@
+{loop $tags $i $t}
+<dl>
+{if $t[thumb]}
+<dt>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+<img alt="{$t[alt]}" title="{$t[alt]}" src="{$t[thumb]}" class="lazy"/>
+</a>
+</dt>
+{/if}
+<dd >
+<h2><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></h2>
+<p>{dsubstr($t[introduce], 100, '...')}<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">[详情]</a></p>
+<p class="time">
+<i class="wy-ico-time"></i>{date('Y-m-d',$t[addtime])}<i class="wy-ico-fwl"></i>阅读量：{$t[hits]}                
+</p>
+</dd>
+</dl>
+{/loop}

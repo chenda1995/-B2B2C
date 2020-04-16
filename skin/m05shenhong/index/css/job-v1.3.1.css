@@ -1,0 +1,94 @@
+.wy-apply{width:100%;padding-bottom:15px;}
+
+/* 人才表格 */
+.resume-tb{border-collapse:collapse;}
+.resume-tb td{width:20%;line-height:2.5;font-size:14px;text-align:center;border:1px solid #c2c2c2;}
+.resume-tb td.blue{color:#004e90;}
+.resume-tb strong{font-size:16px;}
+.resume-tb .user{width:330px;margin:20px auto;padding:20px;text-align:left;background:#f8f8f8;border:1px solid #e3e3e3;border-radius:6px;}
+.resume-tb .human-info{padding:10px;text-align:left;text-indent:2em;}
+
+/* 用户登录 */
+.resume-tb .user p{width:100%;line-height:36px;font-size:14px;color:#000;}
+.resume-tb .user .user_login,.resume-tb .user .user_reg{display:block;width:100%;height:36px;margin-top:10px;color:#fff;text-align:center;font:bold 16px/36px "microsoft yahei";border-radius:4px;border:none;cursor:pointer;}
+.resume-tb .user .user_login{background:#004e90;}
+.resume-tb .user .user_reg{background:#db214c;}
+.resume-tb .user .user_can{text-align:center;}
+.resume-tb .user .user_can b,.resume-tb .user .user_warn{display:inline-block;*display:inline;zoom:1;}
+.resume-tb .user .user_can b{width:158px;height:34px;line-height:34px;margin:0 1px 10px;font-size:14px;color:#db214c;border:1px solid #db214c;border-radius:4px;}
+.resume-tb .user .user_warn{width:18px;height:18px;margin-right:10px;background:url(img/job/user_icon.png) -5px -5px no-repeat;vertical-align:middle;}
+.resume-tb .user .user_input{float:left;display:block;width:156px;height:34px;line-height:34px;margin-right:10px;font-size:14px;text-indent:30px;color:#999;border:1px solid #e3e3e3;border-radius:4px;}
+.resume-tb #user_pass{margin-right:0;background:url(img/job/user_icon.png) 0 -204px no-repeat;}
+.resume-tb #user_name{background:url(img/job/user_icon.png) 0 -170px no-repeat;}
+
+/* 搜索 */
+.wy-searchs .jbptxt{display:block;width:100%;line-height:36px;padding:10px 0;overflow:hidden;}
+.wy-searchs .jbptxt span{display:inline-block;padding:0 10px;font-size:16px;text-align:right;*display:inline;zoom:1;}
+.ml90{margin-left:90px;}.ml50{margin-left:50px;}
+.wy-searchs .jbptxt input[type=text]{width:200px;height:36px;margin:0 5px;border:1px solid #e3e3e3;}
+.wy-searchs .jbptxt input:focus{border:1px solid #db214c;}
+.wy-searchs .jbptxt input.salary{width:110px;}
+.wy-searchs .jbptxt input.date{width:150px;}
+.wy-searchs .jbptxt input[type=checkbox]{float:none;display:inline-block;margin:-3px 5px 0 10px;vertical-align:middle;*display:inline;zoom:1;}
+.wy-searchs .jbptxt select{height:36px;line-height:30px;margin:0 5px;color:#999;border:1px solid #e3e3e3;*font-size:18px;font-size:18px\9;}
+.wy-searchs .jbptxt select option{color:#666;}
+.wy-searchs .jbptxt span.sm{padding-left:10px;color:#666;}
+.wy-searchs .jbptxt input[type=button],.wy-searchs .jbptxt input[type=submit]{width:170px;height:36px;font:18px/36px "microsoft yahei";color:#fff;background:#db214c;border:0 none;border-radius:5px;cursor:pointer;*height:40px;*line-height:36px;}
+.wy-searchs .jbptxt input.b2{margin:0 20px;color:#db214c;background:#fff;}
+.jbptxt img{vertical-align:middle;}
+.jbptxt a{padding-left:25px;text-decoration:underline;color:#db214c;background:url(img/job/bi.jpg) 5px center no-repeat;}
+.wy-searchs .jbptxt input.cld{width:100px;}
+.wy-searchs .jbptxt *{float:left;line-height:36px;}
+
+/* 求职列表 */
+.list_table{height:40px;line-height:40px;margin-top:30px;font-size:14px;}
+.list_table a{display:block;color:#db224c;border-left:2px solid transparent;}
+.list_table a.gw{width:480px;}
+.list_table thead th{font-size:16px;text-align:left;text-indent:2px;border-bottom:2px solid #000;}
+.list_table tbody tr:hover{background:#eee;}
+.list_table tr:hover a{border-left:2px solid #db224c;}
+.list_table td{padding-right:20px;text-indent:2px;}
+
+/* 首页 */
+.wy-mn{float:left;width:800px;padding:0 24px 0 0;border-right:1px solid #e3e3e3;}
+.wy-sd{float:right;width:350px;}
+
+/* 招聘 */
+.jbjl .bold{font-weight:bold;padding:0;}
+.jbtit1{height:38px;border-bottom:1px solid #e3e3e3;}
+.jbtit1 li{float:left;height:38px;line-height:38px;padding:0 15px;font-size:20px;text-align:center;border-bottom:1px solid transparent;}
+.jbtit1 li.on{font-weight:bold;border-bottom:1px solid #db214c;}
+.jbtit2 li:hover,.jbtit1 li:hover{cursor:pointer;}
+.jbtit2{height:30px;}
+.jbtit2 li{float:left;width:50%;height:30px;line-height:30px;font-size:18px;text-align:center;color:#05458c;}
+.jbtit2 li.on{background:#05458c;color:#fff;}
+.jbstit{font-size:20px;}
+.jbtabbox td{border-top:1px solid #f2f2f2;}
+
+.jbjl table{padding:0 0 20px;}
+.jbjl table td a.gw{display:block;width:280px;}
+.jbjl table td,.jbjl table th{height:50px;line-height:50px;font-size:14px;text-align:left;text-indent:15px;}
+
+.browse-box{margin-bottom:20px;padding:20px;border:1px solid #e3e3e3;overflow:hidden;}
+.browse-box h2{display:inline-block;padding-bottom:20px;font-size:20px;*display:inline;zoom:1;}
+.jbtit2{height:42px;border-bottom:1px solid #e3e3e3;}
+.jbtit2 b{height:42px;line-height:42px;padding:0 15px;font-size:18px;text-align:center;border-bottom:1px solid transparent;}
+.jbtit2 b.on{border-bottom:1px solid #db214c;}
+.jbzp,.jbzp2{padding-top:15px;}
+.jbzp li,.jbzp2 li{float:left;height:28px;font:14px/2 "microsoft yahei";}
+.jbzp li{width:46%;padding:0 2%;}
+.jbzp2 li{width:23%;padding:0 1%;}
+span#load_category_1,span#load_area_1{width:auto;}
+
+.wy-job-list{width:1200px;margin:0 auto;padding-top:20px;overflow:hidden;}
+.wy-job-list ul{width:1250px;}
+.wy-job-list li{float:left;width:370px;height:150px;margin:0 10px 10px 0;padding:10px;border:1px solid #e3e3e3;}
+.wy-job-list dt{padding-bottom:10px;border-bottom:1px dashed #e3e3e3;}
+.wy-job-list dt img{float:left;width:160px;height:57px;margin-right:15px;border:1px solid #333;}
+.wy-job-list dt h3{font-size:18px;line-height:35px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.wy-job-list dt p{font-size:14px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.wy-job-list dd a{display:block;height:28px;line-height:28px;font-size:14px;}
+.wy-job-list dd a:hover{color:#333;}
+.wy-job-list dd em{float:left;width:160px;margin-right:10px;color:#db214c;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.wy-job-list dd span{float:left;}
+.wy-job-list dd i{float:right;}

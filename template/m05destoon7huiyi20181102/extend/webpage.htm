@@ -1,0 +1,26 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}extend.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}index.css"/>
+<style>
+th{padding:10px;}
+td{padding:10px;}
+</style>
+<div class="m_new m20 m1">
+	<div class="m1l">
+		<h1 class="title bd-b">{$title}</h1>
+		<div class="content" id="content">{$content}</div>
+	</div>
+	<div class="m1r side">
+		<ul>
+		<!--{php $tags=tag("table=webpage&condition=item='$_item'&areaid=$cityid&pagesize=99&order=listorder desc,itemid desc&template=null");}-->
+		{loop $tags $k $t}
+		<li class="side_li" id="webpage_{$t[itemid]}"><a href="{if $t[domain]}{$t[domain]}{else}{linkurl($t[linkurl], 1)}{/if}">{$t[title]}</a></li>
+		{/loop}
+		</ul>
+	</div>
+	<div class="c_b"></div>
+</div>
+<div class="m20"></div>
+<script type="text/javascript">$(function(){$('#webpage_{$itemid}').attr('class', 'side_on');});</script>
+{template 'footer'}

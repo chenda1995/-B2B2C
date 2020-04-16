@@ -1,0 +1,298 @@
+{template 'header-buy-show'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/tc.page.header.css">
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/tecenet.base.css">
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/buy.css"/>
+<style>
+.breadNav {font-size: 14px;color: #999;width: 1200px;overflow: hidden;margin: 10px auto 0px auto;}
+.breadNav a {color: #999;}
+/* album */
+#mid_pos {position:absolute;}
+/*#mid_div {width:240px;height:180px;cursor:crosshair;padding:5px;border:#CCCCCC 1px solid;background:#F3F3F3;}*/
+#zoomer {border:#333333 1px solid;width:200px;height:200px;background:#666666 url('{DT_SKIN}image/zoom_bg.gif');position:absolute;opacity:0.5;filter:alpha(opacity=50);}
+#big_div {width:420px;height:320px;border:#CCCCCC 1px solid;background:#FFFFFF;position:absolute;overflow:hidden;}
+#big_pic {position:absolute;}
+code{margin: 0 5px;}
+</style>
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<!-- 面包屑导航 -->
+<div class="breadNav">您所在的位置：<a href="{$MODULE[1][linkurl]}" title="{$DT[sitename]}" target="_self">{$DT[sitename]}</a><code>&gt;</code><a href="{$MOD[linkurl]}" target="_self">{$MOD[name]}</a><code>&gt;</code>{cat_pos($CAT, '<code>&gt;</code>')}<code>&gt;</code><font>{$title}</font> </div>
+<!--con-->
+<div class="jy-view-center">
+  <div class="jy-view-model clearfix">
+    <div class="fl jy-view-imgall">
+      <div id="mid_pos"></div>
+      <div class="jy-view-imgbox" id="mid_div" onmouseover="SAlbum();" onmouseout="HAlbum();" onclick="PAlbum(Dd('mid_pic'));">
+      <img src="{$albums[0]}" width="300" height="300" id="mid_pic"/><span id="zoomer"></span>
+      </div>
+      <div class="jy-smimg-model">
+        <div class="jy-vsmall-imgbox">
+          <ul class="jy-sm-ul clearfix">
+          {loop $thumbs $k $v}
+          <li class="fl"> <img src="{$v}" onmouseover="if(this.src.indexOf('nopic60.gif')==-1)Album({$k}, '{$albums[$k]}');" class="{if $k}jy-sm-img ab_im{else}jy-sm-img ab_on{/if}" id="t_{$k}"> </li>
+          {/loop}
+          </ul>
+        </div>
+      </div>
+      <div class="jy-view-czuo clearfix "> <a style="cursor:pointer" class="jy-czuo-a1 jy-czuo-a" href="javascript:;" onclick="SendFav({$moduleid}, {$itemid});"><i class="iconbuy icon-czuo1"></i> 收藏</a> <span style="cursor:pointer" class="jy-czuo-a2 jy-czuo-a"><a href="javascript:;" onclick="Dshare({$moduleid}, {$itemid});"> <i class="iconbuy icon-czuo2"></i>分享</a>
+        </span> <a style="cursor:pointer;" class="jy-czuo-a3 jy-czuo-a" href="javascript:;" onclick="SendReport();"><i class="iconbuy icon-czuo3"></i>举报</a> </div>
+    </div>
+    <div class="fl jy-view-ifbox">
+    <div id="big_div" style="display:none;"><img src="" id="big_pic"/></div>  
+      <div class="jy-view-ititle">
+        <div class="fl jy-view-iname text-overhidden">{if $typeid==1}<i class="jicai fl"></i>{/if}<h1 id="title">{$title}</h1></div>
+      </div>
+      <div class="jy-view-bqian clearfix">
+        <div class="jy-bqian-tt fl"><i class="iconbuy icon-bqian"></i>采购类型：</div>
+        <div class="jy-bqian-list fl">
+        {if $typeid==0}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=0&catid={$catid}" title="普通采购">普通采购</a>
+        {elseif $typeid==1}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=1&catid={$catid}" title="紧急采购">紧急采购</a>
+        {elseif $typeid==2}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=2&catid={$catid}" title="采购二手">采购二手</a>
+        {elseif $typeid==3}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=3&catid={$catid}" title="寻求加工">寻求加工</a>
+        {elseif $typeid==4}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=4&catid={$catid}" title="寻求合作">寻求合作</a>
+        {elseif $typeid==5}
+        <a target="_blank" href="{$MOD[linkurl]}search.php?typeid=5&catid={$catid}" title="招标">招标</a>
+        {/if}
+        </div>
+        {if $expired}<i class="expired"></i>{/if}
+      </div>
+      <div class="jy-info-list">
+        <ul class="jy-info-ul clearfix">
+          <li class=""> <i class="iconbuy icon-vl1"></i>价格要求： <span class="jy-ftnum yfdch">{if $price}{$price}{else}电议{/if}</span></li>
+          <li class="text-overhidden"> <i class="iconbuy icon-vl2"></i>采购数量：{if $amount}{$amount}{else}大量{/if}</li>
+          <li class="text-overhidden"> <i class="iconbuy icon-vl3"></i>包装要求：{if $pack}{$pack}{else}无要求{/if}</li>
+          <li class="text-overhidden"> <i class="iconbuy icon-vl7"></i>采购情况：{if $todate}到{$todate}为止{else}长期有效{/if}{if $expired} <span class="f_red">[已过期]</span>{/if}</li>
+          {if $n1 && $v1}
+          <li class="text-overhidden"><i class="iconbuy icon-vl4"></i>{$n1}：{$v1}</li>
+          {/if}
+          {if $n2 && $v2}
+          <li class="text-overhidden"><i class="iconbuy icon-vl4"></i>{$n2}：{$v2}</li>
+          {/if}
+          {if $n3 && $v3}
+          <li class="text-overhidden"><i class="iconbuy icon-vl4"></i>{$n3}：{$v3}</li>
+          {/if}
+          <li class="text-overhidden"><i class="iconbuy icon-vl6"></i>所在地：{area_pos($areaid, '')}</li>
+        </ul>
+      </div>
+      <div class="jy-info-list2">
+        <ul class="jy-info-ul jy-info-ul2">
+          <li><i class="iconbuy icon-vl9"></i>发布日期：{$editdate}</li>
+          <li class="no_mr"><i class="iconbuy icon-vl10"></i>信息有效期： 
+          {if $username && !$expired}
+         <span class="jy-ftnum" id="timer"></span>
+          {if $totime} 
+ <script type="text/javascript">
+          function TimeTo(dd){  
+    var t = new Date(dd),//取得指定时间的总毫秒数  
+        n = new Date().getTime(),//取得当前毫秒数  
+        c = t - n;//得到时间差  
+    if(c<=0){//如果差小于等于0  也就是过期或者正好过期，则推出程序  
+        document.getElementById('timer').innerHTML ='本次采购已经结束';  
+        clearInterval(window['ttt']);//清除计时器  
+        return;//结束执行  
+    }  
+    var ds = 60*60*24*1000,//一天共多少毫秒  
+        d = parseInt(c/ds),//总毫秒除以一天的毫秒 得到相差的天数  
+        h = parseInt((c-d*ds)/(3600*1000)),//然后取完天数之后的余下的毫秒数再除以每小时的毫秒数得到小时  
+        m = parseInt((c - d*ds - h*3600*1000)/(60*1000)),//减去天数和小时数的毫秒数剩下的毫秒，再除以每分钟的毫秒数，得到分钟数  
+        s = parseInt((c-d*ds-h*3600*1000-m*60*1000)/1000);//得到最后剩下的毫秒数除以1000 就是秒数，再剩下的毫秒自动忽略即可  
+        document.getElementById('timer').innerHTML = '剩 <b>'+d+'</b> 天 <b>'+h+'</b></b> 时 <b>'+m+'</b> 分 <b class="ss">'+s+'</b> 秒';//最后这句讲定义好的显示 更新到 ID为 timer的 div中  
+}  
+(function(){  
+    window['ttt']=setInterval(function(){  
+    TimeTo('{date('Y/m/d', $totime)} 23:59:59');//定义倒计时的结束时间，注意格  
+    },1000);//定义计时器，每隔1000毫秒 也就是1秒 计算并更新 div的显示  
+})();  
+</script>
+              {else}
+              <span class="jy-ftnum">长期有效</span>        
+              {/if}
+              {else}
+               {if $username}
+              <span class="jy-ftnum">本次采购已经结束</span>
+               {else}
+               <span class="jy-ftnum">发布者未注册，不计时。</span>
+               {/if}
+              {/if}
+          </li>
+        </ul>
+      </div>
+      <div class="jy-btn-box clearfix">
+      {if $username && !$expired}
+      <a style="cursor:pointer" class="fl jy-btn-m1 j_xjia" href="{$MOD[linkurl]}{rewrite('price.php?itemid='.$itemid)}"><i class="iconbuy icon-btn1"></i>立即询价</a>
+      {/if}
+      <a href="#lx" class="fl jy-btn-m2"><i class="iconbuy icon-btn2"></i>联系方式</a>
+      <a target="_blank" href="#" class="fr jy-btn-m3 j_showipn"> <i class="iconbuy icon-btn4"></i>手机浏览
+        <div class="showipn" style="display: none;">
+          <div class="iconbuy-showipn"></div>
+          <div class="showipn-img"><img src="{DT_PATH}api/qrcode.png.php?auth={$head_mobile}" width="108" height="108"></div>
+          <div class="showipn-wenzi">扫一扫<br>
+            在手机端浏览</div>
+        </div>
+        </a> </div>
+    </div>
+    <div class="fr interfix-cp">
+    {if $username}
+      <div class="clearfix interfix-tt">
+        <div class="fl interfix-tt-name">我还想采购</div>
+        <a target="_blank" href="{userurl($username, 'file=buy')}" class="interfix-tt-more fr">更多</a> </div>
+      <ul class="xg-xx-ul">
+  <!--{tag("moduleid=$moduleid&length=26&condition=status=3 and thumb<>'' and username='$username'&areaid=$cityid&pagesize=5&order=edittime desc&lazy=$lazy&template=buy-showjj", -2)}-->
+      </ul>
+    </div>
+    {else}
+     <div class="clearfix interfix-tt">
+        <div class="fl interfix-tt-name">紧急采购</div>
+        <a target="_blank" href="{$MOD[linkurl]}{rewrite('search.php?typeid=1&catid='.$catid)}" class="interfix-tt-more fr">更多</a> </div>
+      <ul class="xg-xx-ul">
+  <!--{tag("moduleid=$moduleid&length=26&condition=status=3 and thumb<>'' and typeid=1&catid=$catid&areaid=$cityid&pagesize=5&order=edittime desc&lazy=$lazy&template=buy-showjj", -2)}-->
+      </ul>
+    </div>
+    {/if}
+  </div>
+  <div class="jy-view-model2 clearfix">
+    <div class="jy-model2-left fl">
+      <div class="jy-model2-firmif">
+       <a target="_blank" name="lx"></a>
+        <div class="clearfix interfix-tt interfix-tt2">
+          <div class="fl interfix-tt-name">采购商信息</div>
+        </div>
+        <div class="jy-zt-listbox">
+         <div id="contact">{template 'contact', 'chip'}</div>
+        </div>
+      </div>
+      <div class="jy-model2-firm arx_list_info">
+        <div class="clearfix interfix-tt interfix-tt2">
+          <div class="fl interfix-tt-name">同类采购</div>
+          <a target="_blank" href="{cat_url($catid)}" class="interfix-tt-more fr">更多</a> </div>
+        <ul class="xg-xx-ul xg-xx-ul2">
+          <!--{tag("moduleid=$moduleid&length=32&condition=status=3 and thumb<>''&catid=$catid&areaid=$cityid&pagesize=7&order=edittime desc&lazy=$lazy&template=buy-showjj", -2)}-->
+        </ul>
+      </div>
+    </div>
+    <div class="jy-model2-right fr">
+      <div class="jy-allcp">
+        <div class="jc-cp-miaos">
+          <div class="jc-cp-tl">采购信息描述</div>
+          <div class="jc-miaos-list">
+            <ul class="jc-miaos-ul clearfix">
+              <li>所在地：{area_pos($areaid, '')}</li>
+              <li>有效期至：{if $todate}{$todate}{else}长期有效{/if}{if $expired} <span class="f_red">[已过期]</span>{/if}</li>
+              {if $MOD[hits]}<li>浏览次数：<span id="hits">{$hits}</span></li>{/if}
+            </ul>
+          </div>
+          <div class="jc-miaos-ve">
+          {if $CP}{template 'property_show', 'chip'}{/if}
+          <div id="content">{$content}</div>
+          </div>
+   {if $MOD[fee_award]}
+  <div class="b20 c_b">&nbsp;</div>
+  <div class="award"><div onclick="Go('{$MODULE[2][linkurl]}award.php?mid={$moduleid}&itemid={$itemid}');">打赏</div></div>
+  {/if}
+        </div>
+        {template 'comment', 'chip'}
+        <div class="jc-cp-hot">
+          <div class="jc-cp-tl">全网推荐产品</div>
+          <div class="jc-hot-list">
+            <ul class="jc-hot-ul clearfix">
+     <!--{tag("moduleid=5&length=20&condition=status=3 and level>0 and thumb<>''&areaid=$cityid&pagesize=5&order=edittime desc&lazy=$lazy&template=buy-showsellthumb", -2)}-->
+            </ul>
+          </div>
+        </div>
+        <div class="jc-cp-tuij">
+          <div class="jc-cp-tl">相关采购信息</div>
+          <div class="jc-tuij-box">
+            <dl class="jc-tuij-dl">
+              <dt>相关采购类目</dt>
+              <dd class="clearfix jc-tuij-a">
+{php $mid = $moduleid;}
+{if $CAT[parentid]}
+{php $zcatid = $CAT[parentid];}
+{else}
+{php $zcatid = $catid;}      
+{/if}
+{php $child = get_maincat($zcatid, $mid, 1);}
+{loop $child $i $c}
+<a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}" target="_blank">{$c[catname]}</a>
+{/loop}
+              </dd>
+              <dt>热门采购搜索</dt>
+              <dd class="clearfix jc-tuij-a">
+<!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3&pagesize=26&order=total_search desc&template=show-search_kw")}-->
+              </dd>
+            </dl>
+          </div>
+        </div>
+       </div>
+  <!--我有供应 S-->
+      <div class="userInterest">
+    <p>我有<a href="{$MODULE[6][linkurl]}search.php?kw={cat_name($catid)}" target="_blank">{cat_name($catid)}</a>相关产品供应，立即发布供应产品，让采购<a href="{$MODULE[4][linkurl]}search.php?kw={cat_name($catid)}" target="_blank">{cat_name($catid)}的公司</a>主动与您联系！</p>
+    <a class="releaseBtn" href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=6&action=add" title="立即发布供应产品" target="_blank">立即发布供应产品</a>
+    </div>
+    <!--我有供应E-->
+    </div>
+  </div>
+  <!--安全提示-->
+  <div class="wrapt newfooter"></div>
+<div class="xhtips" id="hotproduct" style="float: initial;margin-bottom: 20px;">
+    <h4>免责声明</h4>
+    <p>本网页所展示的有关【{$title}_{cat_name($catid)}_{$item[company]}】的信息/图片/参数等由{$DT[sitename]}的会员【{$item[company]}】提供，由{$DT[sitename]}会员【{$item[company]}】自行对信息/图片/参数等的真实性、准确性和合法性负责，<b>本平台（本网站）仅提供展示服务，请谨慎交易，因交易而产生的法律关系及法律纠纷由您自行协商解决，本平台（本网站）对此不承担任何责任</b>。您在本网页可以浏览【{$title}_{cat_name($catid)}_{$item[company]}】有关的信息/图片/价格等及提供【{$title}_{cat_name($catid)}_{$item[company]}】的商家公司简介、联系方式等信息。</p>
+    <h4 class="contactTit">联系方式</h4>
+    <p>在您的合法权益受到侵害时，欢迎您向{$DT[emaill]}邮箱发送邮件，或者进入<a href="{$EXT[guestbook_url]}index.php?action=add" title="网站意见反馈" target="_blank">《网站意见反馈》</a>了解投诉处理流程，我们将竭诚为您服务，感谢您对{$DT[sitename]}的关注与支持！</p>
+  </div>
+</div>
+<script type="text/javascript">
+    //联系方式查看
+    function findLx(){
+                $(".jy-close-pp,.pop-see-btn2").on("click",function(){ //关闭弹窗
+            closePop($(".pop-see-man2"))
+        })
+    }
+    function returnIndex(){
+        var index;
+        var timestamp=new Date().getTime();
+        jQuery.ajax({
+            async:false,
+            dataType:"json",
+            success:function(result){
+                if(result.success){
+                    jQuery(".phContact").html(result.data.account.contact);
+                    jQuery(".phTel").html(result.data.account.tel);
+                    jQuery(".phMobile").html(result.data.account.mobile);
+                    jQuery(".phAdd").html(result.data.company.address);
+                    jQuery(".phEmail").html(result.data.account.email);
+                    jQuery(".jy-zt-module2").hide();
+                    jQuery(".jy-zt-module3").show();
+                }
+                index = result.data
+            }
+        });
+        return index;
+    }
+        //显示手机网站二维码
+        $(".j_showipn").on({
+            mouseenter:function(){
+                $(".showipn").show()
+            },
+            mouseleave:function(){
+                $(".showipn").hide()
+            }
+        })
+        $(".jy-czuo-a2").on({
+            mouseenter:function(){
+                $(this).addClass("jy-czuo-a22")
+            },
+            mouseleave:function(){
+                $(this).removeClass("jy-czuo-a22")
+            }
+        })
+</script>
+<script type="text/javascript" src="{DT_SKIN}js/top2.1.js"></script>
+<script type="text/javascript" src="{DT_STATIC}file/script/album.js"></script> 
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+</div>
+{template 'footer'}

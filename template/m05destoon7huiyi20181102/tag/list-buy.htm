@@ -1,0 +1,27 @@
+<div class="wy-buy mb30 cf">
+<div class="hd">
+<dl>
+<dt class="name"><strong>名称</strong></dt>
+<dt>采购所在地</dt>
+<dt>采购数量</dt>
+<dt>发布时间</dt>
+<dt>操作</dt>
+</dl>
+</div>
+<div class="bd">
+{loop $tags $k $t}
+<dl>
+<a target="_blank" href="{$t[linkurl]}">
+<dd class="name"><strong>{$t[title]}</strong></dd>
+<dd>{area_pos($t[areaid], '', 1)}</dd>
+<dd>{if $t[amount] > 0}{$t[amount]}{else}面议{/if}</dd>
+<dd><span>{timetodate($t[edittime], $datetype)}</span></dd>
+<dd>
+查看详情
+</dd>
+</a>
+</dl>
+{/loop}
+</div>
+</div>
+<div class="wy-page" id="pagediv">{if $showpage && $pages}<div class="wy-page" id="pagediv">{$pages}</div>{/if}</div>

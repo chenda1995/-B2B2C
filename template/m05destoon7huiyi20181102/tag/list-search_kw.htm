@@ -1,0 +1,1 @@
+{loop $tags $i $t}<li><a href="{$MODULE[$moduleid][linkurl]}{rewrite('search.php?kw='.urlencode($t['word']))}"{if $target} target="{$target}"{/if}>{$t[word]}</a></li>{/loop}

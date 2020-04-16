@@ -1,0 +1,65 @@
+</td>
+</tr>
+</table>
+</div>
+{if $DT_TOUCH}
+{else}
+{template 'qq', $module}
+<div class="work_footer">
+    <ul class="work_footer-copyright">Copyright ©2003-2018 {$DT[sitename]} All Rights Reserved</ul>
+    <ul class="work_footer-nav">
+        <a href="{$MODULE[1][linkurl]}" target="_blank">{$DT[sitename]}</a> <a href="{$MODULE[2][linkurl]}grade.php" target="_blank">{VIP}服务</a> <a href="{$EXT[ad_url]}" target="_blank">广告服务</a> <a href="{$EXT[guestbook_url]}" target="_blank">意见反馈</a>  
+    </ul>
+</div>
+<!--[以下为系统关键代码，请勿删除]-->
+<script type="text/javascript">
+$('.tb tr').find('>th:last').css('border-right', '#dedede 1px solid');
+if(document.body.clientHeight > Dd('main').scrollHeight) Dd('main').style.height=document.body.clientHeight+'px';
+if(get_cookie('m_side') == 11 && Dd('side_oh').className == 'side_h') {Dh('side');Dd('side_oh').className = 'side_s';}
+var destoon_message = {$_message};
+var destoon_chat = {$_chat};
+{if $_message && $_sound}
+if(window.location.href.indexOf('message.php') == -1) $('#destoon_space').html(sound('message_{$_sound}'));
+{/if}
+{if $_chat}
+if(window.location.href.indexOf('chat.php') == -1) $('#destoon_space').html(sound('chat_new'));
+{/if}
+{if $_userid && $DT[pushtime]}
+window.setInterval('PushNew()',{$DT[pushtime]}*1000);
+{/if}
+</script>
+{/if}
+<script type="text/javascript">
+$(function(){
+var h1 = $(window).height(),h2 = $('#main').height();
+if(h1 > h2) $('#main').height(h1 - 67);
+if(get_local('m_side') == 'Y' && Dd('side_oh').className == 'side_h') {Dh('side');Dd('side_oh').className = 'side_s';}
+var destoon_message = {$_message};
+var destoon_chat = {$_chat};
+{if $_message && $_sound}
+if(window.location.href.indexOf('message.php') == -1) $('#destoon_space').html(sound('message_{$_sound}'));
+{/if}
+{if $_chat}
+if(window.location.href.indexOf('im.php') == -1) $('#destoon_space').html(sound('chat_new'));
+{/if}
+{if $_message}
+Dnotification('new_message', '{$MODULE[2][linkurl]}message.php', '{useravatar($_username, 'large')}', '站内信 ({$_message})', '收到新的站内信件，点击查看');
+{/if}
+{if $_chat}
+Dnotification('new_chat', '{$MODULE[2][linkurl]}im.php', '{useravatar($_username, 'large')}', '新交谈 ({$_chat})', '收到新的对话请求，点击交谈');
+{/if}
+{if $_userid && $DT[pushtime]}
+window.setInterval('PushNew()',{$DT[pushtime]}*1000);
+{/if}
+if($('#mini_profile').length > 0) {
+	$('#my_profile').mouseover(function(){
+		$('#mini_profile').show('fast');
+		$('#my_profile').bind('mouseleave',function(){ 
+			$('#mini_profile').hide(); 
+		});
+	}); 
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/news-v1.3.1.css" />
+<script type="text/javascript" src="{DT_SKIN}js/news-v1.3.1.js"></script> 
+<script type="text/javascript">var module_id= {$moduleid},item_id={$itemid},content_id='content',img_max_width={$MOD[max_width]};</script>
+<div class="wy-mbx">当前位置：<a href="{$MODULE[1][linkurl]}">首页</a><span>&gt;</span><a href="{$MOD[linkurl]}">{$MOD[name]}</a>
+<span>&gt;</span>{cat_pos($CAT, ' <span>&gt;</span> ')}<span>&gt;</span>{$title}</a>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-wrap2 pr">
+<div class="wy-mn-detail">
+<div class="wy-ad-structure">
+<div class="wy-ewm js-ewm"></div>
+<div class="wy-ewm-c js-ewm-c" style="display:none;"><p>使用手机微信“扫一扫”功能，扫描以下二维码，即可将本文分享到“<i>朋友圈</i>”中。</p>
+<p><img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}" width="145px" height="145px"></p></div>
+<h1>{$title}</h1>
+<p class="wy-source">
+<i class="wy-ico-time"></i><span>{$adddate}</span>
+<i class="wy-ico-wz"></i>{if $copyfrom}来源：{if $fromurl}<a href="{$fromurl}" target="_blank">{/if}{$copyfrom}{if $fromurl}</a>{/if}{/if}
+<span>责任编辑：{if $author}{$author}{else}未填{/if}</span>
+<i class="wy-ico-fwl"></i><span>浏览数：{if $MOD[hits]}{$hits}{else}未显示{/if}</span>
+<a href="{DT_PATH}">{$DT[sitename]}</a>
+</p>
+{if $introduce && $user_status == 3 && $page == 1}
+<p class="wy-lead">核心提示：{$introduce}<span class="l"></span><span class="r"></span></p>
+{/if}
+{if $CP}{template 'property_show', 'chip'}{/if}
+<div class="wy-detail" id="content">
+{template 'content', 'chip'}        
+</div>
+{if $voteid}<div class="pd20">{loop $voteid $v}
+{load('vote_'.$v.'.htm')}{/loop}</div>
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+{if $subtitles}
+<div class="subtitle">
+<strong>本文导航：</strong>
+<ul>
+{loop $titles $i $t}
+{if $subtitles > $i}
+<li>
+({php echo $i+1;})
+{if $page == $i+1}
+<strong>{$t}</strong>
+{else}
+<a href="{$MOD[linkurl]}{if $i}{itemurl($item, $i+1)}{else}{$item[linkurl]}{/if}" title="{$t}">{$t}</a>
+{/if}
+</li>
+{/if}
+{/loop}
+</ul>
+<div class="c_b"></div>
+</div>
+{/if}
+{if $MOD[fee_award]}<div class="award"><div onclick="Go('{$MODULE[2][linkurl]}award.php?mid={$moduleid}&itemid={$itemid}');">打赏</div></div>{/if}
+<div class="wy-other-read cf">
+{if $keytags}
+<div class="hd cf">
+<h2>相关阅读：</h2>
+{loop $keytags $t}
+<a href="{$MOD[linkurl]}{rewrite('search.php?kw='.urlencode($t))}" target="_blank">{$t}</a>
+{/loop}
+</div>
+{/if}
+<div class="bdshare bdsharebuttonbox top_bdshare cf bdshare-button-style1-24"><span>分享到：</span><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_bdysc" data-cmd="bdysc" title="分享到百度云收藏"></a></div>
+</div>
+{template 'comment', 'chip'}
+<dl class="wy-next-read cf">
+<dt>阅读上文 &gt;&gt; 
+<!--{tag("moduleid=$moduleid&condition=status=3 and addtime<$addtime&areaid=$cityid&pagesize=1&order=addtime desc&template=list-np", -1)}-->
+</dd>
+<dd>阅读下文 &gt;&gt; 
+<!--{tag("moduleid=$moduleid&condition=status=3 and addtime>$addtime&areaid=$cityid&pagesize=1&order=addtime asc&template=list-np", -1)}-->
+</dd>
+</dl>
+<div class="wy-enjoy js-enjoy">
+<div class="slide">
+<div class="hd cf">
+<h2>大家喜欢看的</h2>
+<ul class="cf">
+<li class="on">品牌</li>
+<li class="">资讯</li>
+<li class="">展会</li>
+<li class="">视频</li>
+<li class="">图片</li>
+<li class="">供应</li>
+<li class="">求购</li>
+<li class="">商城</li>
+</ul>
+</div>
+<div class="bd">
+<div class="brand js-brand">
+<div class="slide2">
+<div class="bd2">
+<!--{php $tags=tag("moduleid=13&condition=status=3 and thumb<>''&areaid=$cityid&pagesize=36&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+{if $i%12 == 0}<ul class="cf" {if $i == 0}{else}style="display: none;"{/if}>{/if}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}">{$t[title]}</a></li>
+{if $i%12 == 11}</ul>{/if}
+{/loop}
+</div>
+<div class="hd2">
+<ul class="cf">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="news" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&showcat=1&pagesize=12&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[catname]}丨{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="news" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=8&condition=status=3&areaid=$cityid&showcat=1&pagesize=12&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[catname]}|{$t[alt]}" target="_blank">{$t[catname]}|{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="pic" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=14&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&pagesize=8&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[title]}"><img src="{$t[thumb]}" alt="{$t[alt]}" />{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+
+<div class="pic" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=12&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&pagesize=8&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" />{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+
+<div class="pic" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=5&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&pagesize=8&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{str_replace('.thumb.', '.middle.',$t[thumb])}" alt="{$t[alt]}" />{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+
+<div class="pic" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=6&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&pagesize=8&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{str_replace('.thumb.', '.middle.',$t[thumb])}" alt="{$t[alt]}" />{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+
+<div class="pic" style="display:none;">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=16&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&pagesize=8&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{str_replace('.thumb.', '.middle.',$t[thumb])}" alt="{$t[alt]}" />{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+
+
+</div>
+</div>
+</div>
+<div class="wy-state">
+<p><span>版权与免责声明：</span></p>
+<p>凡注明稿件来源的内容均为转载稿或由企业用户注册发布，本网转载出于传递更多信息的目的；如转载稿涉及版权问题，请作者联系我们，同时对于用户评论等信息，本网并不意味着赞同其观点或证实其内容的真实性；</p>
+<p><br /><span>本文地址：</span><a href="{$linkurl}">{$linkurl}</a></p>
+<p><span>转载本站原创文章请注明来源：</span><a href="{DT_PATH}">{$DT[sitename]}</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-sd">
+<div class="wy-ad mb10"><a href="#"><img src="http://wy.jmcdn.cn/201711/08/173618ps5a02d01288b788.3731846820958.jpg"></a></div>
+<div class="wy-atc-list mb20">
+<div class="wy-tt cf"><h3>推荐新闻</h3><a href="{$MODULE[21][linkurl]}" target="_blank" class="more">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=16&condition=status=3&areaid=$cityid&showcat=1&pagesize=7&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-spc-topic js-spc-topic mb20">
+<div class="wy-tt3 cf"><h3>行业专题</h3><a href="{$MODULE[11][linkurl]}" target="_blank" class="more">更多行业专题</a></div>
+<div class="slide slide-arrow">
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=11&condition=status=3 and thumb<>''&areaid=$cityid&showcat=5&pagesize=7&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" title="{$t[catname]}|{$t[alt]}" target="_blank"><img src="{$t[thumb]}" class="lazy" alt="{$t[catname]}|{$t[alt]}" title="{$t[catname]}|{$t[alt]}"/><h4>{$t[catname]}|{$t[title]}</h4></a></li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<li class=""></li>
+<li class=""></li>
+<li class=""></li>
+<li class=""></li>
+<li class=""></li>
+</ul>
+</div>
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
+</div>
+</div>
+<div class="wy-atc-list mb20">
+<div class="wy-tt cf"><h3>行业热点</h3><a href="{$MODULE[21][linkurl]}" target="_blank" class="more">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&showcat=1&pagesize=10&order=rand() desc&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-ad mb10"><a href="#"><img src="http://wy.jmcdn.cn/201711/08/173618ps5a02d01288b788.3731846820958.jpg"></a></div>
+
+<div class="wy-channel mb20">
+<div class="wy-tt cf"><h3>热门频道</h3></div>
+<dl class="cf">
+<dt><a href="{$MODULE[21][linkurl]}" title="{$MODULE[21][name]}" target="_blank">{$MODULE[21][name]}</a></dt>
+<dd>
+{php $mid = 21;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<5}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[13][linkurl]}" title="{$MODULE[13][name]}" target="_blank">{$MODULE[13][name]}</a></dt>
+<dd>
+{php $mid = 13;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<5}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[22][linkurl]}" title="{$MODULE[22][name]}" target="_blank">{$MODULE[22][name]}</a></dt>
+<dd>
+{php $mid = 22;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<4}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[12][linkurl]}" title="{$MODULE[12][name]}" target="_blank">{$MODULE[12][name]}</a></dt>
+<dd>
+{php $mid = 12;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<3}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+<dl class="cf">
+<dt><a href="{$MODULE[10][linkurl]}" title="{$MODULE[10][name]}" target="_blank">{$MODULE[10][name]}</a></dt>
+<dd>
+{php $mid = 10;}
+{php $maincat = get_maincat(0, $mid);}
+{loop $maincat $i $m}
+{if $i<4}
+<a href="{$MODULE[$mid][linkurl]}{$m[linkurl]}" target="_blank">{$m[catname]}</a>
+{/if}
+{/loop}
+</dd>
+</dl>
+</div>
+<div class="wy-brand-rec3 mb20">
+<div class="wy-tt cf"><h3>VIP会员</h3></div>
+<ul class="cf" id="brand-list">
+<!--{php $tags=tag("moduleid=13&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc,vip desc&datetype=3&pagesize=10&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" /><p>{$t[title]}</p></a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-brand-hot">
+<div class="wy-tt mb20 cf"><h3><a href="{$MODULE[4][linkurl]}" target="_blank">热门行业企业</a></h3><a href="{$MODULE[4][linkurl]}" class="more" target="_blank">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=4&condition=groupid>5 and catids<>''&areaid=$cityid&order=vip desc,userid desc&datetype=3&pagesize=20&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" title="{$t[company]}" target="_blank">{$t[company]}</a></li>
+{/loop}
+</ul>
+</div>
+</div></div>
+<div class="wy-right-bar">
+<a href="#" class="ewm">
+<dl class="">
+<dd>
+<div class="wy-right-ewm">
+<img src="{DT_PATH}api/qrcode.png.php?auth={$linkurl}&size=5&margin=0">
+<p>微信“扫一扫”<br>即可分享此文章</p>
+</div>
+</dd>
+</dl>
+</a>
+<a href="#" class="topbtn"></a>
+</div>
+{if $content}<script type="text/javascript" src="{DT_STATIC}file/script/content.js"></script>{/if}
+{template 'footer-news'}

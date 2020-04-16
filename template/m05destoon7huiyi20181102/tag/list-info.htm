@@ -1,0 +1,32 @@
+{loop $tags $k $t}
+<li id="item_{$t[itemid]}">
+<a href="{$t[linkurl]}" target="_blank" title="{$t[company]}"><img class="lazy" src="{imgurl($t[thumb])}" alt="{$t[company]}" /></a>
+<div class="wy-invest-c">
+<div class="cf">
+<h3><a href="{$t[linkurl]}" target="_blank">{$t[title]}</a></h3>
+{if $t[vip]}
+<i class="vip">第{$t[vip]}年</i>
+<i class="auth">第{$t[vip]}年</i>
+<i class="star5"></i>
+{/if}
+</div>
+<p><a href="{$t[linkurl]}" target="_blank">{dsubstr($t[introduce], 65, '...')}</a></p>
+<dl>
+<dt><i></i>门店数量：1000以上</dt>
+<dd><i></i>基本投资：<span>{if $t[tzedu]}{$t[tzedu]}{else}未填写{/if}</span></dd>
+</dl>
+<ul>
+<li><a href="{userurl($t[username])}" target="_blank">访问公司官网</a></li>
+
+<li><a href="{userurl($t[username], 'file=introduce')}" target="_blank">介绍</a></li>
+<li><a href="{userurl($t[username], 'file=sell')}" target="_blank">产品</a></li>
+{if $t[validated]}<li><a href="javascript:;" class="bag">已认证</a><span></span></li>{/if}
+{if !$t[username]}<li><a href="javascript:;" class="bag">未注册</a><span></span></li>{/if}
+</ul>
+</div>
+<div class="wy-invest-r">
+<a href="javascript:;" target="_blank" class="eva"><span><i></i>{$t[hits]}人关注</span></a>
+<a href="{$t[linkurl]}" target="_blank" class="join">加盟详情</a>
+</div>
+</li>
+{/loop}

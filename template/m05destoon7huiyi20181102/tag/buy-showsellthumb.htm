@@ -1,0 +1,7 @@
+{loop $tags $k $t}
+ <li>
+    <div class="jc-hot-imgbox"> <a target="_blank" href="{$t[linkurl]}"> <span></span><img class="xg-img" src="{imgurl($t[thumb])}" alt="{$t[alt]}" onerror="this.src='{DT_SKIN}image/sx_nopic150_150.png'"> </a> </div>
+    <div class="jc-hot-cp text-overhidden"> <a target="_blank" href="{$t[linkurl]}">{$t[title]}</a> </div>
+    <div class="jc-hot-cpkg">{area_pos($t[areaid], '')}</div>
+</li>
+{/loop}

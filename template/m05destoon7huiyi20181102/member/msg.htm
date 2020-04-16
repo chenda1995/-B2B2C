@@ -1,0 +1,40 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}style.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}member.css"/>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}index.css"/>
+<div class="m_new">
+	<div class="left_box">
+	<div class="pos">当前位置: <a href="{DT_PATH}">首页</a> &raquo; <a href="{$MOD[linkurl]}">提示信息</a></div>
+	<br/>
+	<table width="300" cellpadding="0" cellspacing="0" align="center">
+	<tr>
+	<td><img src="{SKIN_PATH}image/login_i.gif" alt="" width="300" height="35"/></td>
+	</tr>
+	<tr>
+	<td background="{SKIN_PATH}image/login_b.gif">
+	<div style="padding:20px 10px 5px 15px;line-height:200%;" class="px13">
+			{if $msgcode == 'S0'}
+			<img src="{SKIN_PATH}image/check_right.gif" alt="" width="12" height="11"/> <strong>恭喜!&nbsp;密码重设成功。</strong><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;新密码为<span class="f_red">{$password}</span> 请妥善保存并尽快修改<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="px12 f_red">注意：在离开本页之前，请记录新密码</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$MOD[linkurl]}edit.php?tab=1" class="t f_b">点这里修改新密码</a><br/>
+			{elseif $msgcode == 'S1'}
+			<img src="{SKIN_PATH}image/check_right.gif" alt="" width="12" height="11"/> <strong>恭喜!&nbsp;支付密码重设成功。</strong><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;新密码为<span class="f_red">{$password}</span> 请妥善保存并尽快修改<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="px12 f_red">注意：在离开本页之前，请记录新支付密码</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$MOD[linkurl]}edit.php?tab=1" class="t f_b">点这里修改新支付密码</a><br/>
+			{else}
+			Loading...
+			<meta http-equiv="refresh" content="0;URL={DT_PATH}">
+			{/if}
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td><img src="{SKIN_PATH}image/login_f.gif" alt="" width="300" height="30"/></td>
+	</tr>
+	</table>
+	<br/>
+	</div>
+</div>
+{template 'footer'}

@@ -1,0 +1,5 @@
+{loop $tags $i $t}
+{if $i%2 == 0}<dd>{/if}
+<a href="{$MODULE[5][linkurl]}{$t[linkurl]}" target="_blank">{$t[catname]}</a>
+{if $i%2 == 1}</dd>{/if}
+{/loop}

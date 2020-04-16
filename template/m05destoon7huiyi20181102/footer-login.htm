@@ -1,0 +1,43 @@
+<div class="wrapt newfooter">
+<div class="clear"> </div>
+<div class="ft">
+    <div class="ft-links">
+    <!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&dir=xhtag&template=webpage-new")}-->
+    <a href="{$MODULE[1][linkurl]}sitemap/" target="_blank" rel="nofollow">网站地图</a><em>|</em>
+    <a href="{$EXT[spread_url]}" target="_blank" rel="nofollow">排名推广</a><em>|</em>
+    {if $EXT[ad_enable]}<a href="{$EXT[ad_url]}" target="_blank" rel="nofollow">广告服务</a><em>|</em>{/if}
+    {if $EXT[gift_enable]}<a href="{$EXT[gift_url]}index2.php" target="_blank" rel="nofollow">积分换礼</a><em>|</em>{/if}
+    {if $EXT[guestbook_enable]}<a href="javascript:SendReport();" rel="nofollow">违规举报</a><em>|</em>{/if}
+    {if $EXT[feed_enable]}<a href="{$EXT[feed_url]}" target="_blank" rel="nofollow">RSS订阅</a><em>|</em>{/if}
+ <a target="_blank" href="{$EXT[link_url]}{rewrite('index.php?action=reg')}" title="申请加入友链" rel="nofollow" style="color:#9C7272">申请友链</a>
+    </div>
+    <div class="ft-p">
+       <p>{$DT[copyright]}</p>
+   {if $DT[icpno]}<p><span><a href="//www.miibeian.gov.cn" target="_blank" rel="nofollow">{$DT[icpno]}</a></span></p>{/if}
+   {if DT_DEBUG}<p><span class="px11">{debug()}</span></p>{/if}
+    </div>
+</div>
+</div>
+<!--右侧咨询-->
+{template 'right-zx'}
+{template 'banquan'}
+<!-- 回到顶部 -->
+<!--div class="backTop" style="display: none;"><a href="javascript:void(0)" title="回到顶部" target="_self"></a></div-->
+<script type="text/javascript" src="{DT_SKIN}js/top2.1.js"></script>
+<script type="text/javascript" src="{DT_SKIN}js/jquery.changeimg.js"></script>
+<script type="text/javascript" src="{DT_SKIN}js/jquery.index.js"></script>
+<script type="text/javascript">
+//浮动置顶
+$('.arx_list_info').fixedDiv('#hotproduct');
+</script>
+<!--[以下为系统关键代码，请勿删除]-->
+<script type="text/javascript">
+{if $destoon_task}
+show_task('{$destoon_task}');
+{else}
+{php include DT_ROOT.'/api/task.inc.php';}
+{/if}
+{if $lazy}$(function(){$("img").lazyload();});{/if}
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{template 'header'}
+<script type="text/javascript" src="{DT_SKIN}js/product-v1.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/brand-v1.3.1.css" />
+<div class="wy-wrap">
+<div class="wy-select2">
+<dl class="switch-con cf">
+<dt>分类</dt>
+<dd class="cf">
+<a class="on" href="{$MODULE[5][linkurl]}">全部</a>
+{loop $maincat $k $v}
+<li><a title="{$v[catname]}" href="{$MOD[linkurl]}{$v[linkurl]}">{set_style($v[catname],$v[style])}({$v[item]})</a></li>
+{/loop}
+</dd>
+<a href="javascript:;" class="more">更多</a>
+</dl>
+{loop $PPT $p}
+<dl class="switch-con cf">
+<dt>{$p[name]}</dt>
+<dd class="cf">
+<a href="{$MOD[linkurl]}search.php" title="全部" class="on">全部</a>
+{loop $p[options] $o}
+<a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&ppt_'.$p[oid].'='.urlencode($o))}" title="{$o}">{$o}</a>
+{/loop}
+</dd>
+<a href="javascript:;" class="more">更多</a>
+</dl>
+{/loop}
+<dl class="switch-con cf">
+<dt>地区</dt>
+<dd class="cf">
+<li><a class="all on" href="{$MOD[linkurl]}search.php">全部</a></li>
+{php $mainarea = get_mainarea(0)}
+{loop $mainarea $k $v}
+<li><a  title="{$v[areaname]}" href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v['areaid'])}">{$v[areaname]}</a></li>
+{/loop}
+</dd>
+<a href="javascript:;" class="more">更多</a>
+</dl>
+</div>
+</div>
+
+<div class="wy-nav-line" style="box-shadow:none;"></div>
+<div class="wy-ad wy-ad-half wy-ad-mt0">
+<ul class="cf">
+<li><!--广告ID【AD-D3-1】暂无广告--></li>
+<li><!--广告ID【AD-D3-2】暂无广告--></li>
+<li><!--广告ID【AD-D3-3】暂无广告--></li>
+<li><!--广告ID【AD-D3-4】暂无广告--></li>
+</ul>
+</div>
+<div class="wy-ad wy-ad-full wy-ad-mt0">
+<ul class="cf">
+<li><!--广告ID【AD-D3-1-2】暂无广告--></li>
+<li><!--广告ID【AD-D3-3-4】暂无广告--></li>
+</ul>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-brand-show js-brand-show">
+<a href="{$MODULE[2][linkurl]}grade.php" target="_blank" class="vip-bg"></a>
+<div class="bd">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=48&template=null");}-->
+{loop $tags $i $t}
+{if $i%12==0}<ul>{/if}
+<li><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" alt="{$t[alt]}" /></a><h4><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></h4></li>
+{if $i%12==11}</ul>{/if}
+{/loop}
+</div>
+<div class="hd"><a class="prev"></a><a class="next"></a></div>
+</div></div>
+<div class="wy-wrap cf">
+<div class="wy-brand-rank wy-brand-ico js-brand-rank">
+<div class="wy-tt6"><h3>品牌排行榜</h3></div>
+<div class="bd">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=10&template=null");}-->
+{loop $tags $i $t}
+<dl {if $i == 0}class="on"{/if}>
+<dt class="cf"><em>{if $i < 20}<?php echo $i+1?>{/if}</em><h4>{$t[title]}</h4><span>{$t[company]}</span></dt>
+<dd class="cf">
+<em>{if $i < 20}<?php echo $i+1?>{/if}</em><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy"/></a>
+<div class="text">
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a><br />
+<a href="{userurl($t[username], 'file=introduce')}" target="_blank">{$t[company]}</a>
+</div>
+<div class="ico"><a href="{userurl($t[username], 'file=info')}" target="_blank" title="{$t[alt]}"><i class="i7"></i></a></div>
+</dd>
+</dl>
+{/loop}
+</div>
+</div>
+<div class="wy-brand-rank wy-brand-ico js-brand-rank">
+<div class="wy-tt6"><h3>月度关注榜</h3></div>
+<div class="bd">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=10&template=null");}-->
+{loop $tags $i $t}
+<dl {if $i == 0}class="on"{/if}>
+<dt class="cf"><em>{if $i < 20}<?php echo $i+1?>{/if}</em><h4>{$t[title]}</h4><span>{$t[company]}</span></dt>
+<dd class="cf">
+<em>{if $i < 20}<?php echo $i+1?>{/if}</em><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy"/></a>
+<div class="text">
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a><br />
+<a href="{userurl($t[username], 'file=introduce')}" target="_blank">{$t[company]}</a>
+</div>
+<div class="ico"><a href="{userurl($t[username], 'file=info')}" target="_blank" title="{$t[alt]}"><i class="i7"></i></a></div>
+</dd>
+</dl>
+{/loop}
+</div>
+</div>
+
+<div class="wy-sd">
+<div class="wy-brand-join">
+<div class="wy-tt7"><h3>最新加入品牌</h3><a href="#" target="_blank">更多</a></div>
+<ul class="bd">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=13&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a><span>—</span><a href="{userurl($t[username], 'file=introduce')}" target="_blank" title="{$t[alt]}">{$t[company]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+<div class="wy-ad wy-ad-half wy-ad-mt0">
+<ul class="cf">
+<li><!--广告ID【AD-D4-1】暂无广告--></li>
+<li><!--广告ID【AD-D4-2】暂无广告--></li>
+<li><!--广告ID【AD-D4-3】暂无广告--></li>
+<li><!--广告ID【AD-D4-4】暂无广告--></li>
+</ul>
+</div>
+
+<div class="wy-guan-list">
+<ul class="cf">
+<!--{tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&pagesize=16&order=addtime desc&pages=$pages&target=_blank&lazy=$lazy&template=list-brand")}-->
+</ul>
+<div class="wy-page" id="pagediv">{if $showpage && $pages}<div class="wy-page" id="pagediv">{$pages}</div>{/if}</div>
+</div>
+
+
+{template 'footer-brand'}

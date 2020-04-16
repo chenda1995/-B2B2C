@@ -1,0 +1,73 @@
+<div class="vote">
+<form action="http://localhost/vote/index.php" method="post" target="_blank" id="vote_1" onsubmit="return check_vote_1();">
+<input type="hidden" name="itemid" value="1"/>
+<input type="hidden" name="submit" value="1"/>
+<div id="vote_title_1"><a href="http://localhost/vote/show.php?itemid=1">投票测试</a></div>
+<ul>
+<li><input type="radio" name="vote[]" value="1" id="vote_1_1"/> <label for="vote_1_1"> 测试1</label></li>
+<li><input type="radio" name="vote[]" value="2" id="vote_1_2"/> <label for="vote_1_2"> 测试2</label></li>
+<li><input type="radio" name="vote[]" value="3" id="vote_1_3"/> <label for="vote_1_3"> 测试3</label></li>
+<li><input type="radio" name="vote[]" value="4" id="vote_1_4"/> <label for="vote_1_4"> 测试4</label></li>
+<li><input type="radio" name="vote[]" value="5" id="vote_1_5"/> <label for="vote_1_5"> 测试5</label></li>
+<li><input type="radio" name="vote[]" value="6" id="vote_1_6"/> <label for="vote_1_6"> 测试6</label></li>
+<li><input type="radio" name="vote[]" value="7" id="vote_1_7"/> <label for="vote_1_7"> 测试7</label></li>
+<li><input type="radio" name="vote[]" value="8" id="vote_1_8"/> <label for="vote_1_8"> 测试8</label></li>
+<li><input type="radio" name="vote[]" value="9" id="vote_1_9"/> <label for="vote_1_9"> 测试9</label></li>
+<li><input type="radio" name="vote[]" value="10" id="vote_1_10"/> <label for="vote_1_10"> 测试10</label></li>
+</ul>
+<p>验证码&nbsp;&nbsp;
+<input name="captcha" id="captcha" type="text" size="6" placeholder="验证码" class="input-captcha"/>&nbsp;<img src="http://localhost/api/captcha.png.php?action=image" title="验证码,看不清楚?请点击刷新&#10;字母不区分大小写" alt="" align="absmiddle" id="captchapng" onclick="reloadcaptcha();" style="cursor:pointer;"/><span id="ccaptcha"></span>
+<script type="text/javascript">
+function reloadcaptcha() {
+Dd('captchapng').src = 'http://localhost/api/captcha.png.php?action=image&refresh='+Math.random();
+Dd('ccaptcha').innerHTML = '';
+Dd('captcha').value = '';
+}
+function checkcaptcha(s) {
+s = $.trim(s);
+var t = encodeURIComponent(s);
+if(t.indexOf('%E2%80%86') != -1) s = decodeURIComponent(t.replace(/%E2%80%86/g, ''));
+if(!is_captcha(s)) return;
+$.post(AJPath, 'action=captcha&captcha='+s,
+function(data) {
+if(data == '0') {
+Dd('ccaptcha').innerHTML = '&nbsp;&nbsp;<img src="http://localhost/file/image/check-ok.png" align="absmiddle"/>';
+} else {
+Dd('captcha').focus;
+Dd('ccaptcha').innerHTML = '&nbsp;&nbsp;<img src="http://localhost/file/image/check-ko.png" align="absmiddle"/>';
+}
+}
+);
+}
+function is_captcha(v) {
+if(v.match(/^[a-z0-9A-Z]{1,}$/)) {
+return v.match(/^[a-z0-9A-Z]{4,}$/);
+} else {
+return v.length > 1;
+}
+}
+$(function() {
+$('#captcha').bind('keyup blur', function() {
+checkcaptcha($('#captcha').val());
+});
+});
+</script></p>
+<p><input type="submit" value="投票" class="btn-blue" style="width:86px;"/>&nbsp;&nbsp;
+<input type="button" value="结果" class="btn" style="width:86px;" onclick="Go('http://localhost/vote/show.php?itemid=1');"/></p>
+</form>
+</div>
+<script type="text/javascript">
+function check_vote_1() {
+var c = checked_count('vote_1');
+if(c == 0) {
+alert('请选择投票选项');
+return false;
+}
+if($('#ccaptcha').html().indexOf('ok.png') == -1) {
+alert('请填写验证码');
+Dd('captcha').focus();
+return false;
+}
+return true;
+}
+</script>

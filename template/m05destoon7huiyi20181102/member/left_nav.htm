@@ -1,0 +1,363 @@
+<div class="left-nav"> 
+  <!-- account message -->
+  <div class="account clearfix">
+    <div class="account-photo fl"><a href="avatar.php"><img src="{useravatar($_username, 'large')}&time={$DT_TIME}" title="{$_company}"></a></div>
+    <div class="basic-message fl">
+      <p class="company-name"> <span class="f_r"><a href="edit.php"><img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/setting.gif" width="10" height="10" align="absmiddle" title="资料设置"/></a></span><span class="f_b px14">欢迎，<br />
+        {$_truename}</span> ({$_username}) <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a> </p>
+      <ul class="basic-message-list">
+        <li class="basic-message-detail">
+          <div class="menu-hd">
+            <h4><a href="account.php">账户信息</a></h4>
+            <i class="message-tip"></i></div>
+          <div class="menu-bd hidden">
+            <div class="message-menu clearfix">
+              <h3>资金账号</h3>
+              <div class="message-menu-list fund-account"> 
+                
+                <!--<p>支付宝账户：{if $vtrade}<span class="blue">已开通</span>{else}<span class="orange">未开通</span>{/if}</p>
+
+					<p>通用资金账户：{if $vbank}<span class="blue">已开通</span>{else}<span class="orange">未开通</span>{/if}</p> -->
+                
+                <p onClick="Go('credit.php');">积分：<span class="orange">{$_credit}</span>分 {if $MOD[credit_qd]}<span class="f_r"><a href="credit.php?action=qiandao">签到赚积分</a></span>{/if}</p>
+                <p onClick="Go('record.php');">资金：<span class="orange">{$_money}</span>元 <span class="f_r"><a href="charge.php?action=pay">充值</a></span></p>
+                <p onClick="Go('message.php');">信件：<span class="orange">{$_message}</span>封 <span class="f_r"><a href="message.php?action=send">发信件</a></span></p>
+                <p onClick="Go('deposit.php');">保证金：<span class="orange">{$deposit}</span>元 <span class="f_r"><a href="deposit.php?action=add">增资</a></span></p>
+              </div>
+            </div>
+            <div class="message-menu clearfix">
+              <h3>我的信用</h3>
+              <div class="message-menu-list my-credit"> {if $MOD[vmember]} 
+                
+                <!--<img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $validated}v{else}u{/if}_member.gif" width="16" height="16" title="{if $validated}已通过{$validator}认证{else}未通过认证{/if}" align="absmiddle"/> 认证： -->
+                <p> {if $MOD[vemail]} <img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vemail}v{else}u{/if}_email.gif" width="16" height="16" title="{if $vemail}已通过{else}未通过{/if}邮件认证" align="absmiddle"/> <a href="validate.php?action=email" class="l">邮件认证</a> &nbsp; {if $vemail}<span class="blue">已通过</span>{else} &nbsp;<span class="orange">未认证</span> &nbsp; &nbsp;<span class="orange"> <a href="validate.php?action=email" target="_blank">立即认证</a></span>{/if}
+                  {/if} </p>
+                <p> {if $MOD[vmobile]} <img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vmobile}v{else}u{/if}_mobile.gif" width="16" height="16" title="{if $vmobile}已通过{else}未通过{/if}手机认证" align="absmiddle"/> <a href="validate.php?action=mobile" class="l">手机认证</a> &nbsp;{if $vmobile}<span class="blue">已通过</span>{else} &nbsp;<span class="orange">未认证</span>&nbsp; &nbsp; <span class="orange"><a href="validate.php?action=mobile" target="_blank">立即认证</a></span>{/if}
+                  {/if} </p>
+                <p> {if $MOD[vbank]} <img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vbank}v{else}u{/if}_bank.gif" width="16" height="16" title="{if $vbank}已通过{else}未通过{/if}银行帐号认证" align="absmiddle"/> <a href="validate.php?action=bank" class="l">银行认证</a> &nbsp;{if $vbank}<span class="blue">已通过</span>{else} &nbsp;<span class="orange">未认证</span>&nbsp; &nbsp;<span class="orange"> <a href="validate.php?action=bank" target="_blank">立即认证</a></span>{/if}
+                  {/if} </p>
+                <p> {if $MOD[vtruename]} <img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vtruename}v{else}u{/if}_truename.gif" width="16" height="16" title="{if $vtruename}已通过{else}未通过{/if}真实姓名认证" align="absmiddle"/> <a href="validate.php?action=truename" class="l">实名认证</a> &nbsp;{if $vtruename}<span class="blue">已通过</span>{else} &nbsp;<span class="orange">未认证</span>&nbsp; &nbsp;<span class="orange"> <a href="validate.php?action=truename" target="_blank">立即认证</a></span>{/if}
+                  {/if} </p>
+                <p> {if $MOD[vcompany] && $groupid > 5} <img src="{DT_STATIC}{$MODULE[2][moduledir]}/image/{if $vcompany}v{else}u{/if}_company.gif" width="16" height="16" title="{if $vcompany}已通过{else}未通过{/if}公司资料认证" align="absmiddle"/> <a href="validate.php?action=company" class="l">公司认证</a>&nbsp;&nbsp;{if $vcompany}<span class="blue">已通过</span>{else} &nbsp;<span class="orange">未认证</span>&nbsp; &nbsp;<span class="orange"> <a href="validate.php?action=company" target="_blank">立即认证</a></span>{/if}
+                  {/if} </p>
+                <p> {else}
+                  上次登录：{timetodate($logintime, 5)}
+                  {/if} 
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="basic-message-detail"> <a href="logout.php?forward=">退出</a> {if $admin_user}| <a href="index.php?action=logout" class=" f_red">注销授权</a>{/if}</li>
+      </ul>
+    </div>
+  </div>
+  <!-- member message -->
+  <ul class="member">
+    <li>
+      <p>会员ID号：<span>{$_userid}</span> </p>
+      <span class="f_r f_red"><a href="account.php">账号详情</a></span>
+    </li>
+    <li>
+      <p>会员级别：<span>{$MG[groupname]}</span></p>
+      {if $groupid == 7}
+      <span class="f_r f_gree">已是最高VIP </span>
+      {elseif $groupid == 6}
+     <span class="f_r f_gree"> <a href="grade.php">立即升级</a> </span>
+     {elseif $groupid == 5}
+     <span class="f_r f_gree"> <a href="grade.php">立即升级</a> </span>
+     {elseif $groupid == 8}
+     <span class="f_r f_gree"> <a href="grade.php">立即升级</a> </span>
+      {elseif $groupid == 3}
+     <span class="f_r f_gree"> <a href="{$MODULE[2][linkurl]}{$DT[file_register]}">立即注册</a> </span>
+      {elseif $groupid == 1}
+      <span class="f_r f_gree">您是本集团的CEO</span>
+      {/if}
+ </li>
+ {if !$_userid}
+      <li>
+      您还没有登录，建议您先 <a href="{$DT[file_login]}" class="f_b">登录</a > 或 <a href="{$DT[file_register]}" class="f_b">注册会员</a> 
+       </li>
+       {/if}
+    {if $vip} 
+    <li>
+     <p>服务期：<span> <a href="vip.php"><img src="{DT_SKIN}image/vip_{$vip}.gif" alt="{VIP}" title="{VIP}:{$vip}级" style="margin-top: 12px;"/></a> &nbsp;{timetodate($fromtime, 3)} 至 {timetodate($totime, 3)}
+        &nbsp;剩余 <strong>{$havedays}</strong> 天&nbsp;&nbsp;<a href="vip.php?action=renew" class="l">续费</a>
+        </span></p>
+    </li>
+    {/if}
+    {if $_groupid > 5 && !$_edittime}
+    <li class="complete-infor">
+      <p>资料完善度：<span>40%</span></p>
+      <a href="edit.php">完善资料</a> </li>{/if}
+  </ul>
+  <!-- application -->
+  <div class="application">
+    <div class="nav-title apply-title"> <span class="title-tip"></span>
+      <h3>基础应用</h3>
+    </div>
+    <dl>
+      {if $MYMODS || $show_menu}
+      <dt class="nav-dt nav-mes-dt spreadClass"> <span class="h0"></span>
+        <h4 class="appNav">信息管理</h4>
+        <i class="transform-tip"></i> </dt>
+      <?php
+//信息管理
+ $pageStyle_xxgl = @$_GET['mid']; 
+ //$pageStyle=$_SERVER["QUERY_STRING"];
+ if ($pageStyle_xxgl == "5"||$pageStyle_xxgl == "6"||$pageStyle_xxgl == "7"||$pageStyle_xxgl == "8"||$pageStyle_xxgl == "9"||$pageStyle_xxgl == "10"||$pageStyle_xxgl == "12"||$pageStyle_xxgl == "13"||$pageStyle_xxgl == "14"||$pageStyle_xxgl == "15"||$pageStyle_xxgl == "16"||$pageStyle_xxgl == "18"||$pageStyle_xxgl == "21"||$pageStyle_xxgl == "22"||$pageStyle_xxgl == "27"){
+ $pageStyle_xxgl="";
+ }else{
+ $pageStyle_xxgl="hidden";
+ }
+?>
+      <dd class="<?php echo $pageStyle_xxgl;?>">
+        <ul>
+          {loop $MENUMODS $k $v}
+          {if $v==9}
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="mid_job"><span class="f_r"><a href="{$DT[file_my]}?mid=9&action=add" class="m">发布</a></span><a href="{$DT[file_my]}?mid=9" class="{if in_array($v, $MYMODS)}n{else}f{/if}">招聘管理</a></li>
+          {elseif $v==-9}
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="mid_resume"><span class="f_r"><a href="{$DT[file_my]}?mid=9&action=add&resume=1" class="m">创建</a></span><a href="{$DT[file_my]}?mid=9&resume=1" class="{if in_array($v, $MYMODS)}n{else}f{/if}">简历管理</a></li>
+          {elseif $v==18}
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);"  id="mid_{$v}"><span class="f_r"><a href="{$DT[file_my]}?mid={$v}&job=group&action=add" class="m">创建</a></span><a href="{$DT[file_my]}?mid={$v}" class="{if in_array($v, $MYMODS)}n{else}f{/if}">{$MODULE[$v][name]}管理</a></li>
+          {else}
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);"  id="mid_{$v}"><span class="f_r"><a href="{$DT[file_my]}?mid={$v}&action=add" class="m">发布</a></span><a href="{$DT[file_my]}?mid={$v}" class="{if in_array($v, $MYMODS)}n{else}f{/if}">{$MODULE[$v][name]}管理</a></li>
+          {/if}
+          {/loop}
+        </ul>
+      </dd>
+      {/if}
+      {if $MG[homepage] || $show_menu}
+      <?php
+//商铺管理
+//$pageStyle_ypgl = @$_GET['mid']; 
+$pageStyle_ypgl= $_SERVER['PHP_SELF'];
+if(stristr("$pageStyle_ypgl", "home.php"))
+{
+ $pageStyle_ypgl="";
+ }elseif(stristr("$pageStyle_ypgl", "style.php"))
+ {
+ $pageStyle_ypgl="";
+ }else{
+ $pageStyle_ypgl="hidden";
+ }
+?>
+      <dt class="nav-dt nav-store-dt"> <span class="h1"></span>
+        <h4 class="appNav">商铺管理</h4>
+        <i class="transform-tip"></i> </dt>
+      <dd class="<?php echo $pageStyle_ypgl;?>">
+        <ul>
+          <li class="pull-down "> <a class="second-nav hover-class" href="home.php?action=1">商铺设置</a>
+            <div class="third-nav clearfix"> <a href="home.php?tab=2">基本设置</a> <a href="home.php?tab=0">菜单设置</a> <a href="home.php?tab=1">栏目设置</a> <a href="style.php?">模板设置</a> <a href="/index.php?homepage={$_username}&update=1" target="homepage">更新主页</a> </div>
+          </li>
+          <li class="pull-down "> <a class="second-nav hover-class" href="home.php">店铺管理</a>
+            <div class="third-nav clearfix"> <a href="home.php?action=4">旺铺资料</a> <a href="my.php?mid=12">相册管理</a> <a href="honor.php">荣誉资质</a> <a href="edit.php?tab=2">诚信档案</a> <a href="link.php">友情链接</a> <a href="news.php?">公司新闻</a> <a href="page.php">单页管理</a> </div>
+          </li>
+          <li > <a class="second-nav hover-class" href="home.php?tab=0">横幅管理</a> </li>
+          <li > <a class="second-nav hover-class" href="ad.php">广告管理</a> </li>
+        </ul>
+      </dd>
+      {/if}
+      {if $_userid || $show_menu}
+      <?php
+//账号管理
+//$pageStyle_bjgl = @$_GET['mid']; 
+$pageStyle_zhgl= $_SERVER['PHP_SELF'];
+if(stristr("$pageStyle_zhgl", "edit.php"))
+{
+ $pageStyle_zhgl="";
+ }elseif(stristr("$pageStyle_zhgl", "send.php"))
+  {
+   $pageStyle_zhgl="";
+ }elseif(stristr("$pageStyle_zhgl", "account.php"))
+ {
+ $pageStyle_zhgl="";
+ }else{
+ $pageStyle_zhgl="hidden";
+ }
+?>
+      <dt class="nav-dt nav-account-dt"> <span class="h2"></span>
+        <h4 class="appNav">账号管理</h4>
+        <i class="transform-tip"></i> </dt>
+      <dd class="<?php echo $pageStyle_zhgl;?>">
+        <ul>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="edit"> <a class="m" href="edit.php?tab=0">个人资料</a> </li>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);"> <a class="m" href="account.php">账号详情</a> </li>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="send"> <a class="m" href="send.php">账号安全</a> </li>
+          <li class="side_a"  onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="charge"> <a class="m" href="charge.php?action=record">充值记录</a> </li>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="cash" > <a class="m" href="cash.php?action=index">申请提现</a> </li>
+          <li class="side_a"  onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="address"> <a class="m" href="address.php?action=index">收货地址</a> </li>
+          <li class="side_a"  onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="alert"> <a class="m" href="alert.php?action=index">提醒设定</a> </li>
+          <li class="side_a"  onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="edit.php?tab=2"> <a class="m" href="edit.php?tab=2">公司资料</a> </li>
+          <li class="side_a"  onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="edit.php?tab=3"> <a class="m" href="edit.php?tab=3">公司联系方式</a> </li>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="edit.php?tab=4" > <a class="m" href="edit.php?tab=4">公司介绍</a> </li>
+          <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="avatar"> <a class="m" href="avatar.php">头像设置</a> </li>
+        </ul>
+      </dd>
+      {/if}
+      {if $_userid || $show_menu}
+      <?php
+//交易管理
+//$pageStyle_jygl = @$_GET['mid']; 
+$pageStyle_jygl= $_SERVER['PHP_SELF'];
+if(stristr("$pageStyle_jygl", "trade.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "group.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "record.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "charge.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "deposit.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "credit.php"))
+ {$pageStyle_jygl="";
+ }elseif(stristr("$pageStyle_jygl", "address.php"))
+ {$pageStyle_jygl="";
+ }else{
+ $pageStyle_jygl="hidden";
+ }
+?>
+      <dt class="nav-dt nav-trade-dt"> <span class="h4"></span>
+        <h4 class="appNav">交易管理</h4>
+        <i class="transform-tip"></i> </dt>
+      <dd class="<?php echo $pageStyle_jygl;?>">
+        <ul>
+           <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="trade"><span class="f_r"><a href="trade.php?action=order" class="m">买家</a></span><a href="trade.php" class="{if $_userid}n{else}f{/if}">买家订单</a></li>
+		   <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="trade"><span class="f_r"><a href="order.php" class="m">卖家</a></span><a href="order.php" class="{if $_userid}n{else}f{/if}">卖家订单</a></li>
+              {if isset($MODULE[17])}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="group"><span class="f_r"><a href="group.php?action=order" class="m">买家</a></span><a href="group.php" class="{if $_userid}n{else}f{/if}">团购订单</a></li>
+              {/if}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="record"><span class="f_r"><a href="record.php?action=pay" class="m">站内</a></span><a href="record.php" class="{if $_userid}n{else}f{/if}">{$DT[money_name]}流水</a></li>
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="charge"><span class="f_r"><a href="charge.php?action=pay" class="m">充值</a></span><a href="charge.php?action=record" class="{if $_userid}n{else}f{/if}">充值记录</a></li>
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="deposit"><span class="f_r"><a href="deposit.php?action=add" class="m">增资</a></span><a href="deposit.php" class="{if $_userid}n{else}f{/if}">保 证 金</a></li>
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="cash"><span class="f_r"><a href="cash.php" class="m">提现</a></span><a href="cash.php?action=record" class="{if $_userid}n{else}f{/if}">{$DT[money_name]}提现</a></li>
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="credit"><span class="f_r"><a href="credit.php?action=buy" class="m">购买</a></span><a href="credit.php" class="{if $_userid}n{else}f{/if}">{$DT[credit_name]}管理</a></li>
+              {if $MG[address_limit]>-1 || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="addr"><span class="f_r"><a href="address.php?action=add" class="m">添加</a></span><a href="address.php" class="{if $MG[address_limit]>-1}n{else}f{/if}">收货地址</a></li>
+              {/if}
+        </ul>
+      </dd>
+      {/if}
+    </dl>
+    <div class="nav-title increase-title"> <span class="title-tip"></span>
+      <h3>增值应用</h3>
+    </div>
+    <dl>
+        {if $_userid || $show_menu}    
+      <?php
+//会员服务
+//$pageStyle_bjgl = @$_GET['mid']; 
+$pageStyle_sjgl= $_SERVER['PHP_SELF'];
+if(stristr("$pageStyle_sjgl", "message.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "chat.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "friend.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "favorite.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "alert.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "sms.php"))
+ {$pageStyle_sjgl="";
+  }elseif(stristr("$pageStyle_sjgl", "mail.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "spread.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "ad.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "oauth.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "weixin.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "avatar.php"))
+ {$pageStyle_sjgl="";
+ }elseif(stristr("$pageStyle_sjgl", "ask.php"))
+ {$pageStyle_sjgl="";
+ }else{
+ $pageStyle_sjgl="hidden";
+ }
+?>
+      <dt class="nav-dt nav-bus-dt"> <span class="h3"></span>
+        <h4 class="appNav">会员服务</h4>
+        <i class="transform-tip"></i> </dt>
+      <dd class="<?php echo $pageStyle_sjgl;?>">
+        <ul>
+          {if $MG[inbox_limit]>-1 || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="message"><span class="f_r"><a href="message.php?action=send" class="m">发信</a></span><a href="message.php" class="{if $MG[inbox_limit]>-1}n{else}f{/if}">站内信件</a>{if $_message}<em>{$_message}</em>{/if}</li>
+              {/if}
+              
+              {if $MG[chat] || $show_menu}
+              {if $DT[im_web]}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="chats"><span class="f_r"><a href="chat.php?action=add" class="m">查看</a></span><a href="chat.php" class="{if $MG[inbox_limit]>-1}n{else}f{/if}">站内交谈</a>{if $_chat}<em>{$_chat}</em>{/if}</li>
+              {/if}
+              {/if}
+              
+              {if $MG[friend_limit]>-1 || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="friend"><span class="f_r"><a href="friend.php?action=add" class="m">添加</a></span><a href="friend.php" class="{if $MG[friend_limit]>-1}n{else}f{/if}">我的商友</a></li>
+              {/if}
+              
+              {if $MG[favorite_limit]>-1 || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="favorite"><span class="f_r"><a href="favorite.php?action=add" class="m">添加</a></span><a href="favorite.php" class="{if $MG[favorite_limit]>-1}n{else}f{/if}">商机收藏</a></li>
+              {/if}
+              
+              {if $MG[alert_limit]>-1 || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="alert"><span class="f_r"><a href="alert.php?action=add" class="m">添加</a></span><a href="alert.php" class="{if $MG[alert_limit]>-1}n{else}f{/if}">贸易提醒</a></li>
+              {/if}
+              
+              {if $MG[sms] || $show_menu}
+              {if $DT[sms]}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="sms"><span class="f_r"><a href="sms.php?action=add" class="m">发送</a></span><a href="sms.php" class="{if $MG[sms]}n{else}f{/if}">手机短信</a></li>
+              {/if}
+              {/if}
+              
+              {if $MG[mail] || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="mail"><span class="f_r"><a href="sendmail.php" class="m">电邮</a></span><a href="mail.php" class="{if $MG[mail]}n{else}f{/if}">邮件订阅</a></li>
+              {/if}
+              {if $MG[spread] || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="spread"><span class="f_r"><a href="spread.php?action=add" class="m">购买</a></span><a href="spread.php" class="{if $MG[spread]}n{else}f{/if}">排名推广</a></li>
+              {/if}
+              {if $MG[ad] || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="ad"><span class="f_r"><a href="ad.php?action=add" class="m">购买</a></span><a href="ad.php" class="{if $MG[ad]}n{else}f{/if}">广告预定</a></li>
+              {/if}
+              {if $show_oauth}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="oauth"><span class="f_r"><a href="oauth.php" class="m">绑定</a></span><a href="oauth.php" class="{if $_userid}n{else}f{/if}">一键登录</a></li>
+              {/if}
+              {if $EXT[weixin]}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="weixin"><span class="f_r"><a href="weixin.php" class="m">绑定</a></span><a href="weixin.php" class="{if $_userid}n{else}f{/if}">微信关注</a></li>
+              {/if}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="edit"><span class="f_r"><a href="avatar.php" class="m">头像</a></span><a href="edit.php" class="{if $_userid}n{else}f{/if}">修改资料</a></li>
+              {if $MG[ask] || $show_menu}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="ask"><span class="f_r"><a href="ask.php?action=add" class="m">提问</a></span><a href="ask.php" class="{if $_userid}n{else}f{/if}">客服中心</a></li>
+              {/if}
+        
+        </ul>
+      </dd>
+      {/if}
+    </dl>
+     <dl>
+      <?php
+//扩展项目
+//$pageStyle_bjgl = @$_GET['mid']; 
+$pageStyle_sjgl= $_SERVER['PHP_SELF'];
+  if(stristr("$pageStyle_sjgl", "qiandao.php"))
+ {$pageStyle_sjgl="";
+ }else{
+ $pageStyle_sjgl="hidden";
+ }
+?>
+      <dt class="nav-dt nav-ev-dt"> <span class="h5"></span>
+        <h4 class="appNav">扩展项目</h4>
+        <i class="transform-tip"></i> </dt>
+      <dd class="<?php echo $pageStyle_sjgl;?>">
+        <ul>
+              
+             {if $MOD[credit_qd]}
+              <li class="side_a" onMouseOver="v(this.id);" onMouseOut="t(this.id);" id="credit"><span class="f_r"><a href="credit.php?action=qiandao" class="m">查看</a></span><a href="qiandao.php" class="{if $_userid}n{else}f{/if}" target="_blank">每日签到</a></li>
+              {/if}
+      
+        </ul>
+      </dd>
+    </dl>
+  </div>
+</div>

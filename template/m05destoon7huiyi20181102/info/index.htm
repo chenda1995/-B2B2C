@@ -1,0 +1,501 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/base.css" />
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/jm.css" />
+<div class="wy-wrap">
+<div class="wy-ad cl mb10"><!--广告ID【AD-CS】暂无广告--></div>
+</div>
+<div class="wy-wrap cf" style="z-index:999;">
+<div class="wy-invest-left">
+<div class="cont cf">
+<div class="wy-invest-rank js-invest-rank">
+<div class="slide">
+<div class="hd">
+<ul>
+<li class="on"><i class="ico1"></i>招商飙升榜</li>
+<li><i class="ico2"></i>招商风云榜</li>
+</ul>
+</div>
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=20&template=null");}-->
+{loop $tags $i $t}
+<li>
+<i>{if $i < 20}<?php echo $i+1?>{/if}</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a>
+</li>
+{/loop}
+</ul>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=20&template=null");}-->
+{loop $tags $i $t}
+<li><i>{if $i < 20}<?php echo $i+1?>{/if}</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+<div class="wy-invest-focus js-invest-focus">
+<div class="slide">
+<div class="bd wy-ad">
+<ul class="cf">
+<!--广告:[AD-C0-1]-->
+<li><a href="#" target="_blank" title=""  ><img src="{DT_SKIN}images/ad1.jpg" alt="占位广告" /></a></li>
+<li><a href="#" target="_blank" title=""  ><img src="{DT_SKIN}images/ad1.jpg" alt="占位广告" /></a></li>
+<li><a href="#" target="_blank" title=""  ><img src="{DT_SKIN}images/ad1.jpg" alt="占位广告" /></a></li>
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-join-step">
+<dl class="cf">
+<dt><span>加盟五步走</span></dt>
+<dd>
+<ul class="cf">
+<li><i></i><span>咨询留言</span><p>message</p></li>
+<li><i class="s2"></i><span>精准推荐</span><p>introduce</p></li>
+<li><i class="s3"></i><span>厂家沟通</span><p>conmunicate</p></li>
+<li><i class="s4"></i><span>项目考察</span><p>investigation</p></li>
+<li><i class="s5"></i><span>成功开店</span><p>success</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="wy-invest-right">
+<div class="pic"></div>
+<ul class="txt">
+
+<li>
+<h4><i class="txt1"></i><a href="{$MODULE[2][linkurl]}{$DT[file_my]}?mid=22&action=add" target="_blank">招商加盟服务</a></h4>
+<span>行业招商加盟优选平台。</span>
+</li>
+<li>
+<h4><i class="txt2"></i><a>行业招商指数分析</a></h4>
+<span>全面剖析行业招商各类信息指数。</span>
+</li>
+</ul>
+<div class="oa"><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank">经销商注册</a></div>
+<div class="stati">今日注册<i class="js_agent_today_num">234</i>人，30天已注册<i class="js_agent_month_num">3431</i>人</div>
+<div class="service">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=4&length=8&condition=groupid>5 and thumb<>''&areaid=$cityid&order=userid desc&pagesize=3&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{userurl($t[username])}" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}"/><span>{$t[company]}</span><p>企业详情</p></a></li>
+{/loop}
+</ul>
+</div>
+<style type="text/css">.jm_zxzx iframe{margin-top:55px;margin-left:95px;}</style>
+<div class="consult"><a href="http://wpa.qq.com/msgrd?v=3&uin=3292628658&site=%E5%AE%A2%E6%9C%8D1&menu=yes" rel="nofollow"><span style="width:100%;height:100%;display:block;overflow:hidden;opacity:0;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;"></span></a></div>
+</div>
+</div>
+<div class="wy-wrap">
+<dl class="wy-brand-hot2 cf">
+<dt>热门品牌</dt>
+<dd>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=9&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}" /></a></li>
+{/loop}
+</ul>
+</dd>
+</dl>
+</div>
+<div class="wy-wrap">
+<div class="wy-ad wy-ad-half">
+<ul class="cf">
+<li><a href="#" rel="nofollow" target="_blank"><img src="{DT_SKIN}images/ad2.gif" width="595" height="80" alt=""></a></li>
+<li><a href="#" rel="nofollow" target="_blank"><img src="{DT_SKIN}images/ad3.jpg" width="595" height="80" alt=""></a></li>
+<li><!--广告ID【AD-C3-3】暂无广告--></li>
+<li><!--广告ID【AD-C3-4】暂无广告--></li>
+</ul>
+</div>
+</div>
+<div class="wy-wrap">
+<div class="wy-tt4 cf">
+<h2>火爆招商项目</h2>
+<a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank" class="enter">最好的招商效果，立刻申请入驻！</a>
+<!--连接单页链接s-->
+<a href="/" target="_blank" class="check">查看代理信息</a>
+<a href="/" target="_blank" class="check">招商服务介绍</a>
+<!--连接单页链接e-->
+</div>
+</div>
+<div class="wy-invest-hot">
+<div class="swiper">
+<div class="swiper-container">
+<div class="bd swiper-wrapper cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc&pagesize=20&template=null");}-->
+{loop $tags $i $t}
+{if $i%10 == 0}<ul class="swiper-slide cf">{/if}
+<li><a href="{$t[linkurl]}" target="_blank"><img src="{str_replace('.thumb.'.file_ext($t[thumb]), '',$t[thumb])}" class="lazy" width="215" height="162" alt="{$t[alt]}"></a></li>
+{if $i%10 == 9}</ul>{/if}
+{/loop}
+</div>
+</div>
+</div>
+<div class="hd">
+<i class="l"></i>
+<div class="swiper-scrollbar"><span class="swiper-scrollbar-drag" style="top:0;left:0;">滑动发现更多商机</span></div>
+<i class="r"></i>
+</div>
+</div>
+
+<div class="wy-wrap">
+<div class="wy-ad wy-ad-half">
+<ul class="cf">
+<li><!--广告ID【AD-C4-1】暂无广告--></li>
+<li><!--广告ID【AD-C4-2】暂无广告--></li>
+<li><!--广告ID【AD-C4-3】暂无广告--></li>
+<li><!--广告ID【AD-C4-4】暂无广告--></li>
+</ul>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn">
+<div class="wy-invest-rec js-invest-rec">
+<div class="slide">
+<div class="hd">
+<i></i><h2><a href="{$MODULE[13][linkurl]}" title="品牌招商推荐" target="_blank">品牌招商推荐</a></h2>
+<a href="{$MODULE[13][linkurl]}" class="more" target="_blank">更多</a>
+</div>
+<div class="bd">
+<ul class="list1 cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3 and thumb<>''&areaid=$cityid&order=rand() desc&pagesize=15&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img alt="{$t[alt]}" src="{$t[thumb]}" class="lazy"/></a>
+<div><i class="star5"></i><h4><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></h4></div>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-zs-area">
+<div class="text"><span>招商项目名称</span></div>
+<form class="cf" action="{$MODULE[1][linkurl]}api/search.php">
+<input class="ipt_dq" name="kw" placeholder="请输入关键词" type="text">
+<input name="moduleid" value="22" id="destoon_moduleid" type="hidden">
+<input name="catid" value="243" type="hidden">
+<button type="submit" class="btn_dq"></button>
+</form>
+<div class="text"><span>品牌所在省份</span></div>
+<div class="area">
+{php $mainarea = get_mainarea(0)}
+{loop $mainarea $k $v}
+<a href="{$MOD[linkurl]}search.php?areaid={$v[areaid]}" title="{$v[areaname]}" target="_blank">{$v[areaname]}</a>
+{/loop}
+</div>
+</div>
+</div>
+<div class="wy-wrap">
+<div class="wy-ad wy-ad-half">
+<ul class="cf">
+<li><!--广告ID【AD-C5-1】暂无广告--></li>
+<li><!--广告ID【AD-C5-2】暂无广告--></li>
+<li><!--广告ID【AD-C5-3】暂无广告--></li>
+<li><!--广告ID【AD-C5-4】暂无广告--></li>
+</ul>
+</div>
+</div>
+<div class="wy-wrap"><div class="wy-brand-show js-brand-show">
+<a href="#" target="_blank" class="vip-bg"></a>
+<div class="bd">
+<!--{php $tags=tag("moduleid=13&condition=status=3 and thumb<>''&areaid=$cityid&order=rand() desc&pagesize=36&template=null");}-->
+{loop $tags $i $t}
+{if $i%12 == 0}<ul>{/if}
+<li><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" alt="{$t[alt]}" /></a><h4><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></h4></li>
+{if $i%12 == 11}</ul>{/if}
+{/loop}
+</div>
+<div class="hd"><a class="prev"></a><a class="next"></a></div>
+</div></div>
+<div class="wy-wrap">
+<div class="wy-tt4 mb20 cf">
+<h2><a href="{$MODULE[22][linkurl]}" target="_blank">优质代理商推荐</a></h2>
+<a href="{$MODULE[22][linkurl]}" target="_blank" class="rec">为您推荐系统中最优质的代理商信息，精准招商代理更近一步！</a>
+<a href="javascript:;" class="trade" id="addpage" page="1">>换一批</a>
+<a href="{$MODULE[22][linkurl]}" target="_blank" class="more">更多</a>
+</div>
+<div class="wy-agent-rec">
+<div class="cf" id="jmdl_c">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=9&template=null");}-->
+{loop $tags $i $t}
+<dl class="cf">
+<dt>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[title]}"><b>{dsubstr($t[title], 20, '...')}</b>{area_pos($t[areaid], ' ', 1)}</a>
+<p>{dsubstr($t[introduce], 80, '...')}</p>
+</dt>
+<dd>
+<span><i>{if $t[tzedu]}{$t[tzedu]}{else}面议{/if}</i></span>
+<a href="{$t[linkurl]}" target="_blank">立即查看</a>
+</dd>
+</dl>
+{/loop}
+</div>
+</div>
+</div>
+<div class="wy-adfull js-adfull">
+<div class="bd cf">
+<div class="adfull-item"><!--广告ID【AD-A11-1】暂无广告--></div>
+<div class="adfull-item"><!--广告ID【AD-A11-2】暂无广告--></div>
+<div class="adfull-item"><!--广告ID【AD-A11-3】暂无广告--></div>
+</div>
+<div class="hd"><span class="prev"></span><span class="next"></span></div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn">
+<div class="wy-tt8">
+<i></i><h2>最新代理信息</h2>
+<span>近期共收到代理信息<s class="js_agent_total_num">2132</s>条，已成功代理<s class="js_agent_success_num">234</s>名，还有<s class="js_agent_nosuccess_num">73</s>名正在等待或洽谈中</span>
+<a href="{$MODULE[22][linkurl]}" target="_blank" class="more">更多</a>
+</div>
+<div class="h20"></div>
+<div class="wy-agent-new js-agent-new">
+<div class="slide cf">
+<div class="tt">
+<em class="li1 li-c">联系人</em>
+<em class="li2">加盟区域</em>
+<em class="li3">加盟项目</em>
+<em class="li4">门店面积</em><em class="li5">投资金额</em></div>
+<div class="bd cf jmdl_left_c_sy">
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+<ul class="jmdl_c_sy" id="jmdl_c_sy_all">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=edittime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank">
+<em class="li1 li-c">{$t[lianxiren]}</em>
+<em class="li2">{area_pos($t[areaid], ' ', 1)}</em>
+<em class="li3">{$t[title]}</em>
+<em class="li4">{$t[dianpumj]}</em>
+<em class="li5"><b>{if $t[tzedu]}{$t[tzedu]}万元{else}面议{/if}</b></em>
+<em class="li6"><s>立即查看</s></em>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf jmdl_right_c_sy">
+<li><a href="javascript:;">全部</a></li>
+<li><a href="javascript:;">10-20万元</a></li>
+<li><a href="javascript:;">20-30万元</a></li>
+<li><a href="javascript:;">30-50万元</a></li>
+<li><a href="javascript:;">>50万元</a></li>
+<li><a href="javascript:;"><100平方</a></li>
+<li><a href="javascript:;">100-200平方</a></li>
+<li><a href="javascript:;">200-300平方</a></li>
+<li><a href="javascript:;">>300平方</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="wy-sd">
+<div class="wy-suc-case js-suc-case">
+<div class="slide">
+<div class="hd">
+<ul class="cf">
+<li><a href="javascript:;" target="_blank">开店捷报</a></li>
+<li><a href="javascript:;" target="_blank">新店活动</a></li>
+</ul>
+</div>
+<div class="bd">
+<ul class="case cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3 and thumb<>''&areaid=$cityid&order=edittime desc&pagesize=4&template=null");}-->
+{loop $tags $i $t}
+<li>
+<h3><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></h3>
+<div class="pic cf">
+<a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}"></a>
+<span>{dsubstr($t[introduce], 100, '...')}</span>
+</div>
+</li>
+{/loop}
+</ul>
+<ul class="case cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3 and thumb<>''&areaid=$cityid&order=rand() desc&pagesize=4&template=null");}-->
+{loop $tags $i $t}
+<li>
+<h3><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></h3>
+<div class="pic cf">
+<a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img src="{$t[thumb]}" class="lazy" alt="{$t[alt]}"></a>
+<span>{dsubstr($t[introduce], 100, '...')}</span>
+</div>
+</li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+{template 'footer-info'}
+<script>
+$(function(){
+/* 去除空广告的下边距 */
+$('.wy-ad').each(function(index) {
+var bool=$(this).find("img").length;
+if(bool==0){
+$(this).parent().css({'margin-bottom':'0'});
+}
+});
+$(".popup-slide").slide({mainCell:".slideUI2>div",effect:"top",autoPlay:true,autoPage:true,scroll:2,vis:2});
+var agentdata=[
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&order=rand() desc&pagesize=72&template=null");}-->
+{loop $tags $i $t}
+{
+title:'{dsubstr($t[title], 20, '...')}',
+linkurl:'{$t[linkurl]}',
+introduce:'{dsubstr($t[introduce], 80, '...')}',
+founds:'{if $t[tzedu]}{$t[tzedu]}{else}面议{/if}',
+area:'{area_pos($t[areaid], ' ', 1)}'
+},
+{/loop}
+];
+$("#addpage").click(function() {
+var page=parseInt($('#addpage').attr('page'));
+if(page*9>=agentdata.length){
+page=1;
+}
+var html='';
+for(var i=page*9; i<agentdata.length && i<page*9+9; i++){
+html+='<dl class="cf">';
+html+='<dt>';
+html+='<a href="'+agentdata[i]['linkurl']+'" target="_blank"><b>'+agentdata[i]['title']+'</b>'+agentdata[i]['area']+'</a>';
+html+='<p>'+agentdata[i]['introduce']+'</p>';
+html+='<dd>';
+html+='<span><i>'+agentdata[i]['founds']+'</i></span>';
+html+='<a href="'+agentdata[i]['linkurl']+'" target="_blank">立即查看</a>';
+html+='</dd>';
+html+='</dl>';
+}
+$("#jmdl_c").html(html);
+$('#addpage').attr('page',++page);
+return false;
+});
+(function(){
+var $container = $('.scroll_box');
+$container.imagesLoaded( function(){
+$container.masonry({
+itemSelector : 'li'
+});
+$(".wy-weitu-content").animate({opacity:1},300);
+});
+})();
+});
+</script>

@@ -1,0 +1,88 @@
+{template 'header'}
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/base.css" />
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/co.css" />
+<div class="wy-mbx">当前位置：<a href="{$MODULE[1][linkurl]}">首页</a><span>&gt;</span><a href="{$MOD[linkurl]}">{$MOD[name]}</a>
+</div>
+<div class="wy-wrap">
+<div class="wy-com-select cf">
+<dl class="cf">
+<dt>企业分类：</dt>
+<dd>
+<a href="{$MODULE[4][linkurl]}search.php?action=all" class="on">全部</a>
+{php $mid=4}
+{php $child = get_maincat(0,$mid,1)}
+{loop $child $i $c}
+<a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank" {if $catid == $c[catid]}class="on"{/if}>{$c[catname]}</a>
+{/loop}
+</dd>
+<dt>所在省份：</dt>
+<dd class="area">
+<a href="{$MODULE[4][linkurl]}search.php?action=all">全部</a>
+{php $mainarea = get_mainarea(0)}
+{loop $mainarea $k $v}
+<a href="{$MOD[linkurl]}{rewrite('search.php?catid='.$catid.'&areaid='.$v['areaid'])}" {if $areaid == $v[areaid]}class="on"{/if}>{$v[areaname]}</a>
+{/loop}
+</dd>
+<dt>是否认证：</dt>
+<dd>
+<a href="{$MODULE[4][linkurl]}search.php?action=all" class="on">全部</a>
+<a href="{$MODULE[4][linkurl]}search.php?action=all&validated">是</a>
+<a href="{$MODULE[4][linkurl]}search.php?action=all&nvalidated">否</a>
+</dd>
+</dl>
+</div>
+</div>
+<div class="wy-wrap cf">
+<div class="wy-mn-list">
+<div class="wy-manu-list">
+<div class="wy-tt4 cf"><h2>企业大全</h2></div>
+{if $page==1 && $kw}
+{ad($moduleid,$catid,$kw,6)}
+{load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+{/if}
+{if $tags}
+{template 'list-'.$module, 'tag'}
+{else}
+{template 'empty', 'chip'}
+{/if}
+</div>
+<div class="wy-sd">
+<div class="wy-join-info">
+<div class="cf">
+<p>企业入驻数量：<strong class="companynum">{php echo $db->count($DT_PRE.'company', '1', 1800);}</strong>家<br /><b>让用户轻松找到您！还等什么？</b></p>
+<a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank">加入企业黄页</a>
+</div>
+<dl class="cf">
+<dt><a href="{$MODULE[2][linkurl]}{$DT[file_register]}" target="_blank">注册企业会员</a></dt>
+<dd><a href="{$MODULE[2][linkurl]}{$DT[file_login]}" target="_blank">已注册要登录</a></dd>
+</dl>
+</div>
+<div class="wy-atc-list mb20">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&pagesize=5&order=edittime desc&template=null")}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-atc-list wy-com-name mb20">
+<div class="wy-tt cf"><h3>推荐热门企业</h3></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&group=username&areaid=$cityid&pagesize=10&order=addtime desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a><span>—</span><a href="{userurl($t[username], 'file=introduce')}" target="_blank" title="{$t[title]}">{$t[company]} </a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-atc-list wy-com-name mb20">
+<div class="wy-tt cf"><h3>最新入驻企业</h3></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=4&condition=groupid>5&areaid=$cityid&pagesize=10&order=userid desc&template=null")}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" target="_blank" title="{$t[company]}">{$t[company]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+{template 'footer-company'}

@@ -1,0 +1,226 @@
+{template 'header'}
+<style>body{overflow-x:hidden;}</style>
+<link rel="stylesheet" type="text/css" href="{DT_SKIN}css/news-v1.3.1.css" />
+<script type="text/javascript" src="{DT_SKIN}js/news-v1.3.1.js"></script> 
+<div class="wy-wrap cf">
+<div class="wy-sd-l">
+<div class="wy-atc-list">
+<div class="wy-tt cf"><h3>行业热点</h3></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=12&template=null");}-->
+{loop $tags $i $t}
+<li><i>·</i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-ad cf"><!--广告ID【AD-B3-1】暂无广告--></div>
+<div class="wy-spd-topic js-spd-topic mt10">
+<div class="wy-tt cf"><h3>最新闻</h3></div>
+<div class="slide slide-arrow">
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3 and thumb<>''&areaid=$cityid&order=addtime desc&pagesize=5&template=null");}-->
+{loop $tags $i $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+<img src="{$t[thumb]}" alt="{$t[alt]}" />
+<h3>{$t[title]}</h3>
+<p>{dsubstr($t[introduce], 120, '...')}</p>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<li></li><li></li><li></li><li></li><li></li></ul>
+</div>
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
+</div>
+
+<div class="wy-ad cf"><!--广告ID【AD-B4-1】暂无广告--></div>
+<div class="side_left" id="sideLeft">
+<ul>
+<li class="on"><a href="javascript:void(0)" title="今日推荐" style="cursor:default;"><i class="tj"></i>今日推荐</a></li>
+{php $mid=21}
+{php $child = get_maincat(0,$mid,1)}
+{loop $child $i $c}
+{if $i < 7}
+<li><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank" title="{$c[catname]}"><i class="{if $i == 0}rd{elseif $i ==1}yc{elseif $i ==2}kx{elseif $i ==3}pp{elseif $i ==4}rw{elseif $i ==5}zh{elseif $i ==6}zt{/if}"></i>{$c[catname]}</a></li>
+{/if}
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+<div class="wy-mn">
+<div class="wy-news-rec cf">
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&order=addtime desc&pagesize=1&template=null");}-->
+{loop $tags $i $t}
+<h2><i></i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></h2>
+{/loop}
+<ul>
+<!--{php $tags=tag("moduleid=21&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=5&template=null");}-->
+{loop $tags $i $t}
+<li><a href="{$t[linkurl]}" title="{$t[alt]}" title=""><i></i>{$t[title]}<em>{$t[catname]}</em></a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-news-focus js-news-focus mb10 cf">
+<div class="slide slide-arrow">
+<div class="bd">
+<!--{php $tags=tag("moduleid=21&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&order=rand() desc&pagesize=6&template=null");}-->
+{loop $tags $i $t}
+{if $i%2 == 0}<ul>{/if}
+<li>
+<a href="{$t[linkurl]}" title="{$t[title]}" target="_blank">
+<img src="{$t[thumb]}" alt="{$t[title]}" />
+<p>{$t[title]}</p>
+<span></span>
+</a>
+</li>
+{if $i%2 == 1}</ul>{/if}
+{/loop}
+</div>
+<div class="hd">
+<ul>
+<li></li><li></li><li></li>
+</ul>
+</div>
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
+</div>
+</div>
+<div class="wy-ad cf"><!--广告ID【AD-B3-2】暂无广告--></div>
+<div class="h10 cf"></div>
+<div class="wy-news-list2 js-news-list2">
+<style>.hide{display:none;}</style>
+<div class="hd">
+<ul class="cf">
+{php $mid=21}
+{php $child = get_maincat(0,$mid,1)}
+{loop $child $i $c}
+{if $i < 5}
+<li {if $i == 0}class="on"{/if}><a href="{$MODULE[$mid][linkurl]}{$c[linkurl]}" target="_blank">{$c[catname]}</a></li>
+{/if}
+{/loop}
+</ul>
+</div>
+
+<div class="bd">
+{php $mid=21}
+{php $child = get_maincat(0,$mid,1)}
+{loop $child $k $c}
+{if $k < 5}
+<ul {if $k == 0}{else}style="display:none"{/if}>
+<!--{php $tags=tag("moduleid=$moduleid&catid=".$c[catid]."&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=20&template=null");}-->
+{loop $tags $v $t}
+<li >
+<a href="{$t[linkurl]}" target="_blank" title="{$t[title]}">
+<img alt="{$t[alt]}" src="{if $t[thumb]}{$t[thumb]}{else}{DT_SKIN}image/nopic100.gif{/if}"><h3>{$t[title]}</h3>
+<p class="leadtxt">{dsubstr($t[introduce], 120, '...')}</p>
+<p><em>{$t[catname]}</em><span>阅读量：{$t[hits]}</span><span>{date('Y-m-d',$t[addtime])}</span></p>
+</a>
+</li>
+{/loop}
+</ul>
+{/if}
+{/loop}
+</div>
+</div>
+</div>
+<div class="wy-sd-r">
+<div class="wy-topic2 js-topic2 cf">
+<div class="news_tt"><h2>精彩专题</h2></div>
+<div class="slide slide-arrow">
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and thumb<>''&areaid=$cityid&showcat=1&order=rand() desc&pagesize=5&template=null");}-->
+{loop $tags $v $t}
+<li>
+<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">
+<img alt="{$t[alt]}" src="{$t[thumb]}"/>
+<p>{$t[title]}</p>
+</a>
+</li>
+{/loop}
+</ul>
+</div>
+<div class="hd">
+<ul class="cf">
+<li></li><li></li><li></li><li></li><li></li>                    </ul>
+</div>
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
+</div>
+</div>
+<div class="cf"></div>
+<div class="wy-atc-list">
+<div class="wy-tt cf"><h3>原创精选</h3><a href="#" target="_blank" class="more">更多</a></div>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=8&template=null");}-->
+{loop $tags $v $t}
+<li><i>·</i><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+<div class="wy-ad cf"><!--广告ID【AD-B4-2】暂无广告--></div>
+<dl class="wy-news-rank2 js-news-rank2 mb20 cf">
+<dt class="cf"><a class="on">一周排行</a><a>每月关注</a></dt>
+<dd class="cf">
+<ul>
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=10&template=null");}-->
+{loop $tags $v $t}
+<li><i class="red">{if $v < 10}<?php echo $v+1?>{/if}</i><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></li>
+{/loop}
+</ul>
+</dd>
+<dd class="cf" style="display:none;">
+<ul>
+<!--{php $tags=tag("moduleid=$moduleid&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=10&template=null");}-->
+{loop $tags $v $t}
+<li><i class="red">{if $v < 10}<?php echo $v+1?>{/if}</i><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a></li>
+{/loop}
+</ul>
+</dd>
+</dl>
+<div class="mb10"><div class="wy-brand-rank-chip js-brand-rank-chip">
+<div class="slide">
+<div class="hd">
+<ul class="cf">
+<li><a>品牌排行榜</a></li>
+<li><a>月度关注榜</a></li>
+</ul>
+</div>
+
+<div class="bd">
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=20&template=null");}-->
+{loop $tags $v $t}
+<li><i class="red bold">{if $v < 20}<?php echo $v+1?>{/if}</i> <a href="{userurl($t[username])}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+<ul class="cf">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=20&template=null");}-->
+{loop $tags $v $t}
+<li><i class="red bold">{if $v < 20}<?php echo $v+1?>{/if}</i> <a href="{userurl($t[username])}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="news-index"><div class="wy-brand-rec3 mb20">
+<div class="wy-tt cf"><h3>VIP会员</h3></div>
+<ul class="cf" id="brand-list">
+<!--{php $tags=tag("moduleid=13&condition=status=3&areaid=$cityid&showcat=1&order=rand() desc&pagesize=20&template=null");}-->
+{loop $tags $v $t}
+<li><a href="{userurl($t[username])}" target="_blank" title="{$t[alt]}"><img src="{$t[thumb]}" alt="{$t[alt]}" /><p>{$t[title]}</p></a></li>
+{/loop}
+</ul>
+</div>
+</div>
+</div>
+</div>
+{template 'footer-news'}
