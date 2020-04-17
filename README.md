@@ -7,7 +7,7 @@
 	|--$CFG['db_user'] = '';       		数据库帐号   
 	|--$CFG['db_pass'] = '';       		数据库密码  
    
-3.将Data.sql文件，数据库文件导入至项目数据库中 
+3.将根目录下Data.sql文件导入至项目数据库中 
   
 4.做好以上配置打开 http：//你的网址/admin.php 登陆后台：  
 	|--user：admin  
